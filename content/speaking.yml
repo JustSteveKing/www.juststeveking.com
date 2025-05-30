@@ -1,0 +1,80 @@
+title: Speaking & Knowledge Sharing
+description: Access insights from my conference presentations on Laravel architecture, API design principles, and productivity techniques for developers at all experience levels.
+links:
+  - label: Invite me to speak
+    size: md
+events:
+  - category: Conference
+    title: "Artisinal API Platform"
+    date: "2024-09-20"
+    location: "API Platform Conference, Lille, France, 2024"
+    url: "https://youtu.be/No3wkxIbe10?si=m-zFED1peWd3dLB0"
+  - category: Meetup
+    title: "Building performant APIs using Laravel"
+    date: "2024-06-15"
+    location: "Laravel Worldwide Meetup, July 2024"
+    url: "https://www.youtube.com/live/aCHZnEhDR8M?si=yYsZhySMQhLUfspC"
+  - category: Meetup
+    title: "Building scalable APIs in Laravel"
+    date: "2024-07-01"
+    location: "Zagreb PHP, Croatia"
+  - category: Meetup
+    title: "Building PHP Packages"
+    date: "2021-03-09"
+    location: "Nashville PHP, Online"
+    url: "https://youtu.be/T17-FQ6RIh4?si=eTtXxFiKZJedKkx3"
+  - category: Meetup
+    title: "Building APIs in Laravel"
+    date: "2021-03-15"
+    location: "PHP South West, Online"
+    url: "https://youtu.be/sm9BZbztvEc?si=ZB6Pjx8M3-IQPqMD"
+  - category: Meetup
+    title: "Building APIs using Laravel"
+    date: "2020-09-30"
+    location: "PHP Cambridge, Online"
+    url: "https://youtu.be/CYPLEvJGpPU?si=hFyPV8eSEQzi5lzp"
+  - category: Meetup
+    title: "Building APIs with Laravel"
+    date: "2021-03-02"
+    location: "PHP South Wales, Online"
+    url: "https://youtu.be/5wNi2ujpirI?si=0mkfholZw9Ppz0IR"
+  - category: Meetup
+    title: "Maintaining the chaos, automate your code quality "
+    date: "2019-07-23"
+    location: "PHP South Wales, Wales"
+    url: "https://www.youtube.com/live/aTJjb5jR-kI?si=BVclSibw_KncJX_z"
+  - category: Meetup
+    title: "Building and testing APIs in Laravel"
+    date: "2021-10-26"
+    location: "Laravel Worldwide Meetup, Online"
+    url: "https://www.youtube.com/live/0pylMAlfw5k?si=AGT66r2-TkD2Iie2"
+  - category: Meetup
+    title: "Working with 3rd Party Services in Laravel"
+    date: "2021-11-03"
+    location: "PHP Dublin, Online"
+    url: "https://www.youtube.com/live/dGWoYZg7VWU?si=2E4woPJ6HwJ6tYD8"
+  - category: Meetup
+    title: "From artisan to badass: going past the basics with Laravel"
+    date: "2022-02-16"
+    location: "PHP Leeds, Online"
+    url: "https://www.youtube.com/live/jn-ff5-mlqY?si=wAuumPV7PeSBamSZ"
+  - category: Conference
+    title: "The 10 REST Commandments"
+    date: "2023-11-16"
+    location: "Nordic APIs Platform Summit, Stockholm, Sweden"
+    url: "https://youtu.be/VrDptHA9zi4?si=TYR5e02-iTRhcXCG"
+  - category: Conference
+    title: "Composable Architecture in Laravel"
+    date: "2024-03-01"
+    location: "Laravel Live Pakistan, Online"
+    url: "https://youtu.be/YtEJdUnl848?si=aPUykjtHQ_xFxlWG"
+  - category: Meetup
+    title: "Dive into performant APIs using Laravels built in tools"
+    date: "2024-05-14"
+    location: "PHP Sussex, Online"
+    url: "https://youtu.be/NB7_8GRdZak?si=5GfQrMgzIl1oA5rM"
+  - category: Meetup
+    title: "A deep dive into performant APIs using Laravel's built-in tools"
+    date: "2024-07-30"
+    location: "Laravel Worldwide Meetup, Online"
+    url: "https://www.youtube.com/live/aCHZnEhDR8M?si=FzL4dCflCW1tMsiO"

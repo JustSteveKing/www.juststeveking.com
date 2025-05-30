@@ -1,0 +1,54 @@
+title: Sponsorships
+description: Supporting open source and content creation.
+hero:
+  title: Sponsorships
+  description: Supporting my open source projects and content creation.
+links:
+  - title: GitHub Sponsors
+    url: "https://github.com/sponsors/juststeveking"
+  - title: YouTube Membership
+    url: "https://youtube.com/juststeveking/join"
+  - title: Twitch Subscription
+    url: "https://twitch.tv/subs/juststeveking"
+  - title: PayPal
+    url: "https://paypal.com/paypalme/lilafuches"
+plans:
+  title: Sponsorships Plans
+  description: "You can support my work through various platforms. Each platform has its own benefits and perks."
+  items:
+    - title: "Option A: Platinum Sponsorship"
+      cost: "$999/month via GitHub Sponsors"
+      description: "Includes your logo in videos and livestreams, a link in YouTube descriptions, an optional logo on juststeveking.com, and supports open-source tools. Note: This option does not include any videos or promotion across social platforms."
+      details:
+        title: "$999/month via GitHub Sponsors"
+        description: "If your company relies on my open source tools, becoming a sponsor places your logo on my content and helps sustain these projects."
+        includes:
+          - "Your link in all YouTube video descriptions"
+          - "Your logo featured during livestreams and videos"
+          - "Optional logo placement on juststeveking.com"
+          - "The knowledge that you're support tools used by thousands of developers"
+        exludes:
+          - "Dedicated videos or livestreams"
+          - "Promotion across social platforms"
+        terms:
+          - "No refunds for previous months of Sponsorship"
+          - "Either party can cancel at any time with no further obligation"
+          - "Please email me at juststeveking@proton.me before sponsoring to confirm availability"
+    - title: "Option B: Dedicated Video Package"
+      cost: "$15,000 one-time via Wire Transfer"
+      description: "Includes everything in Option A for 6 months, plus a 2-hour livestream, a dedicated YouTube video, and promotion across all social platforms (including Twitter) of that same video."
+      details:
+        title: "$15,000 one-time via Wire Transfer"
+        description: "For companies interested in dedicated content about their products, I offer a comprehensive package that includes:"
+        includes:
+          - "Everything in Option A (Platinum Sponsorship) for 6 months"
+          - "2-hour livestream featuring your product"
+          - "Dedicated YouTube video on my YouTube channel"
+          - "Promotion of the video across all social platforms (including Twitter)"
+        terms:
+          - "No refunds policy"
+          - "Payment via wire transfer only"
+message: |
+  Please contact me at juststeveking@proton.me to discuss details and confirm availability before proceeding.
+
+  Thank you for considering supporting this work. Every contribution, large or small, makes a huge difference.
