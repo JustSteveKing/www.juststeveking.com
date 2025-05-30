@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["php", "sdk-development", "api-integration", "psr-standards"]
 ---
 
 I have been working with 3rd party APIs for a very long time. Each time I

@@ -62,16 +62,6 @@ export default defineAppConfig({
       'to': 'https://juststeveking.link/dev',
       'target': '_blank',
       'aria-label': 'JustSteveKing on Dev.to'
-    }, {
-      'icon': 'i-simple-icons-caldotcom',
-      'to': 'https://juststeveking.link/cal',
-      'target': '_blank',
-      'aria-label': 'Book a meeting with JustSteveKing'
-    }, {
-      'icon': 'i-simple-icons-warp',
-      'to': 'https://juststeveking.link/warp',
-      'target': '_blank',
-      'aria-label': 'JustSteveKing on Warp'
     }]
   }
 })

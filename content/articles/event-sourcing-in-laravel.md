@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "event-sourcing", "php", "domain-driven-design"]
 ---
 
 Event Sourcing is a term that has been getting more popular in the PHP community over the last few years, but it still remains a mystery to many developers. The questions are always how and why, and it is understandable. This tutorial is designed to help you understand not only what Event Sourcing is, in a practical way, but know when you might want to use it. 

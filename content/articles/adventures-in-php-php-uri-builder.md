@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["php", "uri-builder", "package-development", "api-integration"]
 ---
 
 I would like to announce my latest package *uri-builder* which is a fluent

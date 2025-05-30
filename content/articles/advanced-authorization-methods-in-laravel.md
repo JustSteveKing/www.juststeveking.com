@@ -13,6 +13,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "authorization", "security", "access-control"]
 ---
 
 Authorization, often confused with authentication, is a crucial aspect of web application security. In this article, we will explore Laravel’s built-in authorization features and dive into alternative models such as ReBAC, ABAC, and PBAC, helping you choose the right approach for your application. In Laravel we use an assortment of different approaches, which mostly revolves around RBAC, or Role Based Access Control for those not into acronyms. Is that all? Surely there must be more options to protect the valuable data our apps collect. Let's talk about some Laravel Authorization best practices, and see how we can implement them into our projects. 

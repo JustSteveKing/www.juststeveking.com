@@ -13,6 +13,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "sevalla", "docker", "cloud-deployment"]
 ---
 
 There are many different ways you can deploy a Laravel application, from creating a VPS and setting it all up yourself, to configuring a kubernettes cluster and deploying into it, to signing up for something like Laravel Forge and letting them to do all the hard work for you. These options aren't great, you either have to manage the server yourself, or understand kubernettes which is a minefield in itself.

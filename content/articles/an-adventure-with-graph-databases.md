@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["graph-databases", "neo4j", "php", "open-source"]
 ---
 
 From code to node, was the idea I wanted to accomplish when I first started

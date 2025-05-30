@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["tall-stack", "event-sourcing", "laravel", "php"]
 ---
 
 TALL stack is growing in popularity in the Laravel community, and rightly so.

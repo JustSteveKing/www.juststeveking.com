@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "eloquent", "attribute-casting", "data-transfer-objects"]
 ---
 
 Eloquent Castable attributes are one of the more powerful features of Laravel; some people use them religiously while others tend to shy away from them. In this tutorial, I will walk through a few different examples of using them and, most importantly, why you should be using them.

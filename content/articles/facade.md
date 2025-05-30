@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "facades", "design-patterns", "php"]
 ---
 
 Facades, people seem to love them or hate them. Either way, they are a natural part of what Laravel is today. Laravel Facades, however, aren't strictly facades; are they? Instead, they are static accessors to resolve a class from the container.

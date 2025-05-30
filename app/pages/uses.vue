@@ -25,15 +25,22 @@ defineOgImageComponent('SimpleBlog', {
 
 <template>
   <UPage v-if="page">
-    <UPageHero :title="page.title" :description="page.description" orientation="horizontal" :ui="{
-      container: 'lg:flex sm:flex-row items-center',
-      title: '!mx-0 text-left',
-      description: '!mx-0 text-left',
-      links: 'justify-start'
-    }" />
-    <UPageSection :ui="{
-      container: '!pt-0'
-    }">
+    <UPageHero
+      :title="page.title"
+      :description="page.description"
+      orientation="horizontal"
+      :ui="{
+        container: 'lg:flex sm:flex-row items-center',
+        title: '!mx-0 text-left',
+        description: '!mx-0 text-left',
+        links: 'justify-start'
+      }"
+    />
+    <UPageSection
+      :ui="{
+        container: '!pt-0'
+      }"
+    >
       <!-- Hardware Section -->
       <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-8 mb-16 last:mb-0">
         <div class="lg:col-span-1 mb-4 lg:mb-0">
@@ -46,8 +53,8 @@ defineOgImageComponent('SimpleBlog', {
         </div>
 
         <div class="lg:col-span-2 space-y-8">
-          <div 
-            v-for="(item, index) in page.hardware.items" 
+          <div
+            v-for="(item, index) in page.hardware.items"
             :key="`hardware-${index}`"
             class="group relative pl-6 border-l border-default"
           >
@@ -60,7 +67,7 @@ defineOgImageComponent('SimpleBlog', {
           </div>
         </div>
       </div>
-      
+
       <!-- Software Section -->
       <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-8 mb-16 last:mb-0">
         <div class="lg:col-span-1 mb-4 lg:mb-0">
@@ -73,8 +80,8 @@ defineOgImageComponent('SimpleBlog', {
         </div>
 
         <div class="lg:col-span-2 space-y-8">
-          <div 
-            v-for="(item, index) in page.software.items" 
+          <div
+            v-for="(item, index) in page.software.items"
             :key="`software-${index}`"
             class="group relative pl-6 border-l border-default"
           >
@@ -87,7 +94,7 @@ defineOgImageComponent('SimpleBlog', {
           </div>
         </div>
       </div>
-      
+
       <!-- Services Section - Restructured for consistency -->
       <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-8 mb-16 last:mb-0">
         <div class="lg:col-span-1 mb-4 lg:mb-0">
@@ -100,8 +107,8 @@ defineOgImageComponent('SimpleBlog', {
         </div>
 
         <div class="lg:col-span-2 space-y-8">
-          <div 
-            v-for="(item, index) in page.services.items" 
+          <div
+            v-for="(item, index) in page.services.items"
             :key="`services-${index}`"
             class="group relative pl-6 border-l border-default"
           >

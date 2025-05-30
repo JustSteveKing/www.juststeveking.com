@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "bdd", "testing", "pestphp"]
 ---
 
 BDD, or Behavioural Driven Development, is a popular testing approach in many organizations and has a proven track record for uniting testing efforts across teams. But the question remains, how can we achieve this in Laravel without having to learn a new framework for testing or new language syntax such as [Gherkin](https://cucumber.io/docs/gherkin/).

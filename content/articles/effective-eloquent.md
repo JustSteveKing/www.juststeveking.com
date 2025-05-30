@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "eloquent", "database-queries", "design-patterns"]
 ---
 
 Get ready to level up your Laravel skills with this tutorial on eloquent queries! You'll learn everything you need to know, from beginner to advanced techniques.

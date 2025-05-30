@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "api-integration", "php", "http-client"]
 ---
 
 Sending API requests in any PHP framework has always been a little bit of a manual process, yes you can create an SDK or wrapper - but you are still having to do the same thing.

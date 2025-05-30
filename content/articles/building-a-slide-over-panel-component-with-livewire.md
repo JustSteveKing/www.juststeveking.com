@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "livewire", "tall-stack", "ui-components"]
 ---
 
 I have been a fan of [Laravel Livewire](https://laravel-livewire.com/) since it was first released, and I have used it many times to create great user interfaces for applications. One of the things I find I do a lot is create extracted components that I can pass others into - so that I don't have 20 different modals or slide-overs, for example.

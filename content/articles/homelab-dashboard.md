@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "livewire", "homelab", "self-hosting"]
 ---
 
 So, recently I have been getting into homelab stuff. It kind of brings me back to my Linux System Admin days, and when I would tinker with VMs, servers, and Linux in general.

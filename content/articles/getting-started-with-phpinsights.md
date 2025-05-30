@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["phpinsights", "php", "code-quality", "static-analysis"]
 ---
 
 PHPInsights is a composer package created by Nuno Maduro and is a fantastic tool to get started with analyzing the code quality of your PHP applications.

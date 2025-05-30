@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "feature-flags", "laravel-10", "ab-testing"]
 ---
 
 Laravel Pennant is a package created by the Laravel team that will arrive with [Laravel 10](https://laravel-news.com/laravel-10) provides Feature Flags for your applications. 

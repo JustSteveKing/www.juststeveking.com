@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["jigsaw", "static-site-generator", "laravel", "markdown"]
 ---
 
 As developers, the chance of you having a personal website is pretty high. After all, it is what we do - and most likely, you have rebuilt this countless times. Because we all know that we need to rebuild our website before we finish that blog post we have been meaning to write...

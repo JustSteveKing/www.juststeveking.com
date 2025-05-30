@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["php", "psr-standards", "http-client", "interoperability"]
 ---
 
 Recently I have been scratching my head over PSR-18. As a new PSR there isn't

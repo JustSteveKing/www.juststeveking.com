@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel-pint", "php", "code-standards", "laravel"]
 ---
 
 Laravel Pint is the hot new thing from the Laravel team. An excellent wrapper around PHP CS Fixer that is my go-to code standards tool.

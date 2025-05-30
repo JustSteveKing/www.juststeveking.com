@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "json-api", "api-development", "api-resources"]
 ---
 
 Building APIs in Laravel is a passion of mine, and I have spent a lot of time searching for the perfect way to return consistent JSON:API friendly resources so that I can find and use a standard.

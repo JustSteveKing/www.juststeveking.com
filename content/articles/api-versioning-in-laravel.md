@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "api-development", "versioning", "rest-api"]
 ---
 
 ## Introduction

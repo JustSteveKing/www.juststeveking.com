@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["api-ops", "devops", "api-management", "automation"]
 ---
 
 The world is changing fast, and there is a new buzzword that has been floating around recently - API Ops. Now, if you (like me), are scratching your head wondering what this is and how it effects you, don’t worry. We are going to dive into this together, and see why it’s a game changer in how we develop, deploy, and manage our APIs.

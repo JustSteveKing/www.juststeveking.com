@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "php", "code-style", "psr-12"]
 ---
 
 The long-awaited hype train is finally over, Laravels latest open source CLI app has been released to the world, and we got our hands on it to tell you all about it. Introducing [Laravel Pint](https://github.com/laravel/pint) ...

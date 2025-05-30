@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "notifications", "email", "testing"]
 ---
 
 In most applications, we need to send notifications, whether in-app, email or slack - these are typically transactional notifications to alert users of some action or event in your application. Let's take a dive.

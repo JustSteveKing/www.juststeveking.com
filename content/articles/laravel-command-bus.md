@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "command-bus", "design-patterns", "software-architecture"]
 ---
 
 In Laravel 5.1 the Command Bus was replaced with Dispatchable Jobs, we can still use them but let us also look at how to add a Command Bus.

@@ -96,7 +96,8 @@ export default defineContentConfig({
         date: z.date(),
         image: z.string().nonempty().editor({ input: 'media' }),
         author: createAuthorSchema(),
-        sponsor: createSponsorSchema().optional()
+        sponsor: createSponsorSchema().optional(),
+        tags: z.array(z.string()).optional()
       })
     }),
     pages: defineCollection({

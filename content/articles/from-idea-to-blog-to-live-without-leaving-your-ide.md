@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["statamic", "laravel", "digital-ocean", "infrastructure-as-code"]
 ---
 
 Content management is a very opinionated topic, and everyone has their favorite platform they like to use. Statamic is a fantastic content management package you can add to your Laravel applications.

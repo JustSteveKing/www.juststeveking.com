@@ -31,27 +31,13 @@ defineProps<{
           </p>
           <USeparator />
           <ULink
-            class="w-full flex items-center justify-between gap-1"
+            class="w-full flex items-center justify-end gap-1"
             :to="experience.company.url"
             target="_blank"
           >
-            <span class="text-sm">
+            <span class="text-sm text-right">
               {{ experience.position }}
             </span>
-            <div
-              class=""
-              :style="{ color: experience.company.color }"
-            >
-              <NuxtImg
-                :src="experience.company.logo"
-                :width="20"
-                :height="20"
-                loading="lazy"
-                decoding="async"
-                class="rounded-full"
-                :alt="experience.company.name"
-              />
-            </div>
           </ULink>
         </Motion>
       </div>

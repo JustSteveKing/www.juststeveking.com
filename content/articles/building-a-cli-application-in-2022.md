@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["cli-apps", "php", "development-tools", "programming-languages"]
 ---
 
 I have been building CLI apps for a long time, from simple bash/perl scripts back when I was a System Admin - and now using things like PHP Go or Rust. Let's walk through options for building CLI apps in 2022

@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "api-integration", "github-api", "object-oriented-design"]
 ---
 
 Time and again, I have spoken about API integrations, and each time I find an improvement from the last, once more into the fray.

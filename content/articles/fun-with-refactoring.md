@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "refactoring", "php", "code-optimization"]
 ---
 
 Refactoring isn't a dirty word, quite the opposite. Refactoring is something that you do when you have leveled up or generally improved. It is impossible to refactor something if you have not improved unless you didn't try the first time, of course!

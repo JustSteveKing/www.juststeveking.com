@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "api-development", "domain-drive-design", "development-workflow"]
 ---
 
 I get asked a lot about how you work with Laravel. So in this tutorial, I will walk through my typical approach to building a Laravel application. We will create an API because it is something I love doing.

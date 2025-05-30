@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "domain-driven-design", "code-organization", "php"]
 ---
 
 In a typical Laravel application we are very used to doing things in a certain way, by the book as they say. However there comes a point in the applications lifetime that it is going to be easier to start looking to split this code into Domains so that we can logically group our code.

@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["api-experience", "developer-experience", "api-design", "api-adoption"]
 ---
 
 Is API Experience affecting the adoption of your API or product? With APIs being the backbone of todays internet, isn't it time you started to pay attention to your API Experience, and how you can improve it to reduce friction, frustration, and start improving productivity and adoption.

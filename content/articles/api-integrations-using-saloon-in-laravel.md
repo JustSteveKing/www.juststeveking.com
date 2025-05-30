@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "saloon", "api-integration", "github-api"]
 ---
 
 We have all been there, we want to integrate with a 3rd party API in Laravel and we ask ourselves "How should I do this?". When it comes to API integrations I am no stranger, but still each time I wonder what is going to be the best way. [Sam Carré](https://twitter.com/carre_sam) built a [package](https://docs.saloon.dev/) early in 2022 called [Saloon](https://laravel-news.com/saloon) that can make our API integrations amazing. This article however is going to be very different, this is going to be a walk through on how you can use it to build an integration, from scratch.

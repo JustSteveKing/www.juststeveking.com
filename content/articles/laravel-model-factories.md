@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "model-factories", "testing", "data-seeding"]
 ---
 
 Laravel Model factories are one of the best features you can use in your application when it comes to testing. They provide a way to define data that is predictable and easy to replicate so that your tests are consistent and controlled.

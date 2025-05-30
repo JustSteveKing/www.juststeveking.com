@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "api-design", "rest-api", "backend-development"]
 ---
 
 Building APIs in Laravel is an art form. You must think beyond data access and wrapping your Eloquent Models in API endpoints.

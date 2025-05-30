@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["php", "password-security", "laravel", "code-generation"]
 ---
 
 **Disclaimer**. This is not intended for use in a production environment to create your passwords. My use case for this is to actually generate one off use codes such as One Time Pass Codes. This is not the most secure as the list of words is quite small, and will leave you open to a potential dictionary attack.

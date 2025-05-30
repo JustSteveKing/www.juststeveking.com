@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["php", "object-oriented-programming", "composition", "final-classes"]
 ---
 
 Final classes, you either love them or hate them. People have been using them more recently in their open-source packages, but what does that mean for you? How do you handle this in application code?

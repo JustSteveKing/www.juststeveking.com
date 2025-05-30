@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["golang", "rest-api", "docker", "backend-development"]
 ---
 
 I have been building APIs for production environments for many years now,

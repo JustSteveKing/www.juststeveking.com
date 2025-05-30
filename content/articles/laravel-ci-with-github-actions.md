@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "github-actions", "continuous-integration", "static-analysis"]
 ---
 
 GitHub Actions is a fantastic way to run your Continuous Integration workflows, from running your tests to checking static analysis and more.

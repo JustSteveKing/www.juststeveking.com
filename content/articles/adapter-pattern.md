@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["design-patterns", "php", "software-architecture", "oject-oriented-programming"]
 ---
 
 Of all of the design patterns you could use in your code, the adapter pattern is one of my all time favourites. It allows you to abstract the implementation to an adapter that implements an interface. so you can switch implementation simply by switching the adapter.

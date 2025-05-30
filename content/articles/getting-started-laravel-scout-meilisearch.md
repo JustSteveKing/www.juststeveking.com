@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "meilisearch", "laravel-scout", "search-implementation"]
 ---
 
 We have all needed to add some sort of search to our applications before, and a lot of the time we leaned towards Algolia and Laravel Scout - because it worked out the box and achieved great results. But there is a (relatively) new kid on the block now, meilisearch. Meilisearch is very similar to Algolia in terms of functionality, however it is an open source project build using the Rust programming language. So you can run this locally at no cost, or in production using something like Laravel Forge to spin up a server.

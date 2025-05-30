@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "package-development", "php", "data-transfer-objects"]
 ---
 
 Sharing code has never been more accessible, and installing PHP packages has become convenient; building packages however? In this tutorial, I will walk through how to start and publish a new Laravel package. Going through the setup and tools you can use to ensure your package quality and that if you build and publish something, you do it well.

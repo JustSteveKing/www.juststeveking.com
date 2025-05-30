@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "openapi", "api-documentation", "automation"]
 ---
 
 Over the years, as developers, we have always looked for ways that we can automate our documentation, from PHPDoc to Swagger and beyond. In recent years that has been a significant shift in the API world to adopt a more design-first-led approach to API documentation. This was mainly spurred by the creation of the OpenAPI specification, which is the replacement for Swagger.
