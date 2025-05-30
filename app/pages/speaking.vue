@@ -4,7 +4,7 @@ type Event = {
   date: Date
   location: string
   url?: string
-  category: 'Conference' | 'Live talk' | 'Podcast'
+  category: 'Conference' | 'Meetup'
 }
 
 const { data: page } = await useAsyncData('speaking', () => {
@@ -30,8 +30,8 @@ const { global } = useAppConfig()
 const groupedEvents = computed((): Record<Event['category'], Event[]> => {
   const events = page.value?.events || []
   const grouped: Record<Event['category'], Event[]> = {
-    'Conference': [],
-    'Meetup': []
+    Conference: [],
+    Meetup: []
   }
   for (const event of events) {
     if (grouped[event.category]) grouped[event.category].push(event)
@@ -108,7 +108,7 @@ function formatDate(dateString: Date): string {
             <UButton
               v-if="event.url"
               target="_blank"
-              :label="event.category === 'Podcast' ? 'Listen' : 'Watch'"
+              label="Watch"
               variant="link"
               class="p-0 pt-2 gap-0"
             >

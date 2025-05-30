@@ -14,6 +14,8 @@ export default defineNuxtConfig({
     enabled: true
   },
 
+  css: ['~/assets/css/main.css'],
+
   content: {
     build: {
       markdown: {
@@ -21,7 +23,7 @@ export default defineNuxtConfig({
           langs: [
             'php', 'json', 'yaml', 'dockerfile', 'bash', 'go', 'markdown',
             'makefile', 'gherkin', 'html', 'typescript', 'md', 'ini', 'nginx',
-            'shell', 'json', 'http', 'dotenv',
+            'shell', 'json', 'http', 'dotenv'
           ],
           theme: {
             default: 'github-light',
@@ -33,7 +35,7 @@ export default defineNuxtConfig({
         remarkPlugins: {},
         toc: {
           depth: 3,
-          searchDepth: 3,
+          searchDepth: 3
         }
       }
     },
@@ -41,8 +43,6 @@ export default defineNuxtConfig({
       sqliteConnector: 'native'
     }
   },
-
-  css: ['~/assets/css/main.css'],
 
   future: {
     compatibilityVersion: 4

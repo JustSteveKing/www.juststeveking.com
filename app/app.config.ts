@@ -3,7 +3,7 @@ export default defineAppConfig({
     picture: {
       dark: 'https://github.com/juststeveking.png',
       light: 'https://github.com/juststeveking.png',
-      alt: 'Me giving a talk at API Platform Conference 2024',
+      alt: 'Me giving a talk at API Platform Conference 2024'
     },
     meetingLink: 'https://juststeveking.link/cal',
     email: 'juststeveking@proton.me',

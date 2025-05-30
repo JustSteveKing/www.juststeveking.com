@@ -10,8 +10,6 @@ if (!page.value) {
   })
 }
 
-const { global } = useAppConfig()
-
 useSeoMeta({
   title: page.value?.seo?.title || page.value?.title,
   ogTitle: page.value?.seo?.title || page.value?.title,
@@ -45,7 +43,9 @@ useSeoMeta({
           >
             Hardware
           </h2>
-          <p class="mb-1 text-sm font-medium text-muted">{{ page.hardware.title }}</p>
+          <p class="mb-1 text-sm font-medium text-muted">
+            {{ page.hardware.title }}
+          </p>
         </div>
 
         <div class="lg:col-span-2 space-y-8">
@@ -70,7 +70,9 @@ useSeoMeta({
           >
             Software
           </h2>
-          <p class="mb-1 text-sm font-medium text-muted">{{ page.software.title }}</p>
+          <p class="mb-1 text-sm font-medium text-muted">
+            {{ page.software.title }}
+          </p>
         </div>
 
         <div class="lg:col-span-2 space-y-8">
@@ -95,7 +97,9 @@ useSeoMeta({
           >
             Services
           </h2>
-          <p class="mb-1 text-sm font-medium text-muted">{{ page.services.title }}</p>
+          <p class="mb-1 text-sm font-medium text-muted">
+            {{ page.services.title }}
+          </p>
         </div>
 
         <div class="lg:col-span-2 space-y-8">
@@ -117,11 +121,11 @@ useSeoMeta({
               variant="link"
               class="p-0 pt-2 gap-0"
             >
-                <span>Check them out</span>
-                <UIcon
-                  name="i-lucide-arrow-right"
-                  class="size-4 transition-all opacity-0 group-hover:translate-x-1 group-hover:opacity-100"
-                />
+              <span>Check them out</span>
+              <UIcon
+                name="i-lucide-arrow-right"
+                class="size-4 transition-all opacity-0 group-hover:translate-x-1 group-hover:opacity-100"
+              />
             </NuxtLink>
           </div>
         </div>

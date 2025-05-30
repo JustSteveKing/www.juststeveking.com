@@ -1,5 +1,4 @@
 import { defineCollection, defineContentConfig, z } from '@nuxt/content'
-import { color } from 'motion-v'
 
 const createBaseSchema = () => z.object({
   title: z.string(),
@@ -116,7 +115,7 @@ export default defineContentConfig({
       schema: z.object({
         links: z.array(createButtonSchema()),
         events: z.array(z.object({
-          category: z.enum(['Live talk', 'Podcast', 'Conference']),
+          category: z.enum(['Meetup', 'Conference']),
           title: z.string(),
           date: z.date(),
           location: z.string(),
@@ -128,7 +127,7 @@ export default defineContentConfig({
       type: 'page',
       source: 'about.yml',
       schema: z.object({
-        content: z.object({}),
+        content: z.object({})
       })
     }),
     uses: defineCollection({
@@ -160,7 +159,7 @@ export default defineContentConfig({
           title: z.string(),
           items: z.array(z.object({
             title: z.string(),
-            description: z.string(),
+            description: z.string()
           }))
         })
       })

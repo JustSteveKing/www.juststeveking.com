@@ -48,7 +48,7 @@ defineProps<{
                 height="20"
                 class="rounded-sm"
                 :alt="experience.company.name"
-              />
+              >
             </div>
           </ULink>
         </Motion>
