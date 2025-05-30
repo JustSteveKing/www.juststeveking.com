@@ -42,6 +42,11 @@ const groupedEvents = computed((): Record<Event['category'], Event[]> => {
 function formatDate(dateString: Date): string {
   return new Date(dateString).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })
 }
+
+defineOgImageComponent('SimpleBlog', {
+  title: page.value?.title,
+  description: page.value?.description
+})
 </script>
 
 <template>

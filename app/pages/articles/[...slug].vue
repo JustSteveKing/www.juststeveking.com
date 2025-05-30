@@ -22,7 +22,7 @@ const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(blogNa
 if (page.value.image) {
   defineOgImage({ url: page.value.image })
 } else {
-  defineOgImageComponent('Blog', {
+  defineOgImageComponent('SimpleBlog', {
     headline: breadcrumb.value.map(item => item.label).join(' > ')
   }, {
     fonts: ['Geist:400', 'Geist:600']
@@ -74,6 +74,8 @@ const formatDate = (dateString: Date) => {
             </span>
           </div>
           <NuxtImg
+            loading="lazy"
+            decoding="async"
             :src="page.image"
             :alt="page.title"
             class="rounded-lg w-full h-[300px] object-cover object-center"

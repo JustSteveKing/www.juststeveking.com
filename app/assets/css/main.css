@@ -6,21 +6,31 @@
 @theme static {
   --font-sans: 'Public Sans', sans-serif;
   --font-serif: 'Instrument Serif', serif;
+
+  --ui-secondary: oklch(27.88% 0.0353 276.94);
 }
 
 :root {
-  --ui-container: var(--container-4xl);
-
+  --ui-container: var(--container-5xl);
+  --ui-bg: oklch(95.78% 0.0058 264.53);
+  --ui-text: oklch(43.55% 0.0430 279.33);
+  --ui-primary: oklch(60.23% 0.0981 201.10);
+  --ui-bg-elevated: oklch(21.88% 0.0255 280.66);
 
   ::selection {
     color: #282a30;
-    background-color: #c8c8c8;
+    background-color: var(--ui-primary);
   }
 }
 
 .dark {
-  ::selection {
-    color: #ffffff;
-    background-color: #474747;
-  }
+  --ui-bg: oklch(27.88% 0.0353 276.94);
+  --ui-text: oklch(87.08% 0.0481 273.67);
+  --ui-primary: oklch(82.14% 0.0755 184.10);
+  --ui-bg-elevated: oklch(21.88% 0.0255 280.66);
+}
+
+
+html {
+  scroll-behavior: smooth;
 }

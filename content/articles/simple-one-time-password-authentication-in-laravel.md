@@ -2,7 +2,7 @@
 title: Simple one-time password authentication in Laravel
 description: Learn how to implement one-time password authentication in Laravel. Secure and streamlined user authentication.
 date: 2022-09-23
-image: "/images/articles/laravel-authentication.png"
+image: "/images/articles/laravel-auth.png"
 minRead: 7
 author:
   name: Steve McDougall

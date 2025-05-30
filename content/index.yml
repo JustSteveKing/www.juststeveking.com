@@ -1,11 +1,13 @@
 seo:
-  title: "JustSteveKing"
-  description: "API & DevRel Consultant."
+  title: "API & DevRel Consultant"
+  description: "I help engineering teams build better APIs, scale developer adoption, and create content that converts."
+
 title: "Hey, I'm Steve 👋"
-description: "I help dev-first teams with APIs, Developer Relations, and high-leverage content."
+description: "I help engineering teams build better APIs, scale developer adoption, and create content that converts."
+
 hero:
   links:
-    - label: "Work with me"
+    - label: "Let's work together"
       to: https://juststeveking.link/cal
       color: "neutral"
   images:
@@ -19,54 +21,47 @@ hero:
       alt: "Zagreb PHP Meetup 2024"
     - src: "/images/zg-7.jpg"
       alt: "Zagreb PHP Meetup 2024"
+
 about:
   title: "About Me"
   description: |
-    I'm Steve McDougall — a developer, DevRel consultant, and content strategist. I work with engineering-led teams to sharpen their developer experience, scale community engagement, and build tools developers actually want to use.
-    I design APIs, build content ecosystems, and lead DevRel programs that make products easier to adopt, scale, and love.
+    I'm Steve McDougall — a developer, DevRel consultant, and content strategist who helps engineering teams build products developers love.
+    
+    I specialize in API design, developer experience optimization, and building content ecosystems that drive adoption. Whether you're scaling a developer program or need APIs that feel intuitive from day one, I help teams ship better products faster.
+
 experience:
-  title: Work Experience
+  title: "Experience"
   items:
-    - position: "CC Member"
-      description: "As a core committee member I help steer PSRs and future PSRs for the PHP language."
+    - position: "Core Committee Member"
+      description: "Helping shape PHP Standards Recommendations (PSRs) and steering the future direction of the PHP ecosystem."
       date: "2024 - Present"
       company:
         name: PHP-FIG
-        logo: "https://github.com/php-fig.png"
-        url: "https://github.com/php-fig"
-        color: "#00DC82"
-    - position: "Columnist"
-      description: "I write the 'Artisan Way' and 'API Guy' columns for PHP Architect."
+        
+    - position: "Technical Columnist"
+      description: "Author of 'Artisan Way' and 'API Guy' columns, covering Laravel best practices and API design patterns."
       date: "2023 - Present"
       company:
         name: "[php] Architect"
-        logo: "https://github.com/phparch.png"
-        url: "https://github.com/phparch"
-        color: "#FF6363"
-    - position: "CTO"
-      description: "Freelance Software Engineering, consultant CTO, content-creator."
+        
+    - position: "Founding CTO"
+      description: "Building software solutions, providing technical leadership, and creating educational content for the developer community."
       date: "2019 - Present"
       company:
         name: Lila Fuches
-        logo: "https://github.com/lila-fuches.png"
-        url: "https://github.com/lila-fuches"
-        color: "#5E6AD2"
-    - position: "DevRel"
-      description: "My role as a Developer Advocate was to help increase usage and visibility of the core products."
+        
+    - position: "Developer Advocate"
+      description: "Drove product adoption through technical content, community engagement, and developer experience improvements."
       date: "2023 - 2024"
       company:
         name: Treblle
-        logo: "https://github.com/treblle.png"
-        url: "https://github.com/treblle"
-        color: "#5E6AD2"
-    - position: "Senior EM"
-      description: "I managed a team of 10 engineers, and was responsible for the delivery of the core products."
+        
+    - position: "Senior Engineering Manager"
+      description: "Led a team of 10 engineers, delivering core platform features and establishing engineering best practices."
       date: "2022 - 2023"
       company:
         name: Geomiq
-        logo: "https://github.com/geomiq.png"
-        url: "https://github.com/geomiq"
-        color: "#5E6AD2"
+
 testimonials:
   - quote: "Steve is one of the most thorough and thoughtful educators I've seen. He puts in a ton of effort and it clearly shows."
     author:
@@ -174,19 +169,22 @@ testimonials:
         src: "https://github.com/steven-tey.png"
         srcset: "https://github.com/steven-tey.png 2x"
 articles:
-  title: "Technical Insights & Expertise"
-  description: "Dive into actionable articles on API design patterns, Laravel optimization strategies, and emerging software development practices."
+  title: "Technical Writing & Insights"
+  description: "Practical guides on API design, Laravel optimization, and modern development practices that help teams ship better software."
+
 services:
-  title: "What I Do"
-  description: "Learn to separate signal from noise, and instincts from impulses."
+  title: "How I Can Help"
+  description: "Turn complex technical challenges into clear, actionable solutions."
   headline: "Services"
   services:
-    - title: "API Strategy"
-      description: "Design and implement APIs that developers want to adopt."
-      icon: "i-lucide-smile"
-    - title: "DevRel & Docs"
-      description: "Create educational content, tutorials, and technical demos."
+    - title: "API Design & Strategy"
+      description: "Build APIs that developers actually want to use and integrate with."
+      icon: "i-lucide-lightbulb"
+      
+    - title: "Developer Relations & Documentation"
+      description: "Create content, tutorials, and experiences that accelerate developer onboarding."
       icon: "i-lucide-book-open"
-    - title: "Content Consulting"
-      description: "Help teams grow through developer-first content and SEO."
+      
+    - title: "Technical Content Strategy"
+      description: "Develop content programs that build authority, drive organic growth, and convert developers."
       icon: "i-lucide-file-text"

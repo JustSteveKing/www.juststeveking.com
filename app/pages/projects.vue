@@ -22,6 +22,11 @@ useSeoMeta({
   description: page.value?.seo?.description || page.value?.description,
   ogDescription: page.value?.seo?.description || page.value?.description
 })
+
+defineOgImageComponent('SimpleBlog', {
+  title: page.value?.title,
+  description: page.value?.description
+})
 </script>
 
 <template>
@@ -95,11 +100,13 @@ useSeoMeta({
               />
             </ULink>
           </template>
-          <img
+          <NuxtImg
+            loading="lazy"
+            decoding="async"
             :src="project.image"
             :alt="project.title"
-            class="object-cover w-full h-48 rounded-lg"
-          >
+            class="object-cover w-full h-48 rounded-lg max-sm:rounded-r-none max-sm:rounded-l-lg"
+          />
         </UPageCard>
       </Motion>
     </UPageSection>

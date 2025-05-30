@@ -16,31 +16,28 @@ useSeoMeta({
   description: page.value?.seo?.description || page.value?.description,
   ogDescription: page.value?.seo?.description || page.value?.description
 })
+
+defineOgImageComponent('SimpleBlog', {
+  title: page.value?.title,
+  description: page.value?.description
+})
 </script>
 
 <template>
   <UPage v-if="page">
-    <UPageHero
-      :title="page.title"
-      :description="page.description"
-      orientation="horizontal"
-      :ui="{
-        container: 'lg:flex sm:flex-row items-center',
-        title: '!mx-0 text-left',
-        description: '!mx-0 text-left',
-        links: 'justify-start'
-      }"
-    />
-    <UPageSection
-      :ui="{
-        container: '!pt-0'
-      }"
-    >
+    <UPageHero :title="page.title" :description="page.description" orientation="horizontal" :ui="{
+      container: 'lg:flex sm:flex-row items-center',
+      title: '!mx-0 text-left',
+      description: '!mx-0 text-left',
+      links: 'justify-start'
+    }" />
+    <UPageSection :ui="{
+      container: '!pt-0'
+    }">
+      <!-- Hardware Section -->
       <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-8 mb-16 last:mb-0">
         <div class="lg:col-span-1 mb-4 lg:mb-0">
-          <h2
-            class="lg:sticky lg:top-16 text-xl font-semibold tracking-tight text-highlighted"
-          >
+          <h2 class="lg:sticky lg:top-16 text-xl font-semibold tracking-tight text-highlighted z-10">
             Hardware
           </h2>
           <p class="mb-1 text-sm font-medium text-muted">
@@ -49,8 +46,8 @@ useSeoMeta({
         </div>
 
         <div class="lg:col-span-2 space-y-8">
-          <div
-            v-for="(item, index) in page.hardware.items"
+          <div 
+            v-for="(item, index) in page.hardware.items" 
             :key="`hardware-${index}`"
             class="group relative pl-6 border-l border-default"
           >
@@ -63,11 +60,11 @@ useSeoMeta({
           </div>
         </div>
       </div>
+      
+      <!-- Software Section -->
       <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-8 mb-16 last:mb-0">
         <div class="lg:col-span-1 mb-4 lg:mb-0">
-          <h2
-            class="lg:sticky lg:top-16 text-xl font-semibold tracking-tight text-highlighted"
-          >
+          <h2 class="lg:sticky lg:top-16 text-xl font-semibold tracking-tight text-highlighted z-10">
             Software
           </h2>
           <p class="mb-1 text-sm font-medium text-muted">
@@ -76,8 +73,8 @@ useSeoMeta({
         </div>
 
         <div class="lg:col-span-2 space-y-8">
-          <div
-            v-for="(item, index) in page.software.items"
+          <div 
+            v-for="(item, index) in page.software.items" 
             :key="`software-${index}`"
             class="group relative pl-6 border-l border-default"
           >
@@ -90,11 +87,11 @@ useSeoMeta({
           </div>
         </div>
       </div>
+      
+      <!-- Services Section - Restructured for consistency -->
       <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-8 mb-16 last:mb-0">
         <div class="lg:col-span-1 mb-4 lg:mb-0">
-          <h2
-            class="lg:sticky lg:top-16 text-xl font-semibold tracking-tight text-highlighted"
-          >
+          <h2 class="lg:sticky lg:top-16 text-xl font-semibold tracking-tight text-highlighted z-10">
             Services
           </h2>
           <p class="mb-1 text-sm font-medium text-muted">
@@ -103,30 +100,26 @@ useSeoMeta({
         </div>
 
         <div class="lg:col-span-2 space-y-8">
-          <div
-            v-for="(item, index) in page.services.items"
+          <div 
+            v-for="(item, index) in page.services.items" 
             :key="`services-${index}`"
             class="group relative pl-6 border-l border-default"
           >
-            <h3 class="text-lg font-semibold text-highlighted">
-              {{ item.title }}
-            </h3>
-            <div class="mb-1 text-sm font-medium text-muted">
-              <span>{{ item.description }}</span>
-            </div>
-
-            <NuxtLink
-              target="_blank"
+            <a
               :href="item.url"
-              variant="link"
-              class="p-0 pt-2 gap-0"
+              target="_blank"
+              :title="`Visit ${item.title}`"
+              :aria-label="`Visit ${item.title}`"
+              rel="noopener noreferrer"
+              class="block transition-colors duration-200"
             >
-              <span>Check them out</span>
-              <UIcon
-                name="i-lucide-arrow-right"
-                class="size-4 transition-all opacity-0 group-hover:translate-x-1 group-hover:opacity-100"
-              />
-            </NuxtLink>
+              <h3 class="text-lg font-semibold text-highlighted group-hover:text-primary">
+                {{ item.title }}
+              </h3>
+              <div class="mb-1 text-sm font-medium text-muted">
+                <span>{{ item.description }}</span>
+              </div>
+            </a>
           </div>
         </div>
       </div>

@@ -1,54 +1,101 @@
-title: Sponsorships
-description: Supporting open source and content creation.
+title: "Support My Work"
+description: "Help sustain open-source development and educational content that serves thousands of developers worldwide."
+
 hero:
-  title: Sponsorships
-  description: Supporting my open source projects and content creation.
+  title: "Support My Work"
+  description: "Your sponsorship directly funds open-source tools, educational content, and community resources that help developers build better software."
+
 links:
-  - title: GitHub Sponsors
+  - title: "GitHub Sponsors"
     url: "https://github.com/sponsors/juststeveking"
-  - title: YouTube Membership
+  - title: "YouTube Memberships"
     url: "https://youtube.com/juststeveking/join"
-  - title: Twitch Subscription
+  - title: "Twitch Subscriptions"
     url: "https://twitch.tv/subs/juststeveking"
-  - title: PayPal
+  - title: "Direct Support"
     url: "https://paypal.com/paypalme/lilafuches"
+
 plans:
-  title: Sponsorships Plans
-  description: "You can support my work through various platforms. Each platform has its own benefits and perks."
+  title: "Sponsorship Opportunities"
+  description: "Choose the sponsorship level that aligns with your goals and budget. All plans help sustain the open-source tools and educational content that thousands of developers rely on."
+  
   items:
-    - title: "Option A: Platinum Sponsorship"
-      cost: "$999/month via GitHub Sponsors"
-      description: "Includes your logo in videos and livestreams, a link in YouTube descriptions, an optional logo on juststeveking.com, and supports open-source tools. Note: This option does not include any videos or promotion across social platforms."
+    - title: "Community Supporter"
+      cost: "$50-$250/month via GitHub Sponsors"
+      description: "Perfect for individuals or small teams who benefit from my open-source tools and want to give back to the community."
       details:
-        title: "$999/month via GitHub Sponsors"
-        description: "If your company relies on my open source tools, becoming a sponsor places your logo on my content and helps sustain these projects."
+        title: "Community Supporter - $50-$250/month"
+        description: "Join a community of developers and companies who believe in supporting open-source education."
         includes:
-          - "Your link in all YouTube video descriptions"
-          - "Your logo featured during livestreams and videos"
-          - "Optional logo placement on juststeveking.com"
-          - "The knowledge that you're support tools used by thousands of developers"
-        exludes:
-          - "Dedicated videos or livestreams"
-          - "Promotion across social platforms"
+          - "Supporter badge on GitHub profile"
+          - "Early access to new tutorials and content"
+          - "Monthly supporter-only updates"
+          - "Direct email for questions about my tools"
         terms:
-          - "No refunds for previous months of Sponsorship"
-          - "Either party can cancel at any time with no further obligation"
-          - "Please email me at juststeveking@proton.me before sponsoring to confirm availability"
-    - title: "Option B: Dedicated Video Package"
-      cost: "$15,000 one-time via Wire Transfer"
-      description: "Includes everything in Option A for 6 months, plus a 2-hour livestream, a dedicated YouTube video, and promotion across all social platforms (including Twitter) of that same video."
+          - "Cancel anytime with no obligation"
+          - "No refunds for previous months"
+          
+    - title: "Business Sponsor"
+      cost: "$500/month via GitHub Sponsors"
+      description: "Ideal for companies that use my tools in production and want visible support of the open-source ecosystem."
       details:
-        title: "$15,000 one-time via Wire Transfer"
-        description: "For companies interested in dedicated content about their products, I offer a comprehensive package that includes:"
+        title: "Business Sponsor - $500/month"
+        description: "Perfect for businesses that rely on my open-source tools and want to demonstrate their commitment to the developer community."
         includes:
-          - "Everything in Option A (Platinum Sponsorship) for 6 months"
-          - "2-hour livestream featuring your product"
-          - "Dedicated YouTube video on my YouTube channel"
-          - "Promotion of the video across all social platforms (including Twitter)"
+          - "Company logo in all YouTube video descriptions"
+          - "Logo featured during livestreams"
+          - "Optional logo placement on juststeveking.com"
+          - "Priority support for tool-related questions"
+          - "Quarterly update calls on project roadmaps"
+        excludes:
+          - "Dedicated videos or promotional content"
+          - "Social media promotion campaigns"
+        terms:
+          - "No refunds for previous months"
+          - "Either party can cancel anytime"
+          - "Email juststeveking@proton.me before sponsoring to confirm availability"
+          
+    - title: "Premium Partnership"
+      cost: "$1,500/month via GitHub Sponsors"
+      description: "For companies wanting maximum visibility while supporting open-source development and educational content creation."
+      details:
+        title: "Premium Partnership - $1,500/month"
+        description: "The highest level of ongoing sponsorship, perfect for companies deeply invested in the PHP and Laravel ecosystem."
+        includes:
+          - "Prominent logo placement in all video content"
+          - "Featured mention in livestream intros"
+          - "Premium logo placement on juststeveking.com"
+          - "Monthly strategy calls about PHP/Laravel trends"
+          - "Early preview of major announcements"
+          - "Custom open-source tool consideration"
+        excludes:
+          - "Dedicated promotional videos"
+          - "Guaranteed social media campaigns"
+        terms:
+          - "Minimum 3-month commitment"
+          - "No refunds for previous months"
+          - "Either party can cancel with 30-day notice"
+          - "Pre-approval required via email"
+
+    - title: "Dedicated Content Package"
+      cost: "$12,000 one-time payment"
+      description: "Complete content package including dedicated video, livestream, and cross-platform promotion of your developer tool or service."
+      details:
+        title: "Dedicated Content Package - $12,000"
+        description: "Comprehensive content creation and promotion package designed to showcase your developer tool to my engaged audience."
+        includes:
+          - "Premium Partnership benefits for 3 months"
+          - "90-minute dedicated livestream featuring your product"
+          - "High-quality YouTube tutorial (15-30 minutes)"
+          - "Cross-platform promotion (Twitter, LinkedIn, Mastodon)"
+          - "Newsletter feature to 2,000+ subscribers"
+          - "GitHub repository with example implementation"
+        deliverables:
+          - "Livestream within 30 days of payment"
+          - "YouTube video within 45 days"
+          - "Social promotion within 60 days"
         terms:
           - "No refunds policy"
-          - "Payment via wire transfer only"
-message: |
-  Please contact me at juststeveking@proton.me to discuss details and confirm availability before proceeding.
-
-  Thank you for considering supporting this work. Every contribution, large or small, makes a huge difference.
+          - "Payment via wire transfer or business check"
+          - "Content approval process included"
+          - "One revision round included"

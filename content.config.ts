@@ -163,6 +163,39 @@ export default defineContentConfig({
           }))
         })
       })
+    }),
+    sponsorships: defineCollection({
+      type: 'page',
+      source: 'sponsorships.yml',
+      schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        hero: z.object({
+          title: z.string(),
+          description: z.string()
+        }),
+        links: z.array(z.object({
+          title: z.string(),
+          url: z.string().url()
+        })),
+        plans: z.object({
+          title: z.string(),
+          description: z.string(),
+          items: z.array(z.object({
+            title: z.string(),
+            cost: z.string(),
+            description: z.string(),
+            details: z.object({
+              title: z.string(),
+              description: z.string(),
+              includes: z.array(z.string()),
+              excludes: z.array(z.string()).optional(),
+              terms: z.array(z.string()),
+              deliverables: z.array(z.string()).optional()
+            })
+          }))
+        })
+      })
     })
   }
 })

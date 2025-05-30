@@ -42,13 +42,15 @@ defineProps<{
               class=""
               :style="{ color: experience.company.color }"
             >
-              <img
+              <NuxtImg
                 :src="experience.company.logo"
-                width="20"
-                height="20"
-                class="rounded-sm"
+                :width="20"
+                :height="20"
+                loading="lazy"
+                decoding="async"
+                class="rounded-full"
                 :alt="experience.company.name"
-              >
+              />
             </div>
           </ULink>
         </Motion>

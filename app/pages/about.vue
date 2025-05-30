@@ -18,6 +18,11 @@ useSeoMeta({
   description: page.value?.seo?.description || page.value?.description,
   ogDescription: page.value?.seo?.description || page.value?.description
 })
+
+defineOgImageComponent('SimpleBlog', {
+  title: page.value?.title,
+  description: page.value?.description
+})
 </script>
 
 <template>

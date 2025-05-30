@@ -7,7 +7,9 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@vueuse/nuxt',
     'nuxt-og-image',
-    'motion-v/nuxt'
+    'motion-v/nuxt',
+    'nuxt-cloudflare-analytics',
+    '@nuxthub/core'
   ],
 
   devtools: {
@@ -15,6 +17,11 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
+
+  site: {
+    url: 'https://www.juststeveking.com',
+    name: 'JustSteveKing'
+  },
 
   content: {
     build: {
@@ -57,6 +64,10 @@ export default defineNuxtConfig({
       ],
       crawlLinks: true
     }
+  },
+
+  cloudflareAnalytics: {
+    token: 'e0adefa2a56b4f0db19819e9c168df4b'
   },
 
   eslint: {

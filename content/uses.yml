@@ -1,54 +1,74 @@
-title: My Development Toolkit
-description: An up-to-date collection of softtware, tools, and resources that power my daily workflow and development processes.
+title: "My Development Setup"
+description: "The tools, software, and hardware that power my daily development workflow. Updated regularly as my setup evolves."
+
 hero:
-  title: My Development Toolkit
-  description: An up-to-date collection of softtware, tools, and resources that power my daily workflow and development processes.
+  title: "My Development Setup"
+  description: "The tools, software, and hardware that power my daily development workflow. Updated regularly as my setup evolves."
+
 hardware:
-  title: Devices and equipment that I use.
+  title: "Hardware & Equipment"
   items:
-    - title: Bose QC
-      description: Noise-cancelling headphones for a distraction-free environment.
-    - title: Macbook Air 2024
-      description: I switched to a Macbook Air in 2024, and I love it. It is light, has great battery life, and the M4 chip is fast enough for my needs.
-    - title: ZSA Moonlander
-      description: I have been using the Moonlander for a while now, and I love it! It is a split keyboard that is fully customizable, and it has made a huge difference in my typing comfort.
-    - title: Samsung U32R590
-      description: I have one nice sized screen which I can dedicate for the constant things throughout the day is super useful. This monitor is what I use to keep things like slack, discord, spotify and emails on. It is always in the corner of my eye, but leaves my main screen available for more dynamic application switching.
-    - title: Shure MV7
-      description: I use the Shure MV7 for my podcasting and streaming needs. It is a great microphone that sounds amazing and is very versatile.
-    - title: Logitech Lift
-      description: I use the Logitech Lift for my daily work. It is a vertical mouse that is designed to reduce strain on the wrist and forearm, and it has made a huge difference in my comfort while working.
-    - title: Elgato HD Cam Pro
-      description: I use the Elgato HD Cam Pro for my streaming and video recording needs. It is a great camera that produces high-quality video and has a lot of features that make it easy to use.
-    - title: Elgato Stream Deck
-      description: I use the Elgato Stream Deck for my streaming and video recording needs. It is a great tool that allows me to control my stream and video recording software with ease.
+    - title: "MacBook Air M3 (2024)"
+      description: "Lightweight powerhouse that handles everything I throw at it. The M3 chip delivers incredible performance while maintaining all-day battery life."
+      
+    - title: "ZSA Moonlander"
+      description: "Split ergonomic keyboard that transformed my typing experience. Fully customizable layouts and ortholinear design significantly improved my comfort during long coding sessions."
+      
+    - title: "Samsung U32R590 Monitor"
+      description: "32-inch 4K display dedicated to persistent apps like Slack, Discord, and email. Keeps my main screen free for focused development work while maintaining peripheral awareness."
+      
+    - title: "Shure MV7 Microphone"
+      description: "Professional-grade dynamic microphone for podcasting and video content. Delivers broadcast-quality audio with versatile USB and XLR connectivity."
+      
+    - title: "Logitech Lift Vertical Mouse"
+      description: "Ergonomic vertical mouse that eliminated wrist strain during extended work sessions. Natural hand position makes long development days more comfortable."
+      
+    - title: "Bose QuietComfort Headphones"
+      description: "Industry-leading noise cancellation creates a distraction-free coding environment. Essential for deep focus during complex problem-solving."
+      
+    - title: "Elgato HD60 Pro"
+      description: "Professional streaming camera delivering crisp 4K video for content creation and video calls. Reliable performance with excellent low-light capabilities."
+      
+    - title: "Elgato Stream Deck"
+      description: "Customizable control surface that streamlines my streaming workflow. One-touch access to scenes, audio controls, and automation shortcuts."
+
 services:
-  title: Services that I use, and would highly recommend.
+  title: "Essential Services"
   items:
-    - title: Codecourse
-      description: A platform for learning and improving coding skills through interactive courses and projects.
-      link: https://juststeveking.link/cc
-    - title: Dub.co
-      description: I started using Dub.co for my short link needs, and it has been fantastic so far.
-      link: https://juststeveking.link/dub
+    - title: "Codecourse"
+      description: "Premium platform for advanced PHP and Laravel education. High-quality courses that keep me current with best practices and emerging patterns."
+      url: https://juststeveking.link/cc
+      
+    - title: "Dub.co"
+      description: "Modern link management platform with detailed analytics and branded domains. Clean interface and reliable service for all my link shortening needs."
+      url: https://juststeveking.link/dub
+      
+    - title: "Proton Calendar"
+      description: "Privacy-focused calendar with end-to-end encryption. Seamless sync across devices while keeping personal scheduling data secure."
+
 software:
-  title: Software that I use to do my day to day work.
+  title: "Development Software"
   items:
-    - title: Arc Browser
-      description: My daily driver browser, it is fast, has great features, and is very customizable. However, I am looking for a replacement browser!
-    - title: Proton Calendar
-      description: I use Proton Calendar for my personal calendar needs. It is a great calendar that is secure and private, and it has a lot of features that make it easy to use.
-    - title: Table Plus
-      description: I was a long term Sequel Pro user on a mac because it worked well, but after finding a few issues with the unsupported version I went to twitter and asked advise. Table Plus seemed to be the common pattern in peoples answers, so I went for it and have enjoyed the experience very much.
-    - title: Laravel Herd Pro
-      description: I used to use Docker heavily, but switched to using Herd Pro for its simplicity and convenience. It hasn't let me down yet!
-    - title: Obsidian
-      description: I used to be a heavy Notion user, but the performance of it started to bug me. So I switched to usiong Obsidian as it is fast and straight forward to use.
-    - title: Warp
-      description: I used to use the built in terminal for mac, however since switching to using the Warp terminal I have been more productive and find terminal usage increasingly easier. It works like a combined text editor and terminal, has workflows, and the input stacys at the bottom of the screen so it feels more natural to use.
-    - title: Raycast
-      description: Raycast is super easy to get started with, and has a tonne of integrations making getting around your mac, and other areas - really easy and convenient.
-    - title: Nix Package Manager
-      description: I switched from homebrew and dotfiles, to using Nix Package Manager for my package management needs. It's been a great experience so far, and really simple to use.
-    - title: PhpStorm
-      description: For quite a while I fell out of love with PHPStorm, and preferred VS Code to it. However, recently, I have completely changed my mind and fallen back in love with what PHPStorm offers.
+    - title: "PhpStorm"
+      description: "After years with VS Code, I've rediscovered PhpStorm's powerful refactoring tools and deep Laravel integration. The intelligent code completion and debugging capabilities are unmatched."
+      
+    - title: "Arc Browser"
+      description: "Clean, feature-rich browser with excellent tab management and workspace organization. Though I'm exploring alternatives, Arc's user experience remains exceptional."
+      
+    - title: "Laravel Herd Pro"
+      description: "Simplified local development environment that replaced my complex Docker setup. Manages PHP versions and services effortlessly, letting me focus on code instead of configuration."
+      
+    - title: "Warp Terminal"
+      description: "Modern terminal that feels like a hybrid between text editor and command line. The persistent input bar and intelligent suggestions dramatically improved my CLI productivity."
+      
+    - title: "TablePlus"
+      description: "Elegant database management tool that replaced Sequel Pro. Clean interface with powerful query tools makes database work actually enjoyable."
+      
+    - title: "Obsidian"
+      description: "Lightning-fast note-taking and knowledge management. Switched from Notion for the performance and linking capabilities that help organize technical concepts and project notes."
+      
+    - title: "Raycast"
+      description: "Extensible launcher that replaced Spotlight. Quick access to applications, clipboard history, and custom workflows makes Mac navigation incredibly efficient."
+      
+    - title: "Nix Package Manager"
+      description: "Declarative package management that replaced Homebrew and dotfiles. Reproducible development environments across machines with atomic upgrades and rollbacks."
