@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["api-platform", "php", "api-development", "symfony"]
 ---
 
 <iframe class="aspect-video w-full" src="https://www.youtube.com/embed/NpfnnXi1CHI?si=DlDlJkhfNy7DTvfw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

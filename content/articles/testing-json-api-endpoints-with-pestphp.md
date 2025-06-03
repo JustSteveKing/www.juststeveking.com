@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["pestphp", "json-api", "laravel", "api-testing"]
 ---
 
 I won't show the code for the controller, as that is somewhat subjective. However, we should return a JSON:API Resource inside a JSON Response. Let's have a quick look at the query, which will be based on my previous tutorial on [Effective Eloquent](https://laravel-news.com/effective-eloquent).

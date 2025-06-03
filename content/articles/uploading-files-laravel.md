@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "file-uploads", "media-management", "livewire"]
 ---
 
 One of the things that I see many people struggling with is file uploads. How do we upload a file in Laravel? What is the best way to upload a file? In this tutorial, I will walk through from a basic version using blade and routes, getting more advanced, and then how we might handle it in Livewire too.

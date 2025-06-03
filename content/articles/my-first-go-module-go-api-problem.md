@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["go", "api-development", "error-handling", "go-modules"]
 ---
 
 I have been playing with GoLang on and off now for around 3 years, but never

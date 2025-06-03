@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["url-structure", "web-development", "http", "web-navigation"]
 ---
 
 We all use URLs in our day-to-day lives, whether we are technical or not. But what are the different parts of it? Let's jump right into **unpacking the URL!**

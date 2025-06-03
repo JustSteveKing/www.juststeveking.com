@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel-zero", "cli-development", "php", "api-integration"]
 ---
 
 How can I put this? CLI apps are cool. The ability to open a terminal anywhere and just run a command to do a job that might have taken you much longer. Opening the browser going to the right page, logging in and finding what it is you need to do, and waiting for the page to load .... You get the picture.

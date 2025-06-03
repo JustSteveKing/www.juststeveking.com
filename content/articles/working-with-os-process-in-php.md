@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["php", "os-process", "symfony-process", "developer-experience"]
 ---
 
 Sometimes you need to work with OS-level commands from your PHP application. Let's look at how we can do this and see if we can make the Developer Experience nicer.

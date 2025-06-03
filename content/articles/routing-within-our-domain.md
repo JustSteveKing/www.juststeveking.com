@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "domain-driven-design", "routing", "api-development"]
 ---
 
 In a normal Laravel application we store all of our routes within `web.php` or `api.php` typically, however how does this work with our Domain Driven Design approach? Do we create a `routes/{domain}.php` file, or do we want to put this somewhere else?

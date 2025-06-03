@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "eloquent", "database-operations", "design-patterns"]
 ---
 
 Laravel Eloquent is one of the most powerful and amazing features in a modern framework today. From casting data to value objects and classes, protected the database using fillable fields, transactions, scopes, global scopes, and relationships. Eloquent enables you to succeed in whatever you need to do with the database.

@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["php", "programming-styles", "code-design", "software-development"]
 ---
 
 It's very common to see two programmers who code the same feature differently. But it's much less common for those two programmers to see eye-to-eye and remain friendly. Thankfully, we have a chance to see how two friends approach the same coding challenge differently and each friend's reflection on the other's code and approach.

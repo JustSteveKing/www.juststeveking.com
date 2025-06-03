@@ -13,6 +13,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "webhooks", "api-integrations", "security"]
 ---
 
 These days, real-time communication isn't just expected — it's essential. Our users are done with waiting for full-page refreshes to get the latest info. Enter webhooks, the unsung heroes of the tech world. They're not widely talked about, but that's about to change. I'm on a mission to create the ultimate guide to webhooks in Laravel, making it the go-to resource for integrating webhooks in your next Laravel app.

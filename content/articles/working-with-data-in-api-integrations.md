@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["api-integration", "php", "data-objects", "code"]
 ---
 
 Working with third-party APIs can be frustrating; we get JSON responses which in PHP will be represented as a plain old array - and we send data as arrays too. We lose a great deal of context and the ability to build something with a great developer experience. What if I told you it didn't have to be this way? What if I told you that it doesn't take much effort to build something that will add more context and improve your work with third-party APIs? Don't believe me? Let's take a look.

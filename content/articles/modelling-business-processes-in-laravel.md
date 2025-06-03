@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "pipelines", "business-processes", "code-organisation"]
 ---
 
 As developers, we often map business processes to digital processes, from sending an email to something quite complex. Let's look at how to take a more complicated process and write clean and elegant code.

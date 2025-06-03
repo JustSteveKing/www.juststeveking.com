@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "dependency-injection", "service-providers", "code-organization"]
 ---
 
 Laravel has a fantastic dependency injection container, yet many people shy away from it. In this tutorial, I will walk through how I lean on Laravels container to make my code work for me.

@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["php", "micro-framework", "api-development", "psr"]
 ---
 
 I have used a lot of different frameworks in my career, from Zend(Laminas) to Yii, Cake to Codeignitor, SlimPHP to Laravel and more. They all have their own way of doing things, and their own selling points and benefits. Some are strict on their PSR (PHP Standards Recommendation) implementation, while others are a little looser. I have also always wanted to dabble with creating my own micro-framework, one that I can use for small APIs that just need something fast thrown together.

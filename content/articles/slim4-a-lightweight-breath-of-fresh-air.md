@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["slim-php", "php-frameworks", "lightweight-frameworks", "domain-driven-design"]
 ---
 
 My first introduction into frameworks in the PHP world started with the [Slim

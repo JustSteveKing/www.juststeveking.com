@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "api-integration", "service-pattern", "third-party-services"]
 ---
 
 I have been working with 3rd party APIs for longer than I care to admit, over

@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "docker", "subdomains", "traefik"]
 ---
 
 There are many ways you can add Docker to your Laravel application, but how do you add docker to your Laravel application when you need sub domain support? In this article I will walk through how I have done it in the past, this isn't the only way to achieve this - but it is a way that I found works well for me.

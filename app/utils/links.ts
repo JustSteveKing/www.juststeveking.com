@@ -47,7 +47,7 @@ export const navLinks: NavigationMenuItem[] = [
       {
         label: 'Sponsor',
         description: 'Support open-source development and educational content.',
-        to: '/sponsorships',
+        to: '/sponsorship',
         icon: 'i-lucide-heart-plus'
       }
     ]

@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "eloquent", "model-events", "event-handling"]
 ---
 
 When working with Eloquent Models, it is common to tap into the events dispatched through the Models lifecycle. There are a few different ways you can do this, and in this tutorial, I will walk through them and explain the benefits and drawbacks of each one.

@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "domain-driven-design", "data-objects", "factory-pattern"]
 ---
 
 In our previous blog post we set up our Laravel application to use Domain Driven Design, and we did this in a way that would let us expand and add new domains as and when we needed nicely.

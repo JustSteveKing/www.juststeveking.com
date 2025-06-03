@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "api-responses", "json-responses", "code-organization"]
 ---
 
 Responding from your Laravel application is what I would call vital, especially when you are building an API. Let's have a look at how we can power up our responses.

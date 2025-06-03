@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "domain-driven-design", "cqrs", "query-patterns"]
 ---
 
 In the last instalment we spoke about using a simplified version of the CQRS pattern to create **commands**. This time we are going to talk about the other side to this and talk about **queries**.

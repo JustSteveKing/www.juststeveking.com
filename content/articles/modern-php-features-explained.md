@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["php", "php-8", "modern-php", "lanugage-features"]
 ---
 
 Since its release in late 2020, PHP 8 has been a game changer. In this tutorial, I will walk through all the latest features with real-world examples of when I might choose to use them.

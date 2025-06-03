@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "authentication", "one-time-password", "security"]
 ---
 
 When dealing with Authentication in Laravel, there are several options out of the box. However, sometimes you need something more specific. This tutorial will look at how we can add a one-time password approach to our authentication flow.

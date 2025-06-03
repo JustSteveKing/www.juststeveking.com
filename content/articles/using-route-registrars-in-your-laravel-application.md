@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "routing", "code-organization", "design-patterns"]
 ---
 
 Recently I came across a unique approach to loading routes into Laravel applications, and I wanted to share this with you. It allows you to create Route Registrars classes you register your routes within. I saw this in a package currently being developed by [Ollie Read](https://twitter.com/ollieread), and it caught my attention as a clean and exciting way to register routes.

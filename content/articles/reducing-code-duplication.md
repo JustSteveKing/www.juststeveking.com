@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "code-organization", "refactoring", "design-patterns"]
 ---
 
 Code duplication is the most painful thing for a lot of developers, you think you have solved the problem, but there are several instances of the same issue.

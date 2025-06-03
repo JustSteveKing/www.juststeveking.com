@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "beginner-friendly", "tutorial", "web-application"]
 ---
 
 If you have never built a Laravel application, let me take a walk-through with you from scratch - with no perceived knowledge. In this tutorial, I am going to walk through creating a new Laravel application, something of a refresh of [this article](https://laravel-news.com/your-first-laravel-application), which was posted mid-2021.

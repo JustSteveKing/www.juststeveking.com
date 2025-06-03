@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "authentication", "magic-links", "security"]
 ---
 
 Sometimes we don't want users to have passwords. Sometimes we want to send a magic link to a user's email address and have them click to gain access. 

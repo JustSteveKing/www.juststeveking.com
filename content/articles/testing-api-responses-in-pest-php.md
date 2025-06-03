@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["pestphp", "api-testing", "laravel", "test-fixtures"]
 ---
 
 I get asked about API response testing a lot, how should you do it, and where to start. I have a general rule when it comes to testing APIs, and that rule is: "test your code, and your code only". What do I mean by this? Let me explain:

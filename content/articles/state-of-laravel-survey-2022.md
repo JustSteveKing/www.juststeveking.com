@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "community", "developer-demographics", "php-ecosystem"]
 ---
 
 Laravel celebrated its 10th-anniversary last year. Today it is the most popular PHP framework used by thousands of developers. The ecosystem around Laravel is huge, and new trends are constantly popping up. This survey attempts to gain insight into the representation of this outstanding community's diverse technologies and behaviors.

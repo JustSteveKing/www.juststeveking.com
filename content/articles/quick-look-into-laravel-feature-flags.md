@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "feature-flags", "access-control", "laravel-packages"]
 ---
 
 Not that long ago I published my latest package, [Laravel Feature Flags](https://github.com/JustSteveKing/laravel-feature-flags), which is a simple to use feature flag implementation for Laravel.

@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "openai", "ai-integration", "text-generation"]
 ---
 
 AI is it a buzzword, or is it something we should be thinking about? With the release of the OpenAI package, we can dive into AI-powered Laravel applications

@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "laravel-telescope", "api-monitoring", "http-client"]
 ---
 
 The biggest issue with working with third-party APIs is that we have very little visibility. We integrate them into our code base and test them - but we have no idea how often we use them unless the API we are integrating with has metrics we can use. I have been quite frustrated with this for quite some time - but there is something we can do.

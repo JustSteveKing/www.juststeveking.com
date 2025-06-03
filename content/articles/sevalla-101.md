@@ -13,6 +13,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["cloud-hosting", "developer-tools", "infrastructure", "devops"]
 ---
 
 Let's face it — cloud hosting can be a pain. Between wrestling with AWS dashboards and trying to remember which settings you toggled two weeks ago, it's easy to feel overwhelmed before you've even shipped your first line of code. That's where Sevalla comes in.

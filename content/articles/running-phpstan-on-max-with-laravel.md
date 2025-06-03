@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "phpstan", "sttatic-analysis", "type-safety"]
 ---
 
 Over the last few years static analysis in PHP, and more specifically Laravel, has become more and more popular. With more people adopting it into their Software Delivery Lifecycle, I thought it would be a good time to write a tutorial on how you can add this to your Laravel project.

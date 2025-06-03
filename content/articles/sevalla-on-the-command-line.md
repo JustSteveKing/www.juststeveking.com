@@ -13,6 +13,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["go", "cli-development", "terminal-ui", "api-integration"]
 ---
 
 Sometimes you don't want to have to leave your terminal, it's easy, it's convenient, and it's always there. With that in mind, I thought I would write an article about how I like to check in on my applications that I have deployed on [Sevalla](https://juststeveking.link/sevalla).

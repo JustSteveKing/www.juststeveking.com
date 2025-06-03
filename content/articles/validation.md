@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "validation", "form-requests", "code-organization"]
 ---
 
 Validation is a must-have for any modern project, and in Laravel, it is super simple to get started. Within your controller methods, you can call a method, pass in the request, and an array of the rules you wish to validate with.

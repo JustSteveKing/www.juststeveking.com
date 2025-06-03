@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "domain-driven-design", "data-objects", "command-pattern"]
 ---
 
 In our last installment we spoke about how we can use data objects and data object factories to escape what I call “array hell”, a place where we have no idea what is in something passed to a method and there is no context or strictness about them. Now that we know how we are going to create these let’s look at a way we can use them!

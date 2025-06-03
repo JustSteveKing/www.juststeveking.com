@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "routing","code-organisation", "scalability"]
 ---
 
 Laravels routes files can get pretty busy. Before you know it, you have to search within the routes file to find anything. How do you combat this, though? 

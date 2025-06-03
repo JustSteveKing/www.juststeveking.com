@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "data-model", "eloquent", "database-design"]
 ---
 
 The data model is one of the most important parts of any Laravel application. Many systems will be designed around this data model, so it is typically one of the first things we approach during development. Some of us have been doing this for years and have a good idea of how to approach this - while others may not be used to it yet. I learned about data modeling before I knew there was such thing as a framework, designing my data model in `CREATE TABLE` statements.

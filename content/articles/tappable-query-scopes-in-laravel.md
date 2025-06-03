@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["laravel", "eloquent", "query-scopes", "builder-macros"]
 ---
 
 I recently saw an awesome tweet while browsing twitter which introduced this idea of tappable query scopes, and wanted to share it and dig into it a little more. The idea originally came from a PR on the laravel/framework repo in the comments [link here](https://github.com/laravel/framework/pull/42111#issuecomment-1116944244).

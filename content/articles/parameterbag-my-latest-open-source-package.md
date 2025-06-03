@@ -9,6 +9,7 @@ author:
   avatar:
     src: https://github.com/juststeveking.png
     alt: Steve McDougall
+tags: ["php", "open-source", "data-handling", "api-development"]
 ---
 
 Every now and then you find youself writing the same bit of code in many
