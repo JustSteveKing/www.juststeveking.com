@@ -29,10 +29,6 @@ useSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-defineOgImageComponent('SimpleBlog', {
-  title: page.value?.title,
-  description: page.value?.description
-})
 const [{ data: navigation }, { data: files }] = await Promise.all([
   useAsyncData('navigation', () => {
     return Promise.all([

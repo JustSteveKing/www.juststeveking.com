@@ -1,7 +1,7 @@
 ---
 title: Nuxt and why you should be using it
 description: Discover the power of Nuxt.js for building modern web applications. Learn why you should consider using it for your next project.
-date: 2020-07-09
+date: 2025-06-05
 image: "/images/articles/nuxt.png"
 minRead: 14
 sponsor:
@@ -69,18 +69,17 @@ I used to spend hours configuring Express servers and wrestling with middleware.
 
 You know what I love most about Nuxt's approach to routing? It mirrors how I naturally think about application structure. When I'm planning a new project, I sketch out the pages and their relationships. With Nuxt, that mental model translates directly to folder structure:
 
-```javascript
-// This directory structure...
+```md
 pages/
-├── index.vue                    # becomes /
-├── about.vue                    # becomes /about
+├── index.vue                   # becomes /
+├── about.vue                   # becomes /about
 ├── blog/
-│   ├── index.vue               # becomes /blog
-│   ├── [slug].vue              # becomes /blog/:slug
-│   └── [...comments].vue       # becomes /blog/*/comments/*
+│   ├── index.vue              # becomes /blog
+│   ├── [slug].vue             # becomes /blog/:slug
+│   └── [...comments].vue      # becomes /blog/*/comments/*
 ├── user-[id]/
-│   └── profile.vue             # becomes /user-:id/profile
-└── [[optional]].vue            # becomes / or /:optional
+│   └── profile.vue            # becomes /user-:id/profile
+└── [[optional]].vue           # becomes / or /:optional
 ```
 
 But here's where it gets really powerful. You can mix and match rendering strategies per route:

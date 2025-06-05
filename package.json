@@ -30,7 +30,8 @@
     "@nuxt/eslint": "^1.4.1",
     "eslint": "^9.27.0",
     "typescript": "^5.8.3",
-    "vue-tsc": "^2.2.10"
+    "vue-tsc": "^2.2.10",
+    "wrangler": "^4.19.1"
   },
   "resolutions": {
     "unimport": "4.1.1"
@@ -40,7 +41,8 @@
       "@tailwindcss/oxide",
       "better-sqlite3",
       "sharp",
-      "unrs-resolver"
+      "unrs-resolver",
+      "workerd"
     ],
     "ignoredBuiltDependencies": [
       "@parcel/watcher",
