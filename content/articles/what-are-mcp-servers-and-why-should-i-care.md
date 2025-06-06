@@ -1,5 +1,5 @@
 ---
-title: Whare are MCP Servers, and why should I care?
+title: What are MCP Servers, and why should I care?
 description: Discover how Model Context Protocol servers are revolutionizing Laravel development by connecting AI to your codebase for smarter debugging and coding workflows.
 date: 2025-06-06
 image: "/images/articles/mcp-laravel.png"
