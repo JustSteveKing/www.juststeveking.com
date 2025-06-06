@@ -42,7 +42,7 @@ Let's create the following directories:
 
 We are going to require a few dependencies for this project:
 - [Cobra](https://github.com/spf13/cobra)
-- [Clack Prompts](https://github.com/orochaa/go-clack/prompts)
+- [Clack Prompts](https://github.com/orochaa/go-clack/tree/master/prompts#readme)
 
 Cobra allows us to build a well structured CLI application, and Clack Prompts will give us the terminal experience we want to build.
 
