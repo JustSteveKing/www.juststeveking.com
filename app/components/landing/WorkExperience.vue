@@ -36,7 +36,7 @@ defineProps<{
             target="_blank"
           >
             <span class="text-sm text-right">
-              {{ experience.position }}
+              {{ experience.position }} ({{ experience.company.name }})
             </span>
           </ULink>
         </Motion>
