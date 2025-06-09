@@ -88,7 +88,7 @@ export default defineNuxtConfig({
   },
 
   hub: {
-    analytics: true,
+    analytics: false,
     cache: true
   },
 
