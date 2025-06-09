@@ -7,7 +7,7 @@ minRead: 14
 author:
   name: Steve McDougall
   avatar:
-    src: https://github.com/juststeveking.png
+    src: https://avatars.githubusercontent.com/u/6368379?v=4
     alt: Steve McDougall
 tags: ["api-ops", "devops", "api-management", "automation"]
 ---

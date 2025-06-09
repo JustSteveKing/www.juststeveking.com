@@ -9,7 +9,10 @@ export default defineNuxtConfig({
     'nuxt-og-image',
     'motion-v/nuxt',
     'nuxt-cloudflare-analytics',
-    '@nuxthub/core'
+    '@nuxthub/core',
+    '@nuxtjs/sitemap',
+    'nuxt-llms',
+    '@nuxtjs/robots'
   ],
 
   devtools: {
@@ -66,6 +69,11 @@ export default defineNuxtConfig({
     }
   },
 
+  robots: {
+    blockNonSeoBots: true,
+    blockAiBots: true
+  },
+
   cloudflareAnalytics: {
     token: 'e0adefa2a56b4f0db19819e9c168df4b'
   },
@@ -77,5 +85,34 @@ export default defineNuxtConfig({
         braceStyle: '1tbs'
       }
     }
+  },
+
+  hub: {
+    analytics: true,
+    cache: true
+  },
+
+  llms: {
+    domain: 'https://juststeveking.com',
+    title: 'JustSteveKing',
+    description: 'I help engineering teams build better APIs, scale developer adoption, and create content that converts.',
+    sections: [
+      {
+        title: 'Content',
+        description: 'Explore my articles, tutorials, and guides on API design, developer experience, and more.',
+        links: [
+          {
+            title: 'Technical Writing & Insights',
+            description: 'Practical guides on API design, Laravel optimization, and modern development practices that help teams ship better software',
+            href: '/articles'
+          },
+          {
+            title: 'Technical Speaking',
+            description: 'I help developer communities learn through real-world examples and practical techniques. My talks cover API design patterns, Laravel architecture decisions, and productivity strategies that teams can implement immediately.',
+            href: '/speaking'
+          }
+        ]
+      }
+    ]
   }
 })

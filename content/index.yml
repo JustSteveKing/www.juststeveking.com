@@ -68,106 +68,92 @@ testimonials:
       name: "Aaron Francis"
       description: "Founder at Try Hard Studios"
       avatar:
-        src: "https://github.com/aarondfrancis.png"
-        srcset: "https://github.com/aarondfrancis.png 2x"
+        src: "https://avatars.githubusercontent.com/u/881931?v=4"
   - quote: "Steve is the teacher you wish you had in school. He’s informative, entertaining, and passionate about what he does. I’m always excited to see more of Steve’s content!"
     author:
       name: "Alex Six"
       description: "Senior Software Engineer of Zillow"
       avatar:
-        src: "https://github.com/alexandersix.png"
-        srcset: "https://github.com/alexandersix.png 2x"
+        src: "https://avatars.githubusercontent.com/u/11881203?v=4"
   - quote: "To me, there's one word that comes to mind: 'passion'. There are only a handful of people with the same passion for programming as Steve."
     author:
       name: "Brent Roose"
       description: "Developer Advocate at JetBrains"
       avatar:
-        src: "https://github.com/brendt.png"
-        srcset: "https://github.com/brendt.png 2x"
+        src: "https://avatars.githubusercontent.com/u/6905297?v=4"
   - quote: "Steve is a great developer with a wealth of knowledge that has contributed to many projects we have. His passion for API means we benefit from his aim for the best."
     author:
       name: "Chris Miller"
       description: "Senior Software Engineer at Browserless"
       avatar:
-        src: "https://github.com/ccmiller2018.png"
-        srcset: "https://github.com/ccmiller2018.png 2x"
+        src: "https://avatars.githubusercontent.com/u/31248127?v=4"
   - quote: "Steve is an awesome guy who knows a thing or two about APIs. I’ve learned so much from his content on his YouTube channel as well as his API video course."
     author:
       name: "Davor Minchorov"
       description: "Senior PHP Engineer at Adeva"
       avatar:
-        src: "https://github.com/davorminchorov.png"
-        srcset: "https://github.com/davorminchorov.png 2x"
+        src: "https://avatars.githubusercontent.com/u/6518995?v=4"
   - quote: "Steve is an awesome writer and communicator, he can take complex problems and communicate them in a way that anyone can understand."
     author:
       name: "Eric Barnes"
       description: "Founder/Editor at Laravel News"
       avatar:
-        src: "https://github.com/ericlbarnes.png"
-        srcset: "https://github.com/ericlbarnes.png 2x"
+        src: "https://avatars.githubusercontent.com/u/116662?v=4"
   - quote: "Steve is highly engaging and an expert in what he does. I bookmark everything he publishes and refer back to it on a regular basis. The API king!"
     author:
       name: "Gary Clarke"
       description: "YouTuber at Gary Clarke Tech"
       avatar:
-        src: "https://github.com/garyclarke.png"
-        srcset: "https://github.com/garyclarke.png 2x"
+        src: "https://avatars.githubusercontent.com/u/10089551?v=4"
   - quote: "Steve is one of the top API experts in the world and has been teaching our community for years."
     author:
       name: "Jack Ellis"
       description: "Founder at Fathom Analytics"
       avatar:
-        src: "https://github.com/jackellis.png"
-        srcset: "https://github.com/jackellis.png 2x"
+        src: "https://avatars.githubusercontent.com/u/537943?v=4"
   - quote: "Steve has a profound mastery of APIs and a public-serving teaching approach."
     author:
       name: "Ludovic Guénet"
       description: "Software Engineer at Epekta"
       avatar:
-        src: "https://github.com/ludoguenet.png"
-        srcset: "https://github.com/ludoguenet.png 2x"
+        src: "https://avatars.githubusercontent.com/u/36139526?v=4"
   - quote: "Steve is a stream of knowledge. If you like clean, strict code and silky APIs, there’s nobody I’d sooner turn to for advice!"
     author:
       name: "Luke Downing"
       description: "Educator at Laracasts"
       avatar:
-        src: "https://github.com/lukeraymonddowning.png"
-        srcset: "https://github.com/lukeraymonddowning.png 2x"
+        src: "https://avatars.githubusercontent.com/u/12202279?v=4"
   - quote: "Steve is an absolute weapon. We came for the APIs but we stayed for the clean code, robust systems architecture and deep knowledge of Laravel conventions. Steve made our code faster, more stable and easier to maintain ourselves in the future."
     author:
       name: "Peter Thomson"
       description: "Chief Technology Officer at Icehouse Ventures"
       avatar:
-        src: "https://github.com/peterjthomson.png"
-        srcset: "https://github.com/peterjthomson.png 2x"
+        src: "https://avatars.githubusercontent.com/u/9357736?v=4"
   - quote: "Steve was fantastic to work with. His deep understanding of Laravel, both technically and culturally, made him the perfect person to collaborate with."
     author:
       name: "Phil Leggetter"
       description: "Head of DevRel at Hookdeck"
       avatar:
-        src: "https://github.com/leggetter.png"
-        srcset: "https://github.com/leggetter.png 2x"
+        src: "https://avatars.githubusercontent.com/u/328367?v=4"
   - quote: "Steve’s enthusiasm and positive attitude makes his educational content super easy to digest and makes learning new tools and languages really fun."
     author:
       name: "Sam Carré"
       description: "Head of Engineering at Plannr CRM"
       avatar:
-        src: "https://github.com/sammyjo20.png"
-        srcset: "https://github.com/sammyjo20.png 2x"
+        src: "https://avatars.githubusercontent.com/u/29132017?v=4"
   - quote: "Steve is one of my favourite people. He has a huge passion for teaching developers about APIs and good coding practices."
     author:
       name: "Stephen Rees-Carter"
       description: "Friendly Hacker at Valorin Security"
       avatar:
-        src: "https://github.com/valorin.png"
-        srcset: "https://github.com/valorin.png 2x"
+        src: "https://avatars.githubusercontent.com/u/897369?v=4"
   - quote: "Steve brings knowledge and passion to the community, with easy to follow content that adds real value to any company that uses him."
     author:
       name: "Steven Tey"
       description: "Founder at Dub.co"
       avatar:
-        src: "https://github.com/steven-tey.png"
-        srcset: "https://github.com/steven-tey.png 2x"
+        src: "https://avatars.githubusercontent.com/u/28986134?v=4"
+
 articles:
   title: "Technical Writing & Insights"
   description: "Practical guides on API design, Laravel optimization, and modern development practices that help teams ship better software."

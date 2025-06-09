@@ -19,7 +19,7 @@ defineProps<{
       loop
       dots
       :ui="{
-        viewport: '-mx-4 sm:-mx-12 lg:-mx-16 bg-elevated/50 max-w-(--ui-container)'
+        viewport: '-mx-4 sm:-mx-12 lg:-mx-16 bg-primary/10 rounded-lg max-w-(--ui-container)'
       }"
     >
       <UPageCTA

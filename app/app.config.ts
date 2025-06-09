@@ -1,8 +1,8 @@
 export default defineAppConfig({
   global: {
     picture: {
-      dark: 'https://github.com/juststeveking.png',
-      light: 'https://github.com/juststeveking.png',
+      dark: 'https://avatars.githubusercontent.com/u/6368379?v=4',
+      light: 'https://avatars.githubusercontent.com/u/6368379?v=4',
       alt: 'Me giving a talk at API Platform Conference 2024'
     },
     meetingLink: 'https://juststeveking.link/cal',

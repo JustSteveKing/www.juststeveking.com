@@ -11,7 +11,7 @@ sponsor:
 author:
   name: Steve McDougall
   avatar:
-    src: https://github.com/juststeveking.png
+    src: https://avatars.githubusercontent.com/u/6368379?v=4
     alt: Steve McDougall
 tags: ["mcp-servers", "laravel", "ai-development", "laravel-loop"]
 ---
@@ -88,7 +88,7 @@ This is one of those moments where I love the Laravel community - someone has al
 
 ### What Laravel Loop Offers
 
-Looking at their (GitHub repository)[https://github.com/kirschbaum-development/laravel-loop], Laravel Loop provides several compelling features:
+Looking at their [GitHub repository](https://github.com/kirschbaum-development/laravel-loop), Laravel Loop provides several compelling features:
 
 **Pre-built Toolkits**: The package comes with ready-to-use toolkits including:
 - Laravel Model Tools for interacting with your model data

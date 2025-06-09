@@ -10,7 +10,8 @@ useHead({
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
-    { rel: 'icon', href: '/favicon.ico' }
+    { rel: 'icon', href: '/favicon.ico' },
+    { rel: 'preconnect', href: 'https://avatars.githubusercontent.com' }
   ],
   htmlAttrs: {
     lang: 'en'
