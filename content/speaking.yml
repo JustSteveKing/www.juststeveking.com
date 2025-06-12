@@ -5,6 +5,12 @@ links:
     size: md
 
 events:
+  - category: Meetup
+    title: "Reliable API Calls without the stress"
+    date: "2025-06-11"
+    location: "PHP Sussex, Brighton, UK"
+    url: "https://www.youtube.com/live/tDqYnUSGYAw?si=T0tG00v5ybx1CM7T"
+
   - category: Conference
     title: "Artisanal API Platforms: Crafting Developer-First Experiences"
     date: "2024-09-20"
