@@ -49,6 +49,13 @@ export const navLinks: NavigationMenuItem[] = [
         description: 'Support open-source development and educational content.',
         to: '/sponsorship',
         icon: 'i-lucide-heart-plus'
+      },
+      {
+        label: 'Now',
+        description: 'What am I working on, and what I am learning right now.',
+        to: 'https://now.juststeveking.com/',
+        target: '_blank',
+        icon: 'i-lucide-clock'
       }
     ]
   }

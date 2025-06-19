@@ -21,14 +21,14 @@ const { data: related } = await useAsyncData(`related-${route.path}`, async () =
 
   try {
     // First, let's get all articles to debug
-    const allArticles = await queryCollection("articles").all()
-    
+    const allArticles = await queryCollection('articles').all()
+
     const tags = page.value.tags
     const relatedArticles = []
 
     for (const article of allArticles) {
       if (article.path === page.value.path) continue
-      
+
       if (article.tags && Array.isArray(article.tags)) {
         const hasSharedTag = tags.some(tag => article.tags?.includes(tag))
         if (hasSharedTag) {
@@ -37,8 +37,8 @@ const { data: related } = await useAsyncData(`related-${route.path}`, async () =
       }
     }
     return relatedArticles.slice(0, 3)
-
   } catch (error) {
+    console.log(error)
     return []
   }
 })
@@ -70,7 +70,7 @@ useSeoMeta({
 
 const articleLink = computed(() => `${window?.location}`)
 
-const formatDate = (dateString: Date) => {
+const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
@@ -160,34 +160,37 @@ const formatDate = (dateString: Date) => {
             />
           </div>
           <UContentSurround :surround />
-          
-          <UPageSection title="Related Articles" :ui="{ container: '!p-0', title: 'text-left' }">
+
+          <UPageSection
+            title="Related Articles"
+            :ui="{ container: '!p-0', title: 'text-left' }"
+          >
             <UBlogPosts orientation="vertical">
-            <Motion
-              v-for="(article, index) in related"
-              :key="index"
-              :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-              :while-in-view="{ opacity: 1, transform: 'translateY(0)' }"
-              :transition="{ delay: 0.2 * index }"
-              :in-view-options="{ once: true }"
-            >
-              <UBlogPost
-                variant="naked"
-                orientation="horizontal"
-                :to="article.path"
-                v-bind="article"
-                :ui="{
-                  root: 'md:grid md:grid-cols-2 group overflow-visible transition-all duration-300',
-                  image:
-                    'group-hover/blog-post:scale-105 rounded-lg shadow-lg border-4 border-muted ring-2 ring-default',
-                  header:
-                    index % 2 === 0
-                      ? 'sm:-rotate-1 overflow-visible'
-                      : 'sm:rotate-1 overflow-visible'
-                }"
-              />
-            </Motion>
-          </UBlogPosts>
+              <Motion
+                v-for="(article, index) in related"
+                :key="index"
+                :initial="{ opacity: 0, transform: 'translateY(10px)' }"
+                :while-in-view="{ opacity: 1, transform: 'translateY(0)' }"
+                :transition="{ delay: 0.2 * index }"
+                :in-view-options="{ once: true }"
+              >
+                <UBlogPost
+                  variant="naked"
+                  orientation="horizontal"
+                  :to="article.path"
+                  v-bind="article"
+                  :ui="{
+                    root: 'md:grid md:grid-cols-2 group overflow-visible transition-all duration-300',
+                    image:
+                      'group-hover/blog-post:scale-105 rounded-lg shadow-lg border-4 border-muted ring-2 ring-default',
+                    header:
+                      index % 2 === 0
+                        ? 'sm:-rotate-1 overflow-visible'
+                        : 'sm:rotate-1 overflow-visible'
+                  }"
+                />
+              </Motion>
+            </UBlogPosts>
           </UPageSection>
         </UPageBody>
       </UPage>

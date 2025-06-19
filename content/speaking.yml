@@ -7,71 +7,71 @@ links:
 events:
   - category: Meetup
     title: "Reliable API Calls without the stress"
-    date: "2025-06-11"
+    date: 2025-06-11
     location: "PHP Sussex, Brighton, UK"
     url: "https://www.youtube.com/live/tDqYnUSGYAw?si=T0tG00v5ybx1CM7T"
 
   - category: Conference
     title: "Artisanal API Platforms: Crafting Developer-First Experiences"
-    date: "2024-09-20"
+    date: 2024-09-20
     location: "API Platform Conference, Lille, France"
     url: "https://youtu.be/No3wkxIbe10?si=m-zFED1peWd3dLB0"
     
   - category: Conference
     title: "The 10 REST Commandments: Principles for Better API Design"
-    date: "2023-11-16"
+    date: 2023-11-16
     location: "Nordic APIs Platform Summit, Stockholm, Sweden"
     url: "https://youtu.be/VrDptHA9zi4?si=TYR5e02-iTRhcXCG"
     
   - category: Conference
     title: "Composable Architecture in Laravel: Building Maintainable Applications"
-    date: "2024-03-01"
+    date: 2024-03-01
     location: "Laravel Live Pakistan"
     url: "https://youtu.be/YtEJdUnl848?si=aPUykjtHQ_xFxlWG"
 
   - category: Meetup
     title: "Building High-Performance APIs with Laravel's Built-in Tools"
-    date: "2024-07-30"
+    date: 2024-07-30
     location: "Laravel Worldwide Meetup"
     url: "https://www.youtube.com/live/aCHZnEhDR8M?si=FzL4dCflCW1tMsiO"
     
   - category: Meetup
     title: "Scaling APIs in Laravel: Performance & Architecture Patterns"
-    date: "2024-07-01"
+    date: 2024-07-01
     location: "Zagreb PHP, Croatia"
     
   - category: Meetup
     title: "From Artisan to Expert: Advanced Laravel Techniques"
-    date: "2022-02-16"
+    date: 2022-02-16
     location: "PHP Leeds"
     url: "https://www.youtube.com/live/jn-ff5-mlqY?si=wAuumPV7PeSBamSZ"
     
   - category: Meetup
     title: "Integrating Third-Party Services: Laravel Best Practices"
-    date: "2021-11-03"
+    date: 2021-11-03
     location: "PHP Dublin"
     url: "https://www.youtube.com/live/dGWoYZg7VWU?si=2E4woPJ6HwJ6tYD8"
     
   - category: Meetup
     title: "Building & Testing Robust APIs in Laravel"
-    date: "2021-10-26"
+    date: 2021-10-26
     location: "Laravel Worldwide Meetup"
     url: "https://www.youtube.com/live/0pylMAlfw5k?si=AGT66r2-TkD2Iie2"
     
   - category: Meetup
     title: "PHP Package Development: From Concept to Distribution"
-    date: "2021-03-09"
+    date: 2021-03-09
     location: "Nashville PHP"
     url: "https://youtu.be/T17-FQ6RIh4?si=eTtXxFiKZJedKkx3"
     
   - category: Meetup
     title: "Laravel API Fundamentals: Design, Build, Deploy"
-    date: "2021-03-15"
+    date: 2021-03-15
     location: "PHP South West"
     url: "https://youtu.be/sm9BZbztvEc?si=ZB6Pjx8M3-IQPqMD"
     
   - category: Meetup
     title: "Automating Code Quality: Tools & Workflows for Cleaner Code"
-    date: "2019-07-23"
+    date: 2019-07-23
     location: "PHP South Wales, Wales"
     url: "https://www.youtube.com/live/aTJjb5jR-kI?si=BVclSibw_KncJX_z"

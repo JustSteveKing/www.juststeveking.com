@@ -1,7 +1,7 @@
 <script setup lang="ts">
 type Event = {
   title: string
-  date: Date
+  date: string
   location: string
   url?: string
   category: 'Conference' | 'Meetup'
@@ -39,7 +39,7 @@ const groupedEvents = computed((): Record<Event['category'], Event[]> => {
   return grouped
 })
 
-function formatDate(dateString: Date): string {
+function formatDate(dateString: string): string {
   return new Date(dateString).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })
 }
 

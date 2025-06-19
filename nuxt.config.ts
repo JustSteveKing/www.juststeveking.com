@@ -10,7 +10,6 @@ export default defineNuxtConfig({
     'motion-v/nuxt',
     'nuxt-cloudflare-analytics',
     '@nuxthub/core',
-    '@nuxtjs/sitemap',
     'nuxt-llms',
     '@nuxtjs/robots'
   ],
@@ -69,9 +68,9 @@ export default defineNuxtConfig({
     }
   },
 
-  robots: {
-    blockNonSeoBots: true,
-    blockAiBots: true
+  hub: {
+    analytics: false,
+    cache: true
   },
 
   cloudflareAnalytics: {
@@ -85,11 +84,6 @@ export default defineNuxtConfig({
         braceStyle: '1tbs'
       }
     }
-  },
-
-  hub: {
-    analytics: false,
-    cache: true
   },
 
   llms: {
@@ -114,5 +108,10 @@ export default defineNuxtConfig({
         ]
       }
     ]
+  },
+
+  robots: {
+    blockNonSeoBots: true,
+    blockAiBots: true
   }
 })
