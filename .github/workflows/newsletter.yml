@@ -1,0 +1,46 @@
+name: Generate Weekly Newsletter
+
+on:
+  schedule:
+    # Runs at 09:00 UTC every Friday
+    - cron: '0 9 * * 5'
+  workflow_dispatch:
+    # Allows you to trigger it manually from the Actions tab
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          # Fetch all history so we can commit back
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Run newsletter generator
+        env:
+          BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
+        run: bun run newsletter
+
+      - name: Commit updated state
+        run: |
+          if [ -f newsletter-state.json ] && [ -n "$(git status --porcelain newsletter-state.json)" ]; then
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+            git add newsletter-state.json
+            git commit -m "chore: update newsletter state [skip ci]"
+            git push
+          else
+            echo "No new content found or state unchanged. Skipping commit."
+          fi

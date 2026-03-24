@@ -16,6 +16,21 @@ export default defineConfig({
         optional: true,
         default: '',
       }),
+      BUTTONDOWN_API_KEY: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: true,
+      }),
+      PUBLIC_NEWSLETTER_ACTION: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
+      NEWSLETTER_USERNAME: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+      }),
     },
   },
 

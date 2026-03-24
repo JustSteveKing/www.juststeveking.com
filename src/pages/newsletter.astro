@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro';
 import { Container, Section, Heading, Button, Badge } from '@/components';
 import { newsletter } from '@/config/pages';
+import { PUBLIC_NEWSLETTER_ACTION } from 'astro:env/client';
 
 ---
 
@@ -56,11 +57,16 @@ import { newsletter } from '@/config/pages';
 
         <div class="rounded-2xl border border-stone-800 bg-stone-900/50 p-8 shadow-sm">
           <Heading level={3} class="mb-6">Subscribe</Heading>
-          <form class="space-y-4">
+          <form 
+            id="newsletter-form" 
+            action="https://buttondown.com/api/emails/embed-subscribe/juststeveking" 
+            method="post" 
+            class="space-y-4 embeddable-buttondown-form"
+          >
             <div>
-              <label for="email-address" class="sr-only">Email address</label>
+              <label for="bd-email" class="sr-only">Email address</label>
               <input
-                id="email-address"
+                id="bd-email"
                 name="email"
                 type="email"
                 autocomplete="email"
@@ -70,11 +76,18 @@ import { newsletter } from '@/config/pages';
               />
             </div>
             <Button variant="primary" type="submit" class="w-full">
-              Join the list
+              Subscribe
             </Button>
-            <p class="text-center text-xs text-stone-500">
-              No spam, just quality technical content. Unsubscribe at any time.
-            </p>
+            <div class="text-center space-y-2">
+              <p class="text-xs text-stone-500">
+                No spam, just quality technical content. Unsubscribe at any time.
+              </p>
+              <p class="text-[10px] uppercase tracking-widest text-stone-600">
+                <a href="https://buttondown.com/refer/juststeveking" target="_blank" rel="noopener noreferrer" class="hover:text-stone-400 transition-colors">
+                  Powered by Buttondown.
+                </a>
+              </p>
+            </div>
           </form>
         </div>
       </div>

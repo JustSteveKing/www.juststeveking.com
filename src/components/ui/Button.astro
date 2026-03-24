@@ -1,8 +1,9 @@
 ---
 import { clsx } from 'clsx';
 import type { Size, Variant } from '@/types';
+import type { HTMLAttributes } from 'astro/types';
 
-interface Props {
+interface Props extends HTMLAttributes<'button'>, HTMLAttributes<'a'> {
   variant?: Variant;
   size?: Size;
   href?: string;
@@ -20,6 +21,7 @@ const {
   disabled = false,
   external = false,
   class: className,
+  ...rest
 } = Astro.props as Props;
 
 const variantClasses: Record<Variant, string> = {
@@ -54,12 +56,12 @@ const disabledLinkAttrs = disabled ? { 'aria-disabled': 'true', tabindex: '-1' }
 ---
 
 {href ? (
-  <a href={disabled ? undefined : href} class={base} {...externalAttrs} {...disabledLinkAttrs}>
+  <a href={disabled ? undefined : href} class={base} {...externalAttrs} {...disabledLinkAttrs} {...rest}>
     <slot />
     {external && !disabled && <span class="sr-only">(opens in new tab)</span>}
   </a>
 ) : (
-  <button type={type} disabled={disabled} aria-disabled={disabled || undefined} class={base}>
+  <button type={type} disabled={disabled} aria-disabled={disabled || undefined} class={base} {...rest}>
     <slot />
   </button>
 )}

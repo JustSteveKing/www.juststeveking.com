@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "astro": "astro"
+    "astro": "astro",
+    "newsletter": "node ./scripts/generate-newsletter.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.17",
