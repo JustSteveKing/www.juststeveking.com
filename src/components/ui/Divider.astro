@@ -1,0 +1,21 @@
+---
+import { clsx } from 'clsx';
+import type { Orientation } from '@/types';
+
+interface Props {
+  orientation?: Orientation;
+  class?: string;
+}
+
+const { orientation = 'horizontal', class: className } = Astro.props as Props;
+---
+
+{orientation === 'horizontal' ? (
+  <hr class={clsx('border-stone-800', className)} />
+) : (
+  <div
+    role="separator"
+    aria-orientation="vertical"
+    class={clsx('w-px self-stretch bg-stone-800', className)}
+  />
+)}

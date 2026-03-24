@@ -1,0 +1,111 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import Layout from '@/layouts/Layout.astro';
+import { Container, Heading, Section, Card, Badge } from '@/components';
+import { uses } from '@/config/pages';
+
+const categories: CollectionEntry<'tools'>[] = await getCollection('tools');
+
+const sorted = categories.sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+function getIconName(icon: string) {
+  if (icon.includes(':')) return icon;
+  return `lucide:${icon}`;
+}
+---
+
+<Layout meta={uses}>
+
+  <!-- ============================================================
+    Header
+  ============================================================ -->
+  <Section class="border-b border-stone-800/60 bg-stone-950">
+    <Container>
+      <div class="max-w-3xl">
+        <Badge variant="secondary" class="mb-4">Workspace</Badge>
+        <Heading level={1} class="mb-5">Uses</Heading>
+        <p class="text-xl text-stone-400 leading-relaxed">
+          A curated list of the tools, software, and hardware I use daily to build software, create content, and stay productive.
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- ============================================================
+    Categories Grid
+  ============================================================ -->
+  <Section>
+    <Container>
+      <div class="space-y-20">
+        {sorted.map((category) => (
+          <div class="grid gap-8 lg:grid-cols-4">
+            <div class="lg:col-span-1">
+              <div class="sticky top-24">
+                <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-stone-800 text-blue-400">
+                  <Icon name={getIconName(category.data.icon)} class="h-6 w-6" />
+                </div>
+                <Heading level={3} class="mb-2">{category.data.title}</Heading>
+                <p class="text-sm text-stone-500">
+                  {category.data.items.length} items in this category
+                </p>
+              </div>
+            </div>
+
+            <div class="lg:col-span-3">
+              <div class="grid gap-4 sm:grid-cols-2">
+                {category.data.items.map((item) => (
+                  <Card class="group flex flex-col h-full transition-all duration-200 hover:bg-stone-800/40">
+                    <div class="flex items-start justify-between mb-2">
+                      <h4 class="font-semibold text-stone-100 group-hover:text-white transition-colors">
+                        {item.name}
+                      </h4>
+                      {item.url && (
+                        <a 
+                          href={item.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          class="text-stone-600 hover:text-blue-400 transition-colors"
+                          aria-label={`Visit ${item.name} website`}
+                        >
+                          <Icon name="lucide:external-link" class="h-4 w-4" />
+                        </a>
+                      )}
+                    </div>
+                    {item.description && (
+                      <p class="text-sm text-stone-400 leading-relaxed flex-1">
+                        {item.description}
+                      </p>
+                    )}
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- ============================================================
+    Footer CTA
+  ============================================================ -->
+  <Section class="bg-stone-900/30">
+    <Container>
+      <div class="max-w-2xl mx-auto text-center">
+        <Heading level={2} class="mb-4">Want to see more?</Heading>
+        <p class="text-stone-400 mb-8">
+          I occasionally post detailed desk setups and workflow deep dives on my YouTube channel.
+        </p>
+        <a 
+          href="/videos" 
+          class="inline-flex h-11 items-center justify-center rounded-md bg-stone-800 px-6 font-medium text-stone-100 hover:bg-stone-700 transition-colors"
+        >
+          Watch Workspace Videos
+        </a>
+      </div>
+    </Container>
+  </Section>
+
+</Layout>

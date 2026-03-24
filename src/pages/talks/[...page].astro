@@ -1,0 +1,117 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { Hero, Section, Badge, Container, Button } from '@/components';
+import { talks } from '@/config/pages';
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const allTalks = await getCollection('talks');
+
+  const sorted = allTalks.sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+  );
+
+  return paginate(sorted, { pageSize: 12 });
+};
+
+interface Props {
+  page: Page<CollectionEntry<'talks'>>;
+}
+
+const { page } = Astro.props as unknown as Props;
+---
+
+<Layout meta={talks}>
+  <Hero title={talks.title} description={talks.description} />
+
+  <Section class="py-12">
+    <Container>
+      <div class="divide-y divide-stone-800">
+        {page.data.map((talk) => (
+          <div class="flex flex-col gap-3 py-8 first:pt-0 last:pb-0 sm:flex-row sm:items-start sm:gap-8">
+            <time
+              datetime={new Date(talk.data.date).toISOString()}
+              class="shrink-0 text-xs text-stone-500 sm:w-28 sm:pt-1.5"
+            >
+              {new Date(talk.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+            </time>
+
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <Badge variant="primary">{talk.data.category}</Badge>
+                {talk.data.upcoming && <Badge variant="secondary">Upcoming</Badge>}
+              </div>
+              <h2 class="text-lg font-semibold text-stone-100 mb-1 leading-snug">
+                {talk.data.title}
+              </h2>
+              <p class="text-sm font-medium text-stone-300 mb-0.5">{talk.data.event}</p>
+              <p class="text-sm text-stone-500 mb-3">{talk.data.location}</p>
+              {talk.data.description && (
+                <p class="text-sm text-stone-400 leading-relaxed line-clamp-2 mb-3">
+                  {talk.data.description}
+                </p>
+              )}
+              {(talk.data.url || talk.data.slides || talk.data.video) && (
+                <div class="flex flex-wrap gap-4">
+                  {talk.data.url && (
+                    <a
+                      href={talk.data.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-xs text-stone-400 hover:text-stone-200 transition-colors"
+                    >
+                      Event ↗
+                    </a>
+                  )}
+                  {talk.data.slides && (
+                    <a
+                      href={talk.data.slides}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-xs text-stone-400 hover:text-stone-200 transition-colors"
+                    >
+                      Slides ↗
+                    </a>
+                  )}
+                  {talk.data.video && (
+                    <a
+                      href={talk.data.video}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-xs text-stone-400 hover:text-stone-200 transition-colors"
+                    >
+                      Watch ↗
+                    </a>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {(page.url.prev || page.url.next) && (
+        <nav
+          aria-label="Pagination"
+          class="mt-16 flex items-center justify-between border-t border-stone-800 pt-8"
+        >
+          <div>
+            {page.url.prev && (
+              <Button href={page.url.prev} variant="outline">&larr; Newer</Button>
+            )}
+          </div>
+          <span class="text-sm text-stone-500">
+            Page {page.currentPage} of {page.lastPage}
+          </span>
+          <div>
+            {page.url.next && (
+              <Button href={page.url.next} variant="outline">Older &rarr;</Button>
+            )}
+          </div>
+        </nav>
+      )}
+    </Container>
+  </Section>
+</Layout>

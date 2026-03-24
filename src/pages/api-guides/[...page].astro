@@ -1,0 +1,86 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { Hero, Section, Badge, Container, Button } from '@/components';
+import { apiGuides } from '@/config/pages';
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const allGuides = await getCollection('apiGuides');
+
+  const sorted = allGuides.sort((a, b) => {
+    if (a.data.order !== undefined && b.data.order !== undefined) {
+      return a.data.order - b.data.order;
+    }
+    if (a.data.order !== undefined) return -1;
+    if (b.data.order !== undefined) return 1;
+    return a.data.title.localeCompare(b.data.title);
+  });
+
+  return paginate(sorted, { pageSize: 12 });
+};
+
+interface Props {
+  page: Page<CollectionEntry<'apiGuides'>>;
+}
+
+const { page } = Astro.props as unknown as Props;
+---
+
+<Layout meta={apiGuides}>
+  <Hero title={apiGuides.title} description={apiGuides.description} />
+
+  <Section class="py-12">
+    <Container>
+      <div class="divide-y divide-stone-800">
+        {page.data.map((guide) => (
+          <a
+            href={`/api-guides/${guide.id}`}
+            class="group flex flex-col gap-3 py-7 first:pt-0 last:pb-0 sm:flex-row sm:items-start sm:gap-8"
+          >
+            <div class="shrink-0 sm:w-28 sm:pt-1">
+              <Badge variant="primary">{guide.data.complexity}</Badge>
+            </div>
+
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mb-2">
+                <span class="text-xs text-stone-500">{guide.data.category}</span>
+                {guide.data.apiStyles.map((s) => (
+                  <Badge variant="outline" size="xs">{s}</Badge>
+                ))}
+              </div>
+              <h2 class="text-lg font-semibold text-stone-100 group-hover:text-white mb-2 leading-snug">
+                {guide.data.title}
+              </h2>
+              <p class="text-sm text-stone-400 leading-relaxed line-clamp-2">
+                {guide.data.description}
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      {(page.url.prev || page.url.next) && (
+        <nav
+          aria-label="Pagination"
+          class="mt-16 flex items-center justify-between border-t border-stone-800 pt-8"
+        >
+          <div>
+            {page.url.prev && (
+              <Button href={page.url.prev} variant="outline">&larr; Previous</Button>
+            )}
+          </div>
+          <span class="text-sm text-stone-500">
+            Page {page.currentPage} of {page.lastPage}
+          </span>
+          <div>
+            {page.url.next && (
+              <Button href={page.url.next} variant="outline">Next &rarr;</Button>
+            )}
+          </div>
+        </nav>
+      )}
+    </Container>
+  </Section>
+</Layout>

@@ -1,0 +1,65 @@
+---
+import { clsx } from 'clsx';
+import type { Size, Variant } from '@/types';
+
+interface Props {
+  variant?: Variant;
+  size?: Size;
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  external?: boolean;
+  class?: string;
+}
+
+const {
+  variant = 'default',
+  size = 'md',
+  href,
+  type = 'button',
+  disabled = false,
+  external = false,
+  class: className,
+} = Astro.props as Props;
+
+const variantClasses: Record<Variant, string> = {
+  default:     'bg-stone-800 text-stone-100 hover:bg-stone-700 border border-stone-700',
+  primary:     'bg-blue-600 text-white hover:bg-blue-500 border border-blue-500',
+  secondary:   'bg-stone-900 text-stone-300 hover:bg-stone-800 border border-stone-700',
+  ghost:       'text-stone-300 hover:bg-stone-800/50 hover:text-stone-100 border border-transparent',
+  outline:     'bg-transparent text-stone-300 hover:bg-stone-800 hover:text-stone-100 border border-stone-600',
+  destructive: 'bg-red-600 text-white hover:bg-red-500 border border-red-500',
+};
+
+const sizeClasses: Record<Size, string> = {
+  xs:  'h-6  px-2    text-xs   gap-1',
+  sm:  'h-8  px-3    text-sm   gap-1.5',
+  md:  'h-9  px-4    text-sm   gap-2',
+  lg:  'h-10 px-5    text-base gap-2',
+  xl:  'h-11 px-6    text-base gap-2',
+  '2xl': 'h-12 px-8  text-lg  gap-2.5',
+};
+
+const base = clsx(
+  'inline-flex items-center justify-center rounded-md font-medium transition-colors',
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-950',
+  'disabled:pointer-events-none disabled:opacity-50',
+  variantClasses[variant],
+  sizeClasses[size],
+  className,
+);
+
+const externalAttrs = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+const disabledLinkAttrs = disabled ? { 'aria-disabled': 'true', tabindex: '-1' } : {};
+---
+
+{href ? (
+  <a href={disabled ? undefined : href} class={base} {...externalAttrs} {...disabledLinkAttrs}>
+    <slot />
+    {external && !disabled && <span class="sr-only">(opens in new tab)</span>}
+  </a>
+) : (
+  <button type={type} disabled={disabled} aria-disabled={disabled || undefined} class={base}>
+    <slot />
+  </button>
+)}

@@ -1,0 +1,97 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { Hero, Button, Section, Badge, Container } from '@/components';
+import { articles } from '@/config/pages';
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const allArticles = await getCollection('articles');
+
+  const sorted = allArticles.sort(
+    (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
+  );
+
+  return paginate(sorted, { pageSize: 12 });
+};
+
+interface Props {
+  page: Page<CollectionEntry<'articles'>>;
+}
+
+const { page } = Astro.props as unknown as Props;
+---
+
+<Layout meta={articles}>
+  <Hero title={articles.title} description={articles.description}>
+    <Fragment slot="cta">
+      <Button href="/rss.xml" variant="outline">RSS Feed</Button>
+      <Button href="/newsletter" variant="ghost">Newsletter</Button>
+    </Fragment>
+  </Hero>
+
+  <Section class="py-12">
+    <Container>
+      <div class="divide-y divide-stone-800">
+        {page.data.map((article) => (
+          <a
+            href={`/articles/${article.id}`}
+            class="group flex flex-col gap-3 py-8 first:pt-0 last:pb-0 transition-opacity hover:opacity-90 sm:flex-row sm:items-start sm:gap-8"
+          >
+            <time
+              datetime={new Date(article.data.pubDate).toISOString()}
+              class="shrink-0 text-xs text-stone-500 sm:w-28 sm:pt-1.5"
+            >
+              {new Date(article.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+            </time>
+
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <Badge variant="primary">{article.data.category}</Badge>
+                {(article.data.readingTime ?? article.data.minRead) && (
+                  <span class="text-xs text-stone-500">
+                    {article.data.readingTime ?? article.data.minRead} min read
+                  </span>
+                )}
+              </div>
+              <h2 class="text-lg font-semibold text-stone-100 group-hover:text-white mb-2 leading-snug">
+                {article.data.title}
+              </h2>
+              <p class="text-sm text-stone-400 leading-relaxed line-clamp-2">
+                {article.data.description}
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      {(page.url.prev || page.url.next) && (
+        <nav
+          aria-label="Pagination"
+          class="mt-16 flex items-center justify-between border-t border-stone-800 pt-8"
+        >
+          <div>
+            {page.url.prev && (
+              <Button href={page.url.prev} variant="outline">
+                &larr; Newer
+              </Button>
+            )}
+          </div>
+
+          <span class="text-sm text-stone-500">
+            Page {page.currentPage} of {page.lastPage}
+          </span>
+
+          <div>
+            {page.url.next && (
+              <Button href={page.url.next} variant="outline">
+                Older &rarr;
+              </Button>
+            )}
+          </div>
+        </nav>
+      )}
+    </Container>
+  </Section>
+</Layout>

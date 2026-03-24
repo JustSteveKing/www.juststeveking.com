@@ -1,0 +1,95 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { Hero, Section, Container, Button } from '@/components';
+import { podcasts } from '@/config/pages';
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const allPodcasts = await getCollection('podcasts');
+
+  const sorted = allPodcasts.sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+  );
+
+  return paginate(sorted, { pageSize: 12 });
+};
+
+interface Props {
+  page: Page<CollectionEntry<'podcasts'>>;
+}
+
+const { page } = Astro.props as unknown as Props;
+---
+
+<Layout meta={podcasts}>
+  <Hero title={podcasts.title} description={podcasts.description} />
+
+  <Section class="py-12">
+    <Container>
+      <div class="divide-y divide-stone-800">
+        {page.data.map((podcast) => {
+          const inner = (
+            <div class="flex flex-col gap-3 py-8 first:pt-0 last:pb-0 sm:flex-row sm:items-start sm:gap-8">
+              <div class="shrink-0 sm:w-28 sm:pt-1">
+                <span class="font-mono text-xs text-stone-400">Ep. {podcast.data.episode}</span>
+                <time
+                  datetime={new Date(podcast.data.date).toISOString()}
+                  class="block text-xs text-stone-600 mt-0.5"
+                >
+                  {new Date(podcast.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
+                </time>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h2 class="text-lg font-semibold text-stone-100 group-hover:text-white mb-2 leading-snug">
+                  {podcast.data.title}
+                </h2>
+                {podcast.data.description && (
+                  <p class="text-sm text-stone-400 leading-relaxed line-clamp-2">
+                    {podcast.data.description}
+                  </p>
+                )}
+              </div>
+            </div>
+          );
+
+          return podcast.data.url ? (
+            <a
+              href={podcast.data.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group block transition-opacity hover:opacity-90"
+            >
+              {inner}
+              <span class="sr-only">(opens in new tab)</span>
+            </a>
+          ) : (
+            <div>{inner}</div>
+          );
+        })}
+      </div>
+
+      {(page.url.prev || page.url.next) && (
+        <nav
+          aria-label="Pagination"
+          class="mt-16 flex items-center justify-between border-t border-stone-800 pt-8"
+        >
+          <div>
+            {page.url.prev && (
+              <Button href={page.url.prev} variant="outline">&larr; Newer</Button>
+            )}
+          </div>
+          <span class="text-sm text-stone-500">
+            Page {page.currentPage} of {page.lastPage}
+          </span>
+          <div>
+            {page.url.next && (
+              <Button href={page.url.next} variant="outline">Older &rarr;</Button>
+            )}
+          </div>
+        </nav>
+      )}
+    </Container>
+  </Section>
+</Layout>

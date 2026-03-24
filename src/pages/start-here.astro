@@ -1,0 +1,82 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '@/layouts/Layout.astro';
+import { Container, Section, Heading, Card, Badge } from '@/components';
+import { startHere } from '@/config/pages';
+import { tracks } from '@/config/tracks';
+
+---
+
+<Layout meta={startHere}>
+  <Section class="border-b border-stone-800/60 bg-stone-950">
+    <Container>
+      <div class="max-w-3xl">
+        <Heading level={1} class="mb-5">Start Here</Heading>
+        <p class="text-xl text-stone-400 leading-relaxed">
+          Whether you're a backend engineer, a platform lead, or a CTO, I've organized my content into structured paths to help you solve specific problems.
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="grid gap-8 lg:grid-cols-3">
+        {tracks.map((track) => (
+          <Card class="flex flex-col h-full">
+            <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-stone-800 text-stone-100">
+               <Icon name={`lucide:${track.icon}`} class="h-6 w-6" />
+            </div>
+            
+            <Heading level={3} class="mb-3">{track.title}</Heading>
+            <p class="text-stone-400 mb-8 flex-1">
+              {track.description}
+            </p>
+
+            <div class="space-y-4">
+              <p class="text-xs font-semibold uppercase tracking-wider text-stone-500">Included articles:</p>
+              <ul class="space-y-3">
+                {track.items.map((item) => (
+                  <li>
+                    <a href={item.href} class="group flex items-center text-sm text-stone-300 hover:text-white transition-colors">
+                      <span class="mr-2 text-stone-600 group-hover:text-blue-500">&rarr;</span>
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-stone-800">
+               <a href={track.href} class="text-sm font-medium text-blue-400 hover:text-blue-300">
+                 Explore the track &rarr;
+               </a>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="bg-stone-900/30">
+    <Container>
+      <div class="rounded-2xl border border-stone-800 bg-stone-900/50 p-8 md:p-12">
+        <div class="max-w-2xl">
+          <Badge variant="primary" class="mb-4">Newsletter</Badge>
+          <Heading level={2} class="mb-4">Prefer a slow-burn approach?</Heading>
+          <p class="text-lg text-stone-400 mb-8">
+            Join 5,000+ developers in "Code & Chill". Every week, I send out deep dives into architecture, API design patterns, and lessons learned from the field.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="/newsletter" class="inline-flex h-11 items-center justify-center rounded-md bg-blue-600 px-6 font-medium text-white hover:bg-blue-500 transition-colors">
+              Join Code & Chill
+            </a>
+            <a href="/articles" class="inline-flex h-11 items-center justify-center rounded-md border border-stone-700 bg-transparent px-6 font-medium text-stone-300 hover:bg-stone-800 hover:text-white transition-colors">
+              Browse All Articles
+            </a>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+</Layout>

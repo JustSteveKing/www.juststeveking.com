@@ -1,0 +1,346 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { siteConfig } from '@/config';
+import {
+  Avatar,
+  Badge,
+  Button,
+  Card,
+  Container,
+  Divider,
+  Heading,
+  Link,
+  Section,
+  Testimonial,
+} from '@/components';
+import { about } from '@/config/pages';
+
+const resumeEntry = await getEntry('resume', 'resume');
+const resume = resumeEntry?.data;
+
+const allTestimonials: CollectionEntry<'testimonials'>[] = await getCollection('testimonials');
+
+// Current roles: no endDate or endDate is empty string
+const currentRoles = resume?.work.filter((w) => !w.endDate) ?? [];
+
+// Career milestones — curated narrative subset, not the full work list
+const milestones = [
+  {
+    year: '2007–2011',
+    role: 'Combat Engineer',
+    org: 'HM Forces, Royal Engineers',
+    note: 'Frontline deployment to Afghanistan. Specialised in IED detection and route clearance operations.',
+  },
+  {
+    year: '2018',
+    role: 'Founder',
+    org: 'PHP South Wales',
+    note: "Built Wales' premier PHP developer community from zero to 200+ active members over four years.",
+  },
+  {
+    year: '2019',
+    role: 'CTO',
+    org: 'Lila Fuches Limited',
+    note: 'Led product from MVP through to market-ready SaaS platform, establishing technical foundations for scale.',
+  },
+  {
+    year: '2022',
+    role: 'Senior Engineering Manager',
+    org: 'Geomiq',
+    note: 'Managed 12+ engineers across three products, delivering Laravel applications for 100,000+ manufacturing clients.',
+  },
+  {
+    year: '2023',
+    role: 'Developer Advocate',
+    org: 'Treblle',
+    note: 'Spoke at 15+ global conferences, created 50+ technical resources, and generated $250K+ in qualified leads through content.',
+  },
+  {
+    year: '2023',
+    role: 'Technical Columnist',
+    org: 'php[architect]',
+    note: '12+ monthly deep-dives reaching 50,000+ developers — maintaining 95%+ reader satisfaction through technical storytelling.',
+  },
+  {
+    year: '2024',
+    role: 'Core Committee Member',
+    org: 'PHP-FIG',
+    note: 'Contributing to PSR standards that shape how millions of PHP developers write interoperable code.',
+  },
+  {
+    year: '2024',
+    role: 'Technical Director',
+    org: 'Lila Fuches Limited',
+    note: 'Architecting a scalable Laravel SaaS platform with API-first design, serving 10,000+ users.',
+  },
+];
+
+// Recent publications — most recent first
+const recentPublications = resume?.publications.slice(0, 4) ?? [];
+
+function formatPublicationDate(releaseDate: string): string {
+  const [year, month] = releaseDate.split('-');
+  if (!month) return year ?? releaseDate;
+  const date = new Date(parseInt(year!), parseInt(month!) - 1);
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+}
+---
+
+<Layout meta={about}>
+
+  <!-- ============================================================
+    Intro
+  ============================================================ -->
+  <Section class="border-b border-stone-800/60">
+    <Container>
+      <div class="max-w-3xl">
+
+        <div class="flex items-start gap-5 mb-8">
+          {siteConfig.author.avatar && (
+            <Avatar
+              src={siteConfig.author.avatar}
+              alt={siteConfig.author.name}
+              size="2xl"
+            />
+          )}
+          <div class="pt-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              {currentRoles.map((role) => (
+                <Badge variant="primary" size="sm">{role.position}</Badge>
+              ))}
+            </div>
+            <p class="text-sm text-stone-500">Wales, UK</p>
+          </div>
+        </div>
+
+        <Heading level={1} class="mb-3">About me</Heading>
+        <p class="text-xl font-medium text-stone-300 mb-6">
+          Developer Educator &amp; API Mentor
+        </p>
+
+        {resume?.basics.summary && (
+          <p class="text-lg text-stone-400 leading-relaxed mb-8 max-w-2xl">
+            {resume.basics.summary}
+          </p>
+        )}
+
+        <div class="flex flex-wrap gap-3">
+          <Button href="/articles" variant="primary">Read my writing</Button>
+          <Button href="/talks" variant="outline">Conference talks</Button>
+          <Button href="/work" variant="ghost">Full CV</Button>
+        </div>
+
+      </div>
+    </Container>
+  </Section>
+
+  <!-- ============================================================
+    Currently
+  ============================================================ -->
+  {currentRoles.length > 0 && (
+    <Section aria-label="Currently" class="border-b border-stone-800/60">
+      <Container>
+        <Heading level={2} class="mb-8">Currently</Heading>
+        <div class="grid gap-5 sm:grid-cols-2 max-w-3xl">
+          {currentRoles.map((role) => (
+            <Card>
+              <p class="text-xs text-stone-500 mb-2">
+                {new Date(role.startDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })} — Present
+              </p>
+              <Heading level={4} class="mb-1">{role.position}</Heading>
+              {role.url ? (
+                <Link href={role.url} underline={false} class="text-sm text-stone-400 mb-3 block">
+                  {role.name} ↗
+                </Link>
+              ) : (
+                <p class="text-sm text-stone-400 mb-3">{role.name}</p>
+              )}
+              {role.summary && (
+                <p class="text-sm text-stone-500 leading-relaxed line-clamp-3">
+                  {role.summary}
+                </p>
+              )}
+            </Card>
+          ))}
+        </div>
+      </Container>
+    </Section>
+  )}
+
+  <!-- ============================================================
+    Career arc
+  ============================================================ -->
+  <Section aria-label="Career" class="border-b border-stone-800/60">
+    <Container>
+      <Heading level={2} class="mb-2">How I got here</Heading>
+      <p class="text-stone-400 leading-relaxed mb-10 max-w-2xl">
+        I started my career not as a developer but as a Combat Engineer with the British Army.
+        The discipline, problem-solving under pressure, and systematic thinking I built there
+        shaped everything that came after.
+      </p>
+
+      <div class="max-w-3xl divide-y divide-stone-800">
+        {milestones.map(({ year, role, org, note }) => (
+          <div class="flex flex-col gap-2 py-5 first:pt-0 last:pb-0 sm:flex-row sm:gap-8">
+            <div class="shrink-0 sm:w-28">
+              <span class="font-mono text-xs text-stone-500">{year}</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <Heading level={5} class="mb-0.5">{role}</Heading>
+              <p class="text-xs text-stone-500 mb-2">{org}</p>
+              <p class="text-sm text-stone-400 leading-relaxed">{note}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- ============================================================
+    Writing & Recognition
+  ============================================================ -->
+  <Section aria-label="Writing and Recognition" class="border-b border-stone-800/60">
+    <Container>
+      <div class="max-w-3xl">
+        <Heading level={2} class="mb-2">Writing &amp; Recognition</Heading>
+        <p class="text-stone-400 leading-relaxed mb-10">
+          Regular columnist at php[architect] — one of the PHP community's longest-running
+          technical publications — and a recognised contributor to PSR standards as a
+          PHP-FIG Core Committee member.
+        </p>
+
+        {(resume?.awards?.length || resume?.certificates?.length) && (
+          <div class="flex flex-wrap gap-3 mb-10">
+            {resume?.awards?.map((award) => (
+              <div class="rounded-xl border border-stone-800 px-4 py-3">
+                <p class="text-sm font-semibold text-stone-100">{award.title}</p>
+                <p class="text-xs text-stone-500 mt-0.5">{award.awarder}</p>
+              </div>
+            ))}
+            {resume?.certificates?.map((cert) => (
+              <div class="rounded-xl border border-stone-800 px-4 py-3">
+                <p class="text-sm font-semibold text-stone-100">{cert.name}</p>
+                <p class="text-xs text-stone-500 mt-0.5">{cert.issuer}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <Heading level={3} class="mb-6">Recent publications</Heading>
+        <div class="divide-y divide-stone-800">
+          {recentPublications.map((pub) => (
+            <div class="flex flex-col gap-1 py-5 first:pt-0 last:pb-0 sm:flex-row sm:gap-8">
+              <span class="shrink-0 font-mono text-xs text-stone-500 sm:w-28 sm:pt-0.5">
+                {formatPublicationDate(pub.releaseDate)}
+              </span>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-semibold text-stone-100 mb-1">
+                  {pub.url ? (
+                    <Link href={pub.url} underline={false}>{pub.name} ↗</Link>
+                  ) : pub.name}
+                </p>
+                <p class="text-xs text-stone-500 mb-2">{pub.publisher}</p>
+                {pub.summary && (
+                  <p class="text-sm text-stone-400 leading-relaxed line-clamp-2">
+                    {pub.summary}
+                  </p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- ============================================================
+    Community
+  ============================================================ -->
+  <Section aria-label="Community" class="border-b border-stone-800/60">
+    <Container>
+      <div class="max-w-3xl">
+        <Heading level={2} class="mb-2">Community</Heading>
+        <p class="text-stone-400 leading-relaxed mb-10">
+          I've always believed that the best way to level up is to bring others with you.
+          From founding a local meetup to speaking on international stages, community has
+          been central to everything I do.
+        </p>
+
+        <dl class="grid gap-5 sm:grid-cols-3">
+          <div class="rounded-xl border border-stone-800 p-5">
+            <dd class="text-3xl font-bold tracking-tight text-stone-100 mb-1">200+</dd>
+            <dt class="text-sm text-stone-500">Members in PHP South Wales</dt>
+          </div>
+          <div class="rounded-xl border border-stone-800 p-5">
+            <dd class="text-3xl font-bold tracking-tight text-stone-100 mb-1">40+</dd>
+            <dt class="text-sm text-stone-500">Meetups organised</dt>
+          </div>
+          <div class="rounded-xl border border-stone-800 p-5">
+            <dd class="text-3xl font-bold tracking-tight text-stone-100 mb-1">50+</dd>
+            <dt class="text-sm text-stone-500">Developers mentored</dt>
+          </div>
+        </dl>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- ============================================================
+    Testimonials
+  ============================================================ -->
+  {allTestimonials.length > 0 && (
+    <Section aria-label="Testimonials" class="border-b border-stone-800/60">
+      <Container>
+        <Heading level={2} class="mb-10">What people say</Heading>
+        <div class="-mx-4 sm:-mx-6 lg:-mx-8">
+          <div class="flex gap-5 overflow-x-auto px-4 pb-4 sm:px-6 lg:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {allTestimonials.map((t) => (
+              <Testimonial
+                quote={t.data.quote}
+                name={t.data.author.name}
+                role={t.data.author.role}
+                company={t.data.author.company}
+                avatar={t.data.author.avatar?.src}
+              />
+            ))}
+          </div>
+        </div>
+      </Container>
+    </Section>
+  )}
+
+  <!-- ============================================================
+    Connect
+  ============================================================ -->
+  <Section aria-label="Connect">
+    <Container>
+      <div class="max-w-2xl">
+        <Heading level={2} class="mb-3">Get in touch</Heading>
+        <p class="text-stone-400 leading-relaxed mb-8">
+          Whether you want to talk APIs, discuss a project, or have me speak at your event —
+          I'm always happy to hear from developers and teams doing interesting work.
+        </p>
+        <div class="flex flex-wrap gap-3 mb-10">
+          <Button href={`mailto:${siteConfig.author.email}`} variant="primary">
+            Send an email
+          </Button>
+          <Button href="/newsletter" variant="outline">
+            Subscribe to the newsletter
+          </Button>
+        </div>
+        <Divider class="mb-8" />
+        <div class="flex flex-wrap gap-x-6 gap-y-3">
+          {siteConfig.socials
+            .filter((s) => s.platform !== 'rss')
+            .map((social) => (
+              <Link href={social.url} underline={false} class="text-sm">
+                {social.label}
+              </Link>
+            ))}
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+</Layout>

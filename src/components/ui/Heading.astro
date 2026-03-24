@@ -1,0 +1,27 @@
+---
+import { clsx } from 'clsx';
+
+type Level = 1 | 2 | 3 | 4 | 5 | 6;
+
+interface Props {
+  level?: Level;
+  class?: string;
+}
+
+const { level = 2, class: className } = Astro.props as Props;
+
+const Tag = `h${level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
+const levelClasses: Record<Level, string> = {
+  1: 'text-4xl font-bold tracking-tight text-stone-900 dark:text-stone-50 sm:text-5xl lg:text-6xl',
+  2: 'text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-50 sm:text-4xl',
+  3: 'text-2xl font-semibold tracking-tight text-stone-800 dark:text-stone-100',
+  4: 'text-xl font-semibold text-stone-800 dark:text-stone-100',
+  5: 'text-lg  font-medium text-stone-800 dark:text-stone-100',
+  6: 'text-base font-medium text-stone-800 dark:text-stone-100',
+};
+---
+
+<Tag class={clsx(levelClasses[level], className)}>
+  <slot />
+</Tag>

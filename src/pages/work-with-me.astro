@@ -1,0 +1,121 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { Container, Section, Heading, Card, Button, Badge } from '@/components';
+import { workWithMe } from '@/config/pages';
+
+const services = [
+  {
+    title: 'Team Workshops',
+    description: 'Immersive, hands-on sessions for your engineering team. From API design fundamentals to advanced Laravel architecture.',
+    features: ['Custom curriculum', 'Real-world examples', 'Post-workshop support'],
+    cta: 'Inquire about workshops'
+  },
+  {
+    title: 'Curriculum Design',
+    description: 'I help engineering organizations build internal learning paths and documentation that actually scales with their team.',
+    features: ['Knowledge gap analysis', 'Structured learning paths', 'Content creation'],
+    cta: 'Build your curriculum'
+  },
+  {
+    title: 'Engineering Coaching',
+    description: 'Weekly 1-on-1 or small group sessions for senior engineers and leads looking to level up their architectural thinking.',
+    features: ['Code reviews', 'Architectural advisory', 'Direct Slack access'],
+    cta: 'Get coaching'
+  }
+];
+---
+
+<Layout meta={workWithMe}>
+  <Section class="border-b border-stone-800/60">
+    <Container>
+      <div class="max-w-3xl">
+        <Badge variant="secondary" class="mb-4">Services</Badge>
+        <Heading level={1} class="mb-5">Work With Me</Heading>
+        <p class="text-xl text-stone-400 leading-relaxed">
+          I help engineering teams build better software through structured learning, architectural guidance, and hands-on enablement.
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="grid gap-8 lg:grid-cols-3">
+        {services.map((service) => (
+          <Card class="flex flex-col h-full">
+            <Heading level={3} class="mb-4">{service.title}</Heading>
+            <p class="text-stone-400 mb-8 flex-1">
+              {service.description}
+            </p>
+            
+            <ul class="mb-8 space-y-3">
+              {service.features.map((feature) => (
+                <li class="flex items-center text-sm text-stone-300">
+                  <svg class="mr-3 h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+
+            <Button variant="primary" class="w-full">
+              {service.cta}
+            </Button>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="bg-stone-900/30">
+    <Container>
+      <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+        <div>
+          <Heading level={2} class="mb-6">Why work with me?</Heading>
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-stone-800 text-blue-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-stone-100">Pragmatic Experience</p>
+                <p class="text-sm text-stone-400">15+ years in the trenches, from startups to scale-ups. I don't just teach theory; I teach what works in production.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-stone-800 text-blue-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M8 7h6"/><path d="M8 11h8"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-stone-100">Standard-Driven</p>
+                <p class="text-sm text-stone-400">As a member of the PHP-FIG Core Committee, I have a deep understanding of standards and how they benefit long-term maintenance.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-stone-800 text-blue-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-stone-100">Tailored Approach</p>
+                <p class="text-sm text-stone-400">No generic "off-the-shelf" training. Every engagement is tailored to your team's specific stack, challenges, and goals.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="relative rounded-2xl border border-stone-800 bg-stone-900/50 p-8">
+           <p class="mb-6 text-lg italic text-stone-300">
+             "Steve has a rare ability to take complex architectural concepts and make them feel accessible and actionable. His workshop completely changed how our team thinks about API design."
+           </p>
+           <div class="flex items-center gap-3">
+             <div class="h-10 w-10 rounded-full bg-stone-800"></div>
+             <div>
+               <p class="text-sm font-semibold text-stone-100">Engineering Manager</p>
+               <p class="text-xs text-stone-500">Global Fintech Platform</p>
+             </div>
+           </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+</Layout>

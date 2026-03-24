@@ -1,0 +1,38 @@
+---
+import { clsx } from 'clsx';
+import type { Size, Variant } from '@/types';
+
+interface Props {
+  variant?: Variant;
+  size?: Size;
+  class?: string;
+}
+
+const {
+  variant = 'default',
+  size = 'sm',
+  class: className,
+} = Astro.props as Props;
+
+const variantClasses: Record<Variant, string> = {
+  default:     'bg-stone-800 text-stone-300 border-stone-700',
+  primary:     'bg-blue-950 text-blue-300 border-blue-800',
+  secondary:   'bg-stone-900 text-stone-400 border-stone-700',
+  ghost:       'bg-transparent text-stone-400 border-transparent',
+  outline:     'bg-transparent text-stone-300 border-stone-600',
+  destructive: 'bg-red-950 text-red-300 border-red-800',
+};
+
+const sizeClasses: Record<Size, string> = {
+  xs:    'px-1.5 py-px   text-[10px]',
+  sm:    'px-2   py-0.5  text-xs',
+  md:    'px-2.5 py-0.5  text-xs',
+  lg:    'px-3   py-1    text-sm',
+  xl:    'px-4   py-1    text-sm',
+  '2xl': 'px-5   py-1.5  text-base',
+};
+---
+
+<span class={clsx('inline-flex items-center rounded-full border font-medium', variantClasses[variant], sizeClasses[size], className)}>
+  <slot />
+</span>

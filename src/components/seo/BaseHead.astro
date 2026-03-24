@@ -1,0 +1,61 @@
+---
+import type { PageMeta } from '@/types';
+import { siteConfig } from '@/config';
+import OpenGraph from './OpenGraph.astro';
+import Twitter from './Twitter.astro';
+import Favicons from './Favicons.astro';
+import Feed from './Feed.astro';
+
+interface Props {
+  meta?: PageMeta;
+}
+
+const { meta } = Astro.props as Props;
+
+const title = meta?.title
+  ? `${meta.title} — ${siteConfig.title}`
+  : siteConfig.title;
+
+const description = meta?.description ?? siteConfig.description;
+const canonical = meta?.canonical ?? new URL(Astro.url.pathname, siteConfig.url).toString();
+const ogImage = meta?.ogImage ?? siteConfig.defaultOgImage;
+const ogImageUrl = ogImage ? new URL(ogImage, siteConfig.url).toString() : undefined;
+
+const robotsTokens = [
+  meta?.noIndex && 'noindex',
+  meta?.noFollow && 'nofollow',
+].filter(Boolean);
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+{robotsTokens.length > 0 && (
+  <meta name="robots" content={robotsTokens.join(', ')} />
+)}
+
+<OpenGraph
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogImageUrl={ogImageUrl}
+  type={meta?.type}
+  siteName={siteConfig.title}
+  publishedTime={meta?.publishedTime}
+  modifiedTime={meta?.modifiedTime}
+/>
+
+<Twitter
+  title={title}
+  description={description}
+  imageUrl={ogImageUrl}
+/>
+
+<Favicons />
+
+<Feed title={siteConfig.title} />

@@ -1,5 +1,27 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
+import { defineConfig, envField } from 'astro/config';
+import icon from 'astro-icon';
 
-// https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+  output: 'static',
+
+  integrations: [icon()],
+
+  env: {
+    schema: {
+      GITHUB_TOKEN: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: true,
+        default: '',
+      }),
+    },
+  },
+
+  site: 'https://www.juststeveking.com',
+
+  vite: {
+    plugins: [tailwindcss()]
+  }
+});

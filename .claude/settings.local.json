@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bun add:*)",
+      "Bash(bunx tsc:*)",
+      "Bash(bunx astro:*)",
+      "Bash(xargs sed:*)",
+      "Bash(find /Users/steve/Developer/GitHub/juststeveking/juststeveking.com -name *contribution* -o -name *newsletter*)"
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+---
+import type { GetStaticPaths } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { Badge, Container, Prose } from '@/components';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const videos = await getCollection('videos');
+  return videos.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+};
+
+interface Props {
+  entry: CollectionEntry<'videos'>;
+}
+
+const { entry } = Astro.props as unknown as Props;
+const { Content } = await render(entry);
+
+const meta = {
+  title: entry.data.title,
+  description: entry.data.description,
+  ogImage: `/og/videos/${entry.id}.webp`,
+};
+---
+
+<Layout {meta}>
+  <article>
+    <Container>
+      <div class="max-w-4xl py-12 sm:py-16">
+        <!-- Video embed -->
+        <div class="relative aspect-video overflow-hidden rounded-xl border border-stone-800 bg-stone-900">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${entry.data.videoId}`}
+            title={entry.data.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            class="absolute inset-0 h-full w-full"
+            loading="lazy"
+          />
+        </div>
+
+        <!-- Meta -->
+        <div class="mt-8">
+          <div class="mb-4 flex flex-wrap items-center gap-2">
+            <Badge variant="primary">{entry.data.type}</Badge>
+            {entry.data.difficulty && (
+              <Badge variant="secondary">{entry.data.difficulty}</Badge>
+            )}
+            {entry.data.categories.map((cat) => (
+              <Badge variant="outline" size="xs">{cat}</Badge>
+            ))}
+          </div>
+          <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-stone-500">
+            <time datetime={new Date(entry.data.publishedDate).toISOString()}>
+              {new Date(entry.data.publishedDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+            </time>
+            <span>{entry.data.duration}</span>
+            {entry.data.views && <span>{entry.data.views} views</span>}
+          </div>
+        </div>
+        <Prose class="mt-12">
+          <Content />
+        </Prose>
+      </div>
+    </Container>
+  </article>
+</Layout>

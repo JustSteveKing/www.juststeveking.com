@@ -1,0 +1,101 @@
+---
+import type { GetStaticPaths } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { Badge, Button, Container, Divider, Prose } from '@/components';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const packages = await getCollection('packages');
+  return packages.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+};
+
+interface Props {
+  entry: CollectionEntry<'packages'>;
+}
+
+const { entry } = Astro.props as unknown as Props;
+const { Content } = await render(entry);
+
+const meta = {
+  title: entry.data.name,
+  description: entry.data.description,
+};
+---
+
+<Layout {meta}>
+  <article>
+    <header class="border-b border-stone-800 py-16 sm:py-24">
+      <Container>
+        <div class="max-w-3xl">
+          <div class="mb-4 flex flex-wrap items-center gap-2">
+            {entry.data.version && <Badge variant="primary">v{entry.data.version}</Badge>}
+            {entry.data.featured && <Badge variant="secondary">Featured</Badge>}
+            {entry.data.tech?.map((t) => (
+              <Badge variant="outline" size="xs">{t}</Badge>
+            ))}
+          </div>
+          <h1 class="text-4xl font-bold tracking-tight text-stone-100 sm:text-5xl">
+            {entry.data.name}
+          </h1>
+          <p class="mt-4 text-lg text-stone-400">{entry.data.description}</p>
+
+          {(entry.data.downloads !== undefined || entry.data.monthlyDownloads !== undefined || entry.data.stars !== undefined) && (
+            <dl class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-stone-500">
+              {entry.data.stars !== undefined && (
+                <div class="flex gap-1.5">
+                  <dt class="font-medium text-stone-400">Stars</dt>
+                  <dd>{entry.data.stars.toLocaleString()}</dd>
+                </div>
+              )}
+              {entry.data.monthlyDownloads !== undefined && (
+                <div class="flex gap-1.5">
+                  <dt class="font-medium text-stone-400">Monthly downloads</dt>
+                  <dd>{entry.data.monthlyDownloads.toLocaleString()}</dd>
+                </div>
+              )}
+              {entry.data.downloads !== undefined && (
+                <div class="flex gap-1.5">
+                  <dt class="font-medium text-stone-400">Total downloads</dt>
+                  <dd>{entry.data.downloads.toLocaleString()}</dd>
+                </div>
+              )}
+            </dl>
+          )}
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            {entry.data.github && (
+              <Button href={entry.data.github} variant="outline" external>GitHub</Button>
+            )}
+            {entry.data.packagist && (
+              <Button href={entry.data.packagist} variant="ghost" external>Packagist</Button>
+            )}
+            {entry.data.link && (
+              <Button href={entry.data.link} variant="ghost" external>Website</Button>
+            )}
+          </div>
+        </div>
+      </Container>
+    </header>
+
+    <Container>
+      <div class="max-w-3xl py-12">
+        <Prose>
+          <Content />
+        </Prose>
+
+        {entry.data.updatedAt && (
+          <>
+            <Divider class="my-10" />
+            <p class="text-sm text-stone-600">
+              Last updated {new Date(entry.data.updatedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+            </p>
+          </>
+        )}
+      </div>
+    </Container>
+  </article>
+</Layout>

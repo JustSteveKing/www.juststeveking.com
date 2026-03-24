@@ -1,0 +1,70 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { Container, Section, Heading, Card, Prose } from '@/components';
+import { now } from '@/config/pages';
+
+---
+
+<Layout meta={now}>
+  <Section class="border-b border-stone-800/60">
+    <Container>
+      <div class="max-w-3xl">
+        <Heading level={1} class="mb-5">Now</Heading>
+        <p class="text-xl text-stone-400 leading-relaxed">
+          This is a <a href="https://nownownow.com/about" class="text-blue-400 hover:underline">now page</a>. It’s a snapshot of what I’m doing, learning, and focused on right now.
+        </p>
+        <p class="mt-4 text-sm text-stone-500 italic">Last updated: March 24, 2026</p>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="grid gap-12 lg:grid-cols-3">
+        <div class="lg:col-span-2">
+          <Prose>
+            <h3>Primary Focus</h3>
+            <p>
+              I am currently serving as a <strong>Technical Director</strong>, leading engineering teams and shaping architectural standards. My daily work involves a lot of API design reviews, mentoring senior engineers, and ensuring our Laravel-based systems remain maintainable and scalable.
+            </p>
+
+            <h3>What I'm Learning</h3>
+            <p>
+              Deepening my knowledge of <strong>Rust</strong>. I've been fascinated by its memory safety and performance, and I'm exploring how it can complement the PHP ecosystem, particularly in the context of high-performance microservices and CLI tools.
+            </p>
+
+            <h3>Recent Milestones</h3>
+            <ul>
+              <li>Rebuilt this website using Astro 6 and Tailwind CSS 4.</li>
+              <li>Successfully launched a new internal learning curriculum for our platform team.</li>
+              <li>Published a series of articles on advanced API versioning patterns.</li>
+            </ul>
+
+            <h3>Health & Balance</h3>
+            <p>
+              Living in beautiful Wales, UK. I'm making it a priority to get outside more often, away from the screen, and enjoy the local landscape.
+            </p>
+          </Prose>
+        </div>
+
+        <aside class="space-y-8">
+          <Card>
+            <Heading level={4} class="mb-4">Reading</Heading>
+            <ul class="space-y-3 text-sm text-stone-400">
+              <li><span class="text-stone-100 font-medium">Domain-Driven Design</span> by Eric Evans</li>
+              <li><span class="text-stone-100 font-medium">The Rust Programming Language</span></li>
+            </ul>
+          </Card>
+
+          <Card>
+            <Heading level={4} class="mb-4">Listening</Heading>
+            <ul class="space-y-3 text-sm text-stone-400">
+              <li><span class="text-stone-100 font-medium">The Laravel Podcast</span></li>
+              <li><span class="text-stone-100 font-medium">Syntax.fm</span></li>
+            </ul>
+          </Card>
+        </aside>
+      </div>
+    </Container>
+  </Section>
+</Layout>

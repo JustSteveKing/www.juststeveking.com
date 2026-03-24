@@ -1,0 +1,26 @@
+---
+import { clsx } from 'clsx';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props as Props;
+---
+
+<div
+  class={clsx(
+    'prose prose-stone prose-invert max-w-none',
+    'prose-headings:scroll-mt-20 prose-headings:font-semibold',
+    'prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline',
+    'prose-code:rounded prose-code:bg-stone-800 prose-code:px-1 prose-code:py-px prose-code:text-stone-200 prose-code:before:content-none prose-code:after:content-none',
+    'prose-pre:border prose-pre:border-stone-800 prose-pre:bg-stone-900',
+    'prose-blockquote:border-stone-700 prose-blockquote:text-stone-400',
+    'prose-hr:border-stone-800',
+    'prose-th:text-stone-300 prose-td:text-stone-400',
+    'prose-img:rounded-lg prose-img:border prose-img:border-stone-800',
+    className,
+  )}
+>
+  <slot />
+</div>

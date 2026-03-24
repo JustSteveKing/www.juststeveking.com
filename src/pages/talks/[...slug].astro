@@ -1,0 +1,85 @@
+---
+import type { GetStaticPaths } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { Badge, Button, Container, Prose } from '@/components';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const talks = await getCollection('talks');
+  return talks.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+};
+
+interface Props {
+  entry: CollectionEntry<'talks'>;
+}
+
+const { entry } = Astro.props as unknown as Props;
+const { Content } = await render(entry);
+
+const meta = {
+  title: entry.data.title,
+  description: entry.data.description ?? `${entry.data.title} at ${entry.data.event}`,
+};
+---
+
+<Layout {meta}>
+  <article>
+    <header class="border-b border-stone-800 py-16 sm:py-24">
+      <Container>
+        <div class="max-w-3xl">
+          <div class="mb-4 flex flex-wrap items-center gap-2">
+            <Badge variant="primary">{entry.data.category}</Badge>
+            {entry.data.upcoming && <Badge variant="secondary">Upcoming</Badge>}
+          </div>
+          <h1 class="text-4xl font-bold tracking-tight text-stone-100 sm:text-5xl">
+            {entry.data.title}
+          </h1>
+          {entry.data.description && (
+            <p class="mt-4 text-lg text-stone-400">{entry.data.description}</p>
+          )}
+          <dl class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-stone-500">
+            <div class="flex gap-1.5">
+              <dt class="font-medium text-stone-400">Event</dt>
+              <dd>{entry.data.event}</dd>
+            </div>
+            <div class="flex gap-1.5">
+              <dt class="font-medium text-stone-400">Location</dt>
+              <dd>{entry.data.location}</dd>
+            </div>
+            <div class="flex gap-1.5">
+              <dt class="font-medium text-stone-400">Date</dt>
+              <dd>
+                <time datetime={new Date(entry.data.date).toISOString()}>
+                  {new Date(entry.data.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+                </time>
+              </dd>
+            </div>
+          </dl>
+          <div class="mt-8 flex flex-wrap gap-3">
+            {entry.data.slides && (
+              <Button href={entry.data.slides} variant="outline" external>Slides</Button>
+            )}
+            {entry.data.video && (
+              <Button href={entry.data.video} variant="outline" external>Watch recording</Button>
+            )}
+            {entry.data.url && (
+              <Button href={entry.data.url} variant="ghost" external>Event page</Button>
+            )}
+          </div>
+        </div>
+      </Container>
+    </header>
+
+    <Container>
+      <div class="max-w-3xl py-12">
+        <Prose>
+          <Content />
+        </Prose>
+      </div>
+    </Container>
+  </article>
+</Layout>

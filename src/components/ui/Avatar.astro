@@ -1,0 +1,30 @@
+---
+import { clsx } from 'clsx';
+import type { Size } from '@/types';
+
+interface Props {
+  src: string;
+  alt: string;
+  size?: Size;
+  class?: string;
+}
+
+const { src, alt, size = 'md', class: className } = Astro.props as Props;
+
+const sizeClasses: Record<Size, string> = {
+  xs:    'size-6  text-xs',
+  sm:    'size-8  text-sm',
+  md:    'size-10 text-base',
+  lg:    'size-12 text-lg',
+  xl:    'size-16 text-xl',
+  '2xl': 'size-24 text-3xl',
+};
+---
+
+<img
+  src={src}
+  alt={alt}
+  class={clsx('rounded-full object-cover ring-1 ring-stone-700', sizeClasses[size], className)}
+  loading="lazy"
+  decoding="async"
+/>

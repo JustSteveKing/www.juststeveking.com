@@ -1,0 +1,419 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$comment": "Frontmatter schema for juststeveking/content. Generated from src/content.config.ts.",
+  "$defs": {
+    "apiGuide": {
+      "title": "API Guide",
+      "description": "Frontmatter for files in api-guides/",
+      "type": "object",
+      "required": ["title", "description", "category", "useWhen", "avoidWhen"],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 220
+        },
+        "category": {
+          "type": "string"
+        },
+        "complexity": {
+          "type": "string",
+          "enum": ["intro", "intermediate", "advanced"],
+          "default": "intro"
+        },
+        "apiStyles": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        },
+        "useWhen": {
+          "type": "string"
+        },
+        "avoidWhen": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        },
+        "related": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [],
+          "description": "Slugs of related api-guide entries"
+        },
+        "featured": {
+          "type": "boolean",
+          "default": false
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "publishedDate": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "article": {
+      "title": "Article",
+      "description": "Frontmatter for files in articles/",
+      "type": "object",
+      "required": ["title", "description", "pubDate"],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "category": {
+          "type": "string",
+          "default": "Uncategorized"
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        },
+        "pubDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "updatedDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "image": {
+          "type": "string"
+        },
+        "minRead": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "draft": {
+          "type": "boolean",
+          "default": false
+        },
+        "featured": {
+          "type": "boolean",
+          "default": false
+        },
+        "readingTime": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Injected automatically from word count if omitted"
+        },
+        "canonical": {
+          "type": "string",
+          "format": "uri"
+        },
+        "author": {
+          "type": "object",
+          "required": ["name"],
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "avatar": {
+              "type": "object",
+              "required": ["src", "alt"],
+              "additionalProperties": false,
+              "properties": {
+                "src": { "type": "string" },
+                "alt": { "type": "string" }
+              }
+            }
+          }
+        },
+        "sponsor": {
+          "type": "object",
+          "required": ["name", "url", "logo"],
+          "additionalProperties": false,
+          "properties": {
+            "name": { "type": "string" },
+            "url": { "type": "string", "format": "uri" },
+            "logo": { "type": "string", "format": "uri" }
+          }
+        },
+        "crossPost": {
+          "type": "object",
+          "required": ["originalUrl", "originalSite", "publishedDate", "permission"],
+          "additionalProperties": false,
+          "properties": {
+            "originalUrl": { "type": "string", "format": "uri" },
+            "originalSite": { "type": "string" },
+            "publishedDate": { "type": "string", "format": "date" },
+            "permission": {
+              "type": "boolean",
+              "description": "Explicit permission received to cross-post"
+            }
+          }
+        }
+      }
+    },
+    "testimonial": {
+      "title": "Testimonial",
+      "description": "Frontmatter for files in testimonials/",
+      "type": "object",
+      "required": ["quote", "author"],
+      "additionalProperties": false,
+      "properties": {
+        "quote": {
+          "type": "string"
+        },
+        "author": {
+          "type": "object",
+          "required": ["name", "role", "company"],
+          "additionalProperties": false,
+          "properties": {
+            "name": { "type": "string" },
+            "role": { "type": "string" },
+            "company": { "type": "string" },
+            "avatar": {
+              "type": "object",
+              "required": ["src"],
+              "additionalProperties": false,
+              "properties": {
+                "src": { "type": "string", "format": "uri" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "video": {
+      "title": "Video",
+      "description": "Frontmatter for files in videos/",
+      "type": "object",
+      "required": ["title", "description", "videoId", "publishedDate", "duration"],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "videoId": {
+          "type": "string",
+          "description": "YouTube video ID"
+        },
+        "publishedDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "duration": {
+          "type": "string",
+          "description": "Human-readable duration, e.g. 12:34"
+        },
+        "views": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        },
+        "categories": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        },
+        "type": {
+          "type": "string",
+          "enum": ["video", "shorts", "livestream"],
+          "default": "video"
+        },
+        "featured": {
+          "type": "boolean",
+          "default": false
+        },
+        "difficulty": {
+          "type": "string",
+          "enum": ["beginner", "intermediate", "advanced"]
+        },
+        "transcript": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether a transcript file exists alongside this entry"
+        }
+      }
+    },
+    "contribution": {
+      "title": "Contribution",
+      "description": "Frontmatter for files in contributions/",
+      "type": "object",
+      "required": ["project", "description", "url"],
+      "additionalProperties": false,
+      "properties": {
+        "project": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "package": {
+      "title": "Package",
+      "description": "Frontmatter for files in packages/",
+      "type": "object",
+      "required": ["name", "description"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "packagist": {
+          "type": "string",
+          "format": "uri"
+        },
+        "github": {
+          "type": "string",
+          "format": "uri"
+        },
+        "link": {
+          "type": "string",
+          "format": "uri"
+        },
+        "tech": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "featured": {
+          "type": "boolean",
+          "default": false
+        },
+        "downloads": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "monthlyDownloads": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "stars": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "version": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "talk": {
+      "title": "Talk",
+      "description": "Frontmatter for files in talks/",
+      "type": "object",
+      "required": ["title", "event", "location", "date", "category"],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "event": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["conference", "workshop", "meetup", "webinar", "panel"]
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Recording URL"
+        },
+        "slides": {
+          "type": "string",
+          "format": "uri"
+        },
+        "video": {
+          "type": "string",
+          "format": "uri"
+        },
+        "featured": {
+          "type": "boolean",
+          "default": false
+        },
+        "upcoming": {
+          "type": "boolean",
+          "default": false
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "podcast": {
+      "title": "Podcast",
+      "description": "Frontmatter for files in podcasts/",
+      "type": "object",
+      "required": ["title", "episode", "date"],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "episode": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

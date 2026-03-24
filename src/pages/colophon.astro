@@ -1,0 +1,75 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { Container, Section, Heading, Card, Prose, Badge } from '@/components';
+import { colophon } from '@/config/pages';
+
+const technologies = [
+  { name: 'Astro', version: '6.0', description: 'The web framework for content-driven websites.' },
+  { name: 'Tailwind CSS', version: '4.0', description: 'A utility-first CSS framework for rapid UI development.' },
+  { name: 'TypeScript', version: '6.0', description: 'Strongly typed programming language that builds on JavaScript.' },
+  { name: 'Bun', version: '1.2', description: 'Fast all-in-one JavaScript runtime.' },
+];
+---
+
+<Layout meta={colophon}>
+  <Section class="border-b border-stone-800/60">
+    <Container>
+      <div class="max-w-3xl">
+        <Heading level={1} class="mb-5">Colophon</Heading>
+        <p class="text-xl text-stone-400 leading-relaxed">
+          Technical details about the design and implementation of this website.
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="grid gap-12 lg:grid-cols-3">
+        <div class="lg:col-span-2">
+          <Prose>
+            <h3>Architecture</h3>
+            <p>
+              This site is built using <strong>Astro 6</strong>, following a static-first approach to ensure maximum performance and security. The entire site is pre-rendered at build time and served as static HTML.
+            </p>
+
+            <h3>Content Management</h3>
+            <p>
+              A unique feature of this site is its <strong>decoupled content system</strong>. All articles, talks, and other resources are managed in a private GitHub repository. During the build process, custom Astro loaders fetch this content via the GitHub API, process the Markdown, and inject it into the site.
+            </p>
+
+            <h3>Design & Typography</h3>
+            <p>
+              The design system is custom-built using <strong>Tailwind CSS 4</strong>. It prioritizes readability and a clean, minimal aesthetic.
+            </p>
+            <ul>
+              <li><strong>Colors:</strong> A refined "stone" palette from Tailwind's default colors, with blue accents for links and primary actions.</li>
+              <li><strong>Typography:</strong> The site uses system fonts (San Francisco on macOS/iOS, Segoe UI on Windows) to minimize load times and ensure a native feel on every platform.</li>
+              <li><strong>Icons:</strong> Custom SVG icons and a minimal set of Lucide-inspired paths.</li>
+            </ul>
+
+            <h3>Infrastructure</h3>
+            <p>
+              The site is deployed on <strong>Cloudflare Pages</strong>, benefiting from their global edge network and automated build pipeline.
+            </p>
+          </Prose>
+        </div>
+
+        <div class="space-y-6">
+          <Heading level={4}>Core Stack</Heading>
+          <div class="grid gap-4">
+            {technologies.map((tech) => (
+              <Card class="p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-semibold text-stone-100">{tech.name}</span>
+                  <Badge variant="secondary" size="xs">{tech.version}</Badge>
+                </div>
+                <p class="text-xs text-stone-500 leading-relaxed">{tech.description}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+</Layout>

@@ -1,0 +1,96 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { Hero, Section, Badge, Container, Button } from '@/components';
+import { videos } from '@/config/pages';
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const allVideos = await getCollection('videos');
+
+  const sorted = allVideos.sort(
+    (a, b) => new Date(b.data.publishedDate).getTime() - new Date(a.data.publishedDate).getTime(),
+  );
+
+  return paginate(sorted, { pageSize: 12 });
+};
+
+interface Props {
+  page: Page<CollectionEntry<'videos'>>;
+}
+
+const { page } = Astro.props as unknown as Props;
+---
+
+<Layout meta={videos}>
+  <Hero title={videos.title} description={videos.description} />
+
+  <Section class="py-12">
+    <Container>
+      <div class="grid gap-5 sm:grid-cols-2">
+        {page.data.map((video) => (
+          <a
+            href={`/videos/${video.id}`}
+            class="group flex flex-col rounded-xl border border-stone-800 overflow-hidden transition-colors hover:border-stone-700"
+          >
+            <div class="relative aspect-video bg-stone-900 overflow-hidden">
+              {video.data.thumbnail ? (
+                <img
+                  src={video.data.thumbnail}
+                  alt=""
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-stone-700" aria-hidden="true">
+                    <polygon points="6 3 20 12 6 21 6 3" />
+                  </svg>
+                </div>
+              )}
+              <div class="absolute bottom-2 right-2 rounded bg-black/70 px-1.5 py-0.5 text-xs text-white font-mono">
+                {video.data.duration}
+              </div>
+            </div>
+
+            <div class="flex flex-col flex-1 p-4">
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <Badge variant="primary">{video.data.type}</Badge>
+                {video.data.difficulty && <Badge variant="secondary">{video.data.difficulty}</Badge>}
+              </div>
+              <h2 class="text-sm font-semibold text-stone-100 group-hover:text-white mb-1.5 leading-snug flex-1">
+                {video.data.title}
+              </h2>
+              <time datetime={new Date(video.data.publishedDate).toISOString()} class="text-xs text-stone-500 mt-auto">
+                {new Date(video.data.publishedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+              </time>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      {(page.url.prev || page.url.next) && (
+        <nav
+          aria-label="Pagination"
+          class="mt-16 flex items-center justify-between border-t border-stone-800 pt-8"
+        >
+          <div>
+            {page.url.prev && (
+              <Button href={page.url.prev} variant="outline">&larr; Newer</Button>
+            )}
+          </div>
+          <span class="text-sm text-stone-500">
+            Page {page.currentPage} of {page.lastPage}
+          </span>
+          <div>
+            {page.url.next && (
+              <Button href={page.url.next} variant="outline">Older &rarr;</Button>
+            )}
+          </div>
+        </nav>
+      )}
+    </Container>
+  </Section>
+</Layout>

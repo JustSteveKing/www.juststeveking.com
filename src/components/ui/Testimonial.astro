@@ -1,0 +1,28 @@
+---
+import { clsx } from 'clsx';
+import Avatar from './Avatar.astro';
+
+interface Props {
+  quote: string;
+  name: string;
+  role: string;
+  company: string;
+  avatar?: string;
+  class?: string;
+}
+
+const { quote, name, role, company, avatar, class: className } = Astro.props;
+---
+
+<figure class={clsx('flex w-80 shrink-0 flex-col rounded-xl border border-stone-800 p-6', className)}>
+  <blockquote class="text-sm text-stone-300 leading-relaxed flex-1 mb-5">
+    &ldquo;{quote}&rdquo;
+  </blockquote>
+  <figcaption class="flex items-center gap-3">
+    {avatar && <Avatar src={avatar} alt={name} size="sm" />}
+    <div>
+      <p class="text-sm font-semibold text-stone-100">{name}</p>
+      <p class="text-xs text-stone-500">{role}, {company}</p>
+    </div>
+  </figcaption>
+</figure>

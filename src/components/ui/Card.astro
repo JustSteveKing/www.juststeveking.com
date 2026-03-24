@@ -1,0 +1,38 @@
+---
+import { clsx } from 'clsx';
+
+interface Props {
+  href?: string;
+  external?: boolean;
+  'aria-label'?: string;
+  class?: string;
+}
+
+const {
+  href,
+  external = false,
+  'aria-label': ariaLabel,
+  class: className,
+} = Astro.props as Props;
+
+const base = clsx(
+  'rounded-xl border border-stone-800 dark:border-stone-100 bg-stone-900/10 dark:bg-stone-100/10 p-6',
+  href && 'transition-colors duration-150 hover:border-stone-700 dark:hover:border-stone-300 hover:bg-stone-900/20 dark:hover:bg-stone-100/20',
+  className,
+);
+
+const externalAttrs = external
+  ? { target: '_blank', rel: 'noopener noreferrer' }
+  : {};
+---
+
+{href ? (
+  <a href={href} class={base} aria-label={ariaLabel} {...externalAttrs}>
+    <slot />
+    {external && <span class="sr-only">(opens in new tab)</span>}
+  </a>
+) : (
+  <div class={base} aria-label={ariaLabel}>
+    <slot />
+  </div>
+)}

@@ -1,0 +1,200 @@
+---
+---
+
+<div
+  id="command-palette"
+  class="fixed inset-0 z-100 hidden overflow-y-auto p-4 sm:p-6 md:p-20"
+  role="dialog"
+  aria-modal="true"
+>
+  <!-- Backdrop -->
+  <div class="fixed inset-0 bg-stone-950/40 backdrop-blur-sm transition-opacity" aria-hidden="true"></div>
+
+  <!-- Command Palette -->
+  <div class="relative mx-auto max-w-2xl transform divide-y divide-stone-800 overflow-hidden rounded-xl bg-stone-900/80 shadow-2xl ring-1 ring-stone-800 backdrop-blur-md transition-all">
+    <div class="relative">
+      <svg class="pointer-events-none absolute left-4 top-3.5 h-5 w-5 text-stone-500" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+      </svg>
+      <input
+        type="text"
+        id="command-input"
+        class="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-stone-100 placeholder-stone-500 focus:ring-0 sm:text-sm"
+        placeholder="Search articles, talks, and more..."
+        role="combobox"
+        aria-expanded="false"
+        aria-controls="options"
+        autocomplete="off"
+      />
+    </div>
+
+    <!-- Results -->
+    <ul id="options" class="max-h-96 scroll-py-3 overflow-y-auto p-3" role="listbox">
+      <!-- Loading / No results state -->
+      <li id="no-results" class="hidden px-4 py-14 text-center sm:px-14">
+        <p class="mt-4 text-sm text-stone-500">No results found.</p>
+      </li>
+    </ul>
+
+    <!-- Footer -->
+    <div class="flex flex-wrap items-center bg-stone-900/50 px-4 py-2.5 text-xs text-stone-400">
+      <span class="mr-3 flex items-center gap-1">
+        <kbd class="rounded border border-stone-700 bg-stone-800 px-1.5 font-sans font-medium text-stone-300">esc</kbd>
+        to close
+      </span>
+      <span class="mr-3 flex items-center gap-1">
+        <kbd class="rounded border border-stone-700 bg-stone-800 px-1.5 font-sans font-medium text-stone-300">↑↓</kbd>
+        to navigate
+      </span>
+      <span class="flex items-center gap-1">
+        <kbd class="rounded border border-stone-700 bg-stone-800 px-1.5 font-sans font-medium text-stone-300">↵</kbd>
+        to select
+      </span>
+    </div>
+  </div>
+</div>
+
+<script>
+  interface SearchItem {
+    title: string;
+    description: string;
+    href: string;
+    category: string;
+  }
+
+  let searchIndex: SearchItem[] = [];
+  let filteredResults: SearchItem[] = [];
+  let selectedIndex = -1;
+
+  const palette = document.getElementById('command-palette') as HTMLElement;
+  const input = document.getElementById('command-input') as HTMLInputElement;
+  const options = document.getElementById('options') as HTMLElement;
+  const noResults = document.getElementById('no-results') as HTMLElement;
+
+  async function loadIndex() {
+    if (searchIndex.length > 0) return;
+    const res = await fetch('/search.json');
+    searchIndex = await res.json();
+  }
+
+  function openPalette() {
+    palette.classList.remove('hidden');
+    input.focus();
+    loadIndex();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePalette() {
+    palette.classList.add('hidden');
+    document.body.style.overflow = '';
+    input.value = '';
+    selectedIndex = -1;
+    renderResults([]);
+  }
+
+  function renderResults(results: SearchItem[]) {
+    filteredResults = results.slice(0, 10);
+    
+    // Clear current items (except no-results)
+    const existing = options.querySelectorAll('.search-item');
+    existing.forEach(e => e.remove());
+
+    if (filteredResults.length === 0 && input.value.trim() !== '') {
+      noResults.classList.remove('hidden');
+      return;
+    }
+
+    noResults.classList.add('hidden');
+
+    filteredResults.forEach((item, index) => {
+      const li = document.createElement('li');
+      li.className = `search-item group cursor-default select-none rounded-xl p-3 transition-colors ${index === selectedIndex ? 'bg-stone-800 ring-1 ring-stone-700' : 'hover:bg-stone-800/50'}`;
+      li.role = 'option';
+      li.id = `option-${index}`;
+      li.ariaSelected = index === selectedIndex ? 'true' : 'false';
+      
+      li.innerHTML = `
+        <a href="${item.href}" class="flex flex-col" onclick="event.preventDefault()">
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-medium ${index === selectedIndex ? 'text-white' : 'text-stone-100'} group-hover:text-white">${item.title}</span>
+            <span class="text-[10px] font-semibold uppercase tracking-wider ${index === selectedIndex ? 'text-stone-300' : 'text-stone-500'} group-hover:text-stone-300">${item.category}</span>
+          </div>
+          <p class="mt-1 text-xs ${index === selectedIndex ? 'text-stone-300' : 'text-stone-400'} line-clamp-1">${item.description}</p>
+        </a>
+      `;
+      
+      li.addEventListener('click', () => {
+        window.location.href = item.href;
+      });
+
+      options.appendChild(li);
+
+      if (index === selectedIndex) {
+        li.scrollIntoView({ block: 'nearest' });
+      }
+    });
+  }
+
+  input.addEventListener('input', (e) => {
+    const query = (e.target as HTMLInputElement).value.toLowerCase().trim();
+    if (!query) {
+      selectedIndex = -1;
+      renderResults([]);
+      return;
+    }
+
+    const filtered = searchIndex.filter(item => 
+      item.title.toLowerCase().includes(query) || 
+      item.description.toLowerCase().includes(query) ||
+      item.category.toLowerCase().includes(query)
+    );
+
+    selectedIndex = filtered.length > 0 ? 0 : -1;
+    renderResults(filtered);
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (filteredResults.length === 0) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      selectedIndex = (selectedIndex + 1) % filteredResults.length;
+      renderResults(searchIndex.filter(item => {
+        const query = input.value.toLowerCase().trim();
+        return item.title.toLowerCase().includes(query) || 
+               item.description.toLowerCase().includes(query) ||
+               item.category.toLowerCase().includes(query);
+      }));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      selectedIndex = (selectedIndex - 1 + filteredResults.length) % filteredResults.length;
+      renderResults(searchIndex.filter(item => {
+        const query = input.value.toLowerCase().trim();
+        return item.title.toLowerCase().includes(query) || 
+               item.description.toLowerCase().includes(query) ||
+               item.category.toLowerCase().includes(query);
+      }));
+    } else if (e.key === 'Enter' && selectedIndex >= 0) {
+      e.preventDefault();
+      window.location.href = filteredResults[selectedIndex].href;
+    }
+  });
+
+  // Shortcut Cmd+K
+  window.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      openPalette();
+    }
+    if (e.key === 'Escape' && !palette.classList.contains('hidden')) {
+      closePalette();
+    }
+  });
+
+  // Close on backdrop click
+  palette.addEventListener('click', (e) => {
+    if (e.target === palette) {
+      closePalette();
+    }
+  });
+</script>

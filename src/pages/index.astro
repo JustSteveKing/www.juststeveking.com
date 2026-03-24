@@ -1,11 +1,247 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { siteConfig } from '@/config';
+import {
+  Avatar,
+  Badge,
+  Button,
+  Card,
+  Container,
+  Heading,
+  Link,
+  Section,
+  Testimonial,
+} from '@/components';
+import { home } from '@/config/pages';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const allArticles: CollectionEntry<'articles'>[] = await getCollection('articles');
+const recentArticles = allArticles
+  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
+  .slice(0, 3);
+
+const allTestimonials: CollectionEntry<'testimonials'>[] = await getCollection('testimonials');
+
+const stats = [
+  { value: '15+',  label: 'Years experience' },
+  { value: '100+', label: 'Articles published' },
+  { value: '30+',  label: 'Conference talks' },
+  { value: '50K+', label: 'Monthly readers' },
+];
+
+const pillars = [
+  {
+    title: 'Writing',
+    description:
+      'In-depth articles on PHP, Laravel, API design, and software architecture — published here, in php[architect] magazine, and on Laravel News.',
+    href: '/articles',
+    cta: 'Browse articles',
+  },
+  {
+    title: 'Speaking',
+    description:
+      '30+ talks at international conferences covering APIs, PHP internals, developer tooling, and building great developer experiences.',
+    href: '/talks',
+    cta: 'View talks',
+  },
+  {
+    title: 'Open Source',
+    description:
+      'Packages used by thousands of developers across the PHP ecosystem, plus active membership on the PHP-FIG Core Committee shaping PSR standards.',
+    href: '/packages',
+    cta: 'View packages',
+  },
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout meta={home}>
+
+  <!-- ============================================================
+    Hero
+  ============================================================ -->
+  <Section class="border-b border-stone-800/60">
+    <Container>
+      <div class="max-w-3xl">
+
+        <div class="flex items-start gap-5 mb-8">
+          {siteConfig.author.avatar && (
+            <Avatar
+              src={siteConfig.author.avatar}
+              alt={siteConfig.author.name}
+              size="2xl"
+            />
+          )}
+          <div class="pt-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <Badge variant="primary" size="sm">PHP-FIG Core Committee</Badge>
+              <Badge variant="secondary" size="sm">Technical Director</Badge>
+            </div>
+            <p class="text-sm text-stone-500">Wales, UK</p>
+          </div>
+        </div>
+
+        <Heading level={1} class="mb-3">
+          Steve McDougall
+        </Heading>
+        <p class="text-xl font-medium text-stone-300 mb-5">
+          Developer Educator &amp; API Mentor
+        </p>
+        <p class="text-lg text-stone-400 leading-relaxed mb-8 max-w-2xl">
+          I've spent 15+ years building software and leading engineering teams.
+          Today I write, speak, and build open-source to help developers get better
+          at APIs, PHP, and software craft.
+        </p>
+
+        <div class="flex flex-wrap gap-3 mb-10">
+          <Button href="/articles" variant="primary" size="lg">Read the Articles</Button>
+          <Button href="/videos" variant="outline" size="lg">Watch Videos</Button>
+          <Button href="/talks" variant="ghost" size="lg">Conference Talks</Button>
+        </div>
+
+        <div class="flex flex-wrap gap-x-5 gap-y-2">
+          {siteConfig.socials
+            .filter((s) => s.platform !== 'rss')
+            .map((social) => (
+              <Link href={social.url} underline={false} class="text-sm">
+                {social.label}
+              </Link>
+            ))}
+        </div>
+
+      </div>
+    </Container>
+  </Section>
+
+  <!-- ============================================================
+    Stats
+  ============================================================ -->
+  <div class="border-b border-stone-800/60 py-10">
+    <Container>
+      <dl class="grid grid-cols-2 gap-8 sm:grid-cols-4">
+        {stats.map(({ value, label }) => (
+          <div>
+            <dd class="text-3xl font-bold tracking-tight text-stone-100">{value}</dd>
+            <dt class="mt-1 text-sm text-stone-500">{label}</dt>
+          </div>
+        ))}
+      </dl>
+    </Container>
+  </div>
+
+  <!-- ============================================================
+    Latest Writing
+  ============================================================ -->
+  <Section aria-label="Latest Writing" class="border-b border-stone-800/60">
+    <Container>
+      <div class="flex items-baseline justify-between mb-10">
+        <Heading level={2}>Latest Writing</Heading>
+        <Link href="/articles" underline={false} class="text-sm">
+          All articles &rarr;
+        </Link>
+      </div>
+
+      <div class="divide-y divide-stone-800">
+        {recentArticles.map((article) => (
+          <a
+            href={`/articles/${article.id}`}
+            class="group flex flex-col gap-3 py-6 first:pt-0 last:pb-0 transition-opacity hover:opacity-90 sm:flex-row sm:items-start sm:gap-8"
+          >
+            <time
+              datetime={new Date(article.data.pubDate).toISOString()}
+              class="shrink-0 text-xs text-stone-500 sm:w-28 sm:pt-1.5"
+            >
+              {new Date(article.data.pubDate).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              })}
+            </time>
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <Badge variant="primary" size="xs">{article.data.category}</Badge>
+                {(article.data.readingTime ?? article.data.minRead) && (
+                  <span class="text-xs text-stone-500">
+                    {article.data.readingTime ?? article.data.minRead} min read
+                  </span>
+                )}
+              </div>
+              <Heading level={4} class="mb-1.5 text-base group-hover:text-white">
+                {article.data.title}
+              </Heading>
+              <p class="text-sm text-stone-400 leading-relaxed line-clamp-1">
+                {article.data.description}
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- ============================================================
+    What I Create
+  ============================================================ -->
+  <Section aria-label="What I Create" class="border-b border-stone-800/60">
+    <Container>
+      <Heading level={2} class="mb-10">What I Create</Heading>
+      <div class="grid gap-5 sm:grid-cols-3">
+        {pillars.map(({ title, description, href, cta }) => (
+          <Card href={href} class="flex flex-col">
+            <Heading level={4} class="mb-2">{title}</Heading>
+            <p class="text-sm text-stone-400 leading-relaxed flex-1 mb-5">
+              {description}
+            </p>
+            <span class="text-sm text-stone-300 group-hover:text-white transition-colors">
+              {cta} &rarr;
+            </span>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- ============================================================
+    Testimonials (only renders when the collection has entries)
+  ============================================================ -->
+  {allTestimonials.length > 0 && (
+    <Section aria-label="What People Say" class="border-b border-stone-800/60">
+      <Container>
+        <Heading level={2} class="mb-10">What People Say</Heading>
+        <div class="-mx-4 sm:-mx-6 lg:-mx-8">
+          <div class="flex gap-5 overflow-x-auto px-4 pb-4 sm:px-6 lg:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {allTestimonials.map((t) => (
+              <Testimonial
+                quote={t.data.quote}
+                name={t.data.author.name}
+                role={t.data.author.role}
+                company={t.data.author.company}
+                avatar={t.data.author.avatar?.src}
+              />
+            ))}
+          </div>
+        </div>
+      </Container>
+    </Section>
+  )}
+
+  <!-- ============================================================
+    Newsletter CTA
+  ============================================================ -->
+  <Section aria-label="Newsletter">
+    <Container>
+      <div class="max-w-2xl">
+        <Heading level={2} class="mb-3">Stay in the loop</Heading>
+        <p class="text-stone-400 leading-relaxed mb-6">
+          Articles on PHP, APIs, and software craft — delivered to your inbox.
+          No noise, just practical content for developers who want to level up.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <Button href="/newsletter" variant="primary">Subscribe to the Newsletter</Button>
+          <Button href="/rss.xml" variant="outline">RSS Feed</Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
 </Layout>

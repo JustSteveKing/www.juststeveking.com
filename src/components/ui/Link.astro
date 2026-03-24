@@ -1,0 +1,32 @@
+---
+import { clsx } from 'clsx';
+
+interface Props {
+  href: string;
+  external?: boolean;
+  underline?: boolean;
+  class?: string;
+}
+
+const {
+  href,
+  external = href.startsWith('http') || href.startsWith('//'),
+  underline = true,
+  class: className,
+} = Astro.props as Props;
+
+const externalAttrs = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+<a
+  href={href}
+  class={clsx(
+    'text-stone-300 transition-colors hover:text-stone-100',
+    underline && 'underline underline-offset-4 decoration-stone-600 hover:decoration-stone-300',
+    className,
+  )}
+  {...externalAttrs}
+>
+  <slot />
+  {external && <span class="sr-only">(opens in new tab)</span>}
+</a>

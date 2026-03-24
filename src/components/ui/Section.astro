@@ -1,0 +1,23 @@
+---
+import { clsx } from 'clsx';
+
+interface Props {
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
+  class?: string;
+}
+
+const {
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledby,
+  class: className,
+} = Astro.props as Props;
+---
+
+<section
+  aria-label={ariaLabel}
+  aria-labelledby={ariaLabelledby}
+  class={clsx('py-16 sm:py-24', className)}
+>
+  <slot />
+</section>

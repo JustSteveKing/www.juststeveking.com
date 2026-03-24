@@ -1,0 +1,16 @@
+---
+import { clsx } from 'clsx';
+
+interface Props {
+  label?: string;
+  class?: string;
+}
+
+const { label = 'Loading...', class: className } = Astro.props as Props;
+---
+
+<div
+  role="status"
+  aria-label={label}
+  class={clsx('rounded-md bg-stone-800 motion-safe:animate-pulse', className)}
+/>

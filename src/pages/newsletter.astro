@@ -1,0 +1,102 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { Container, Section, Heading, Button, Badge } from '@/components';
+import { newsletter } from '@/config/pages';
+
+---
+
+<Layout meta={newsletter}>
+  <Section class="border-b border-stone-800/60">
+    <Container>
+      <div class="max-w-3xl">
+        <Badge variant="primary" class="mb-4">Newsletter</Badge>
+        <Heading level={1} class="mb-5">Code & Chill</Heading>
+        <p class="text-xl text-stone-400 leading-relaxed">
+          Join 5,000+ developers who receive a weekly deep dive into PHP, API design, and the art of software engineering.
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="grid gap-12 lg:grid-cols-2">
+        <div>
+          <Heading level={2} class="mb-6">What to expect</Heading>
+          <ul class="space-y-6">
+            <li class="flex gap-4">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-stone-800 text-blue-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M8 7h6"/><path d="M8 11h8"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-stone-100">Deep Dives</p>
+                <p class="text-sm text-stone-400">Technical explorations into complex topics like Event Sourcing, Domain-Driven Design, and API versioning.</p>
+              </div>
+            </li>
+            <li class="flex gap-4">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-stone-800 text-blue-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-stone-100">Case Studies</p>
+                <p class="text-sm text-stone-400">Real-world examples of how I solve architectural problems for clients and in my open-source projects.</p>
+              </div>
+            </li>
+            <li class="flex gap-4">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-stone-800 text-blue-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-stone-100">AMA & Community</p>
+                <p class="text-sm text-stone-400">Answers to common questions from the community and curated resources from across the ecosystem.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="rounded-2xl border border-stone-800 bg-stone-900/50 p-8 shadow-sm">
+          <Heading level={3} class="mb-6">Subscribe</Heading>
+          <form class="space-y-4">
+            <div>
+              <label for="email-address" class="sr-only">Email address</label>
+              <input
+                id="email-address"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                class="w-full min-w-0 appearance-none rounded-md border border-stone-700 bg-stone-800 px-4 py-2 text-stone-100 placeholder-stone-500 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                placeholder="Enter your email"
+              />
+            </div>
+            <Button variant="primary" type="submit" class="w-full">
+              Join the list
+            </Button>
+            <p class="text-center text-xs text-stone-500">
+              No spam, just quality technical content. Unsubscribe at any time.
+            </p>
+          </form>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="bg-stone-900/30">
+    <Container>
+      <div class="text-center max-w-2xl mx-auto">
+        <Heading level={2} class="mb-4">Already a reader?</Heading>
+        <p class="text-stone-400 mb-8">
+          Check out the latest articles or follow me on social media for more frequent updates.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/articles" class="text-sm font-medium text-blue-400 hover:text-blue-300">
+            Read latest articles &rarr;
+          </a>
+          <a href="https://twitter.com/JustSteveKing" class="text-sm font-medium text-stone-400 hover:text-stone-300">
+            Follow on X
+          </a>
+        </div>
+      </div>
+    </Container>
+  </Section>
+</Layout>

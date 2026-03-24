@@ -1,0 +1,29 @@
+---
+import type { PageMeta } from '@/types';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  ogImageUrl?: string;
+  type?: PageMeta['type'];
+  siteName: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+}
+
+const { title, description, canonical, ogImageUrl, type = 'website', siteName, publishedTime, modifiedTime } = Astro.props as Props;
+---
+
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:site_name" content={siteName} />
+{ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+{publishedTime && (
+  <meta property="article:published_time" content={new Date(publishedTime).toISOString()} />
+)}
+{modifiedTime && (
+  <meta property="article:modified_time" content={new Date(modifiedTime).toISOString()} />
+)}

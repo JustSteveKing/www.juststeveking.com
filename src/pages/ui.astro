@@ -1,0 +1,351 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import {
+  Container,
+  Heading,
+  Section,
+  Button,
+  Badge,
+  Card,
+  Avatar,
+  Link,
+  Prose,
+  Divider,
+  Skeleton,
+} from "@/components";
+
+---
+
+<Layout>
+  <Container class="py-16">
+
+      <!-- Page title -->
+      <div class="mb-16 border-b border-stone-800 pb-8">
+        <Heading level={1}>UI Components</Heading>
+        <p class="mt-3 text-stone-400">Visual reference for all components in <code class="rounded bg-stone-800 px-1.5 py-0.5 text-sm text-stone-200">src/components/ui</code>.</p>
+      </div>
+
+      <!-- ------------------------------------------------------------------ -->
+      <!-- Button -->
+      <!-- ------------------------------------------------------------------ -->
+      <Section class="py-12">
+        <Heading level={2} class="mb-8">Button</Heading>
+
+        <div class="space-y-8">
+          <!-- Variants -->
+          <div>
+            <p class="mb-3 text-xs font-medium uppercase tracking-widest text-stone-800 dark:text-stone-200">Variants</p>
+            <div class="flex flex-wrap gap-3">
+              <Button variant="default">Default</Button>
+              <Button variant="primary">Primary</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="ghost">Ghost</Button>
+              <Button variant="outline">Outline</Button>
+              <Button variant="destructive">Destructive</Button>
+            </div>
+          </div>
+
+          <Divider />
+
+          <!-- Sizes -->
+          <div>
+            <p class="mb-3 text-xs font-medium uppercase tracking-widest text-stone-800 dark:text-stone-200">Sizes</p>
+            <div class="flex flex-wrap items-center gap-3">
+              <Button variant="primary" size="xs">Extra small</Button>
+              <Button variant="primary" size="sm">Small</Button>
+              <Button variant="primary" size="md">Medium</Button>
+              <Button variant="primary" size="lg">Large</Button>
+              <Button variant="primary" size="xl">Extra large</Button>
+              <Button variant="primary" size="2xl">2XL</Button>
+            </div>
+          </div>
+
+          <Divider />
+
+          <!-- As link / disabled -->
+          <div>
+            <p class="mb-3 text-xs font-medium uppercase tracking-widest text-stone-800 dark:text-stone-200">As link / states</p>
+            <div class="flex flex-wrap items-center gap-3">
+              <Button variant="primary" href="/">Internal link</Button>
+              <Button variant="outline" href="https://github.com" external>External link</Button>
+              <Button variant="default" disabled>Disabled</Button>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Divider />
+
+      <!-- ------------------------------------------------------------------ -->
+      <!-- Badge -->
+      <!-- ------------------------------------------------------------------ -->
+      <Section class="py-12">
+        <Heading level={2} class="mb-8">Badge</Heading>
+
+        <div class="space-y-8">
+          <div>
+            <p class="mb-3 text-xs font-medium uppercase tracking-widest text-stone-800 dark:text-stone-200">Variants</p>
+            <div class="flex flex-wrap gap-2">
+              <Badge variant="default">Default</Badge>
+              <Badge variant="primary">Primary</Badge>
+              <Badge variant="secondary">Secondary</Badge>
+              <Badge variant="ghost">Ghost</Badge>
+              <Badge variant="outline">Outline</Badge>
+              <Badge variant="destructive">Destructive</Badge>
+            </div>
+          </div>
+
+          <Divider />
+
+          <div>
+            <p class="mb-3 text-xs font-medium uppercase tracking-widest text-stone-800 dark:text-stone-200">Sizes</p>
+            <div class="flex flex-wrap items-center gap-2">
+              <Badge size="xs">XS</Badge>
+              <Badge size="sm">SM</Badge>
+              <Badge size="md">MD</Badge>
+              <Badge size="lg">LG</Badge>
+              <Badge size="xl">XL</Badge>
+              <Badge size="2xl">2XL</Badge>
+            </div>
+          </div>
+
+          <Divider />
+
+          <div>
+            <p class="mb-3 text-xs font-medium uppercase tracking-widest text-stone-800 dark:text-stone-200">In context</p>
+            <div class="flex flex-wrap gap-2">
+              <Badge variant="primary">PHP</Badge>
+              <Badge variant="outline">Laravel</Badge>
+              <Badge variant="secondary">API Design</Badge>
+              <Badge variant="default">Open Source</Badge>
+              <Badge variant="destructive">Deprecated</Badge>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Divider />
+
+      <!-- ------------------------------------------------------------------ -->
+      <!-- Card -->
+      <!-- ------------------------------------------------------------------ -->
+      <Section class="py-12">
+        <Heading level={2} class="mb-8">Card</Heading>
+
+        <div class="grid gap-4 sm:grid-cols-3">
+          <!-- Static card -->
+          <Card>
+            <Badge variant="secondary" class="mb-3">Static</Badge>
+            <Heading level={4} class="mb-2">Static card</Heading>
+            <p class="text-sm text-stone-400">No href — renders as a plain div. Use for non-navigable content blocks.</p>
+          </Card>
+
+          <!-- Linked card -->
+          <Card href="/articles">
+            <Badge variant="primary" class="mb-3">Linked</Badge>
+            <Heading level={4} class="mb-2">Linked card</Heading>
+            <p class="text-sm text-stone-400">Has an href — renders as an anchor with hover state. Hover me.</p>
+          </Card>
+
+          <!-- External linked card -->
+          <Card href="https://github.com/JustSteveKing" external>
+            <Badge variant="outline" class="mb-3">External</Badge>
+            <Heading level={4} class="mb-2">External card</Heading>
+            <p class="text-sm text-stone-400">Opens in a new tab. Adds <code class="rounded bg-stone-800 px-1 text-xs">noopener noreferrer</code>.</p>
+          </Card>
+        </div>
+      </Section>
+
+      <Divider />
+
+      <!-- ------------------------------------------------------------------ -->
+      <!-- Avatar -->
+      <!-- ------------------------------------------------------------------ -->
+      <Section class="py-12">
+        <Heading level={2} class="mb-8">Avatar</Heading>
+
+        <div>
+          <p class="mb-4 text-xs font-medium uppercase tracking-widest text-stone-800 dark:text-stone-200">Sizes</p>
+          <div class="flex flex-wrap items-end gap-4">
+            <div class="flex flex-col items-center gap-2">
+              <Avatar src="https://github.com/JustSteveKing.png" alt="Steve McDougall" size="xs" />
+              <span class="text-xs text-stone-800 dark:text-stone-200">xs</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <Avatar src="https://github.com/JustSteveKing.png" alt="Steve McDougall" size="sm" />
+              <span class="text-xs text-stone-800 dark:text-stone-200">sm</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <Avatar src="https://github.com/JustSteveKing.png" alt="Steve McDougall" size="md" />
+              <span class="text-xs text-stone-800 dark:text-stone-200">md</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <Avatar src="https://github.com/JustSteveKing.png" alt="Steve McDougall" size="lg" />
+              <span class="text-xs text-stone-800 dark:text-stone-200">lg</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <Avatar src="https://github.com/JustSteveKing.png" alt="Steve McDougall" size="xl" />
+              <span class="text-xs text-stone-800 dark:text-stone-200">xl</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <Avatar src="https://github.com/JustSteveKing.png" alt="Steve McDougall" size="2xl" />
+              <span class="text-xs text-stone-800 dark:text-stone-200">2xl</span>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Divider />
+
+      <!-- ------------------------------------------------------------------ -->
+      <!-- Link -->
+      <!-- ------------------------------------------------------------------ -->
+      <Section class="py-12">
+        <Heading level={2} class="mb-8">Link</Heading>
+
+        <div class="space-y-4 text-sm">
+          <div class="flex items-center gap-3">
+            <span class="w-32 text-xs text-stone-800 dark:text-stone-200">Internal</span>
+            <Link href="/articles">Browse articles</Link>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="w-32 text-xs text-stone-800 dark:text-stone-200">External</span>
+            <Link href="https://github.com/JustSteveKing">GitHub profile</Link>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="w-32 text-xs text-stone-800 dark:text-stone-200">No underline</span>
+            <Link href="/articles" underline={false}>No underline variant</Link>
+          </div>
+        </div>
+      </Section>
+
+      <Divider />
+
+      <!-- ------------------------------------------------------------------ -->
+      <!-- Heading -->
+      <!-- ------------------------------------------------------------------ -->
+      <Section class="py-12">
+        <Heading level={2} class="mb-8">Heading</Heading>
+
+        <div class="space-y-4">
+          <div class="flex items-baseline gap-4">
+            <span class="w-8 text-right text-xs text-stone-600">h1</span>
+            <Heading level={1}>The quick brown fox</Heading>
+          </div>
+          <div class="flex items-baseline gap-4">
+            <span class="w-8 text-right text-xs text-stone-600">h2</span>
+            <Heading level={2}>The quick brown fox</Heading>
+          </div>
+          <div class="flex items-baseline gap-4">
+            <span class="w-8 text-right text-xs text-stone-600">h3</span>
+            <Heading level={3}>The quick brown fox</Heading>
+          </div>
+          <div class="flex items-baseline gap-4">
+            <span class="w-8 text-right text-xs text-stone-600">h4</span>
+            <Heading level={4}>The quick brown fox</Heading>
+          </div>
+          <div class="flex items-baseline gap-4">
+            <span class="w-8 text-right text-xs text-stone-600">h5</span>
+            <Heading level={5}>The quick brown fox</Heading>
+          </div>
+          <div class="flex items-baseline gap-4">
+            <span class="w-8 text-right text-xs text-stone-600">h6</span>
+            <Heading level={6}>The quick brown fox</Heading>
+          </div>
+        </div>
+      </Section>
+
+      <Divider />
+
+      <!-- ------------------------------------------------------------------ -->
+      <!-- Prose -->
+      <!-- ------------------------------------------------------------------ -->
+      <Section class="py-12">
+        <Heading level={2} class="mb-8">Prose</Heading>
+
+        <Prose>
+          <h2>Markdown-rendered content</h2>
+          <p>This is what body copy looks like inside <code>Prose</code>. It wraps the <code>@tailwindcss/typography</code> plugin and applies dark-mode overrides so everything stays on-brand.</p>
+          <h3>Code blocks</h3>
+          <pre><code>export function githubLoader(options) &#123;
+  return &#123; name: 'github-loader', async load() &#123; ... &#125; &#125;;
+&#125;</code></pre>
+          <h3>Blockquote</h3>
+          <blockquote>Good APIs are not designed, they are discovered through use.</blockquote>
+          <h3>Lists</h3>
+          <ul>
+            <li>Articles pulled from <code>juststeveking/content</code></li>
+            <li>ETag-based incremental syncing</li>
+            <li>Reading time injected automatically</li>
+          </ul>
+          <p>Links inside prose look like <a href="#">this</a> and open correctly for internal vs external targets.</p>
+        </Prose>
+      </Section>
+
+      <Divider />
+
+      <!-- ------------------------------------------------------------------ -->
+      <!-- Divider -->
+      <!-- ------------------------------------------------------------------ -->
+      <Section class="py-12">
+        <Heading level={2} class="mb-8">Divider</Heading>
+
+        <div class="space-y-6">
+          <div>
+            <p class="mb-3 text-xs font-medium uppercase tracking-widest text-stone-800 dark:text-stone-200">Horizontal</p>
+            <Divider />
+          </div>
+
+          <div>
+            <p class="mb-3 text-xs font-medium uppercase tracking-widest text-stone-800 dark:text-stone-200">Vertical (in flex row)</p>
+            <div class="flex h-8 items-center gap-4">
+              <span class="text-sm text-stone-400">Left</span>
+              <Divider orientation="vertical" />
+              <span class="text-sm text-stone-400">Middle</span>
+              <Divider orientation="vertical" />
+              <span class="text-sm text-stone-400">Right</span>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Divider />
+
+      <!-- ------------------------------------------------------------------ -->
+      <!-- Skeleton -->
+      <!-- ------------------------------------------------------------------ -->
+      <Section class="py-12">
+        <Heading level={2} class="mb-8">Skeleton</Heading>
+
+        <div class="space-y-6">
+          <!-- Card skeleton -->
+          <div>
+            <p class="mb-3 text-xs font-medium uppercase tracking-widest text-stone-800 dark:text-stone-200">Card skeleton</p>
+            <div class="rounded-xl border border-stone-800 p-6 space-y-3">
+              <Skeleton class="h-4 w-16" />
+              <Skeleton class="h-6 w-2/3" />
+              <Skeleton class="h-4 w-full" />
+              <Skeleton class="h-4 w-5/6" />
+            </div>
+          </div>
+
+          <!-- Article list skeleton -->
+          <div>
+            <p class="mb-3 text-xs font-medium uppercase tracking-widest text-stone-800 dark:text-stone-200">Article list skeleton</p>
+            <div class="space-y-4">
+              {[80, 65, 72].map((w) => (
+                <div class="flex gap-4">
+                  <Skeleton class="size-12 shrink-0 rounded-full" />
+                  <div class="flex-1 space-y-2 pt-1">
+                    <Skeleton class={`h-4 w-${w === 80 ? '4/5' : w === 65 ? '2/3' : '3/4'}`} />
+                    <Skeleton class="h-3 w-1/2" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Section>
+
+    </Container>
+</Layout>

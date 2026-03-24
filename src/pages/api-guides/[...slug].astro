@@ -1,0 +1,80 @@
+---
+import type { GetStaticPaths } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { Badge, Container, Divider, Prose } from '@/components';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const guides = await getCollection('apiGuides');
+  return guides.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+};
+
+interface Props {
+  entry: CollectionEntry<'apiGuides'>;
+}
+
+const { entry } = Astro.props as unknown as Props;
+const { Content } = await render(entry);
+
+const meta = {
+  title: entry.data.title,
+  description: entry.data.description,
+  ogImage: `/og/apiGuides/${entry.id}.webp`,
+};
+---
+
+<Layout {meta}>
+  <article>
+    <header class="border-b border-stone-800 py-16 sm:py-24">
+      <Container>
+        <div class="max-w-3xl">
+          <div class="mb-4 flex flex-wrap items-center gap-2">
+            <Badge variant="primary">{entry.data.complexity}</Badge>
+            <Badge variant="secondary">{entry.data.category}</Badge>
+            {entry.data.apiStyles.map((style) => (
+              <Badge variant="outline" size="xs">{style}</Badge>
+            ))}
+          </div>
+          <h1 class="text-4xl font-bold tracking-tight text-stone-100 sm:text-5xl">
+            {entry.data.title}
+          </h1>
+          <p class="mt-4 text-lg text-stone-400">{entry.data.description}</p>
+        </div>
+      </Container>
+    </header>
+
+    <Container>
+      <div class="max-w-3xl py-12">
+        <div class="mb-10 grid gap-4 sm:grid-cols-2">
+          <div class="rounded-lg border border-stone-800 bg-stone-900/40 p-5">
+            <p class="mb-1.5 text-xs font-semibold uppercase tracking-widest text-stone-500">Use when</p>
+            <p class="text-sm text-stone-300">{entry.data.useWhen}</p>
+          </div>
+          <div class="rounded-lg border border-stone-800 bg-stone-900/40 p-5">
+            <p class="mb-1.5 text-xs font-semibold uppercase tracking-widest text-stone-500">Avoid when</p>
+            <p class="text-sm text-stone-300">{entry.data.avoidWhen}</p>
+          </div>
+        </div>
+
+        <Prose>
+          <Content />
+        </Prose>
+
+        {entry.data.tags.length > 0 && (
+          <>
+            <Divider class="my-10" />
+            <div class="flex flex-wrap gap-2">
+              {entry.data.tags.map((tag) => (
+                <Badge variant="outline" size="sm">{tag}</Badge>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    </Container>
+  </article>
+</Layout>
