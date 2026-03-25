@@ -1,6 +1,7 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
 import { generateOgImage } from '@/lib/og';
+import * as staticPages from '@/config/pages';
 
 export const prerender = true;
 
@@ -21,7 +22,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       getCollection('podcasts'),
     ]);
 
-  return [
+  const dynamicPaths = [
     ...articles.map((e) => ({
       params: { collection: 'articles', id: e.id },
       props: { title: e.data.title, description: e.data.description } satisfies Props,
@@ -57,6 +58,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
       } satisfies Props,
     })),
   ];
+
+  const pagePaths = Object.entries(staticPages).map(([id, data]) => ({
+    params: { collection: 'pages', id: id.toLowerCase() },
+    props: { title: data.title, description: data.description } satisfies Props,
+  }));
+
+  return [...dynamicPaths, ...pagePaths];
 };
 
 export const GET: APIRoute = async ({ params, props }) => {
