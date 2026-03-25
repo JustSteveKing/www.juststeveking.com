@@ -35,7 +35,7 @@ const articles = defineCollection({
   loader: collection('articles'),
   schema: z.object({
     title: z.string(),
-    description: z.string().max(160),
+    description: z.string().max(200),
     category: z.string().default('Uncategorized'),
     tags: z.array(z.string()).default([]),
     pubDate: z.coerce.date(),

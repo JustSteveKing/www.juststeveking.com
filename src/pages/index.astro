@@ -185,7 +185,7 @@ const pillars = [
   <Section aria-label="What I Create" class="border-b border-stone-800/60">
     <Container>
       <Heading level={2} class="mb-10">What I Create</Heading>
-      <div class="grid gap-5 sm:grid-cols-3">
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {pillars.map(({ title, description, href, cta }) => (
           <Card href={href} class="flex flex-col">
             <Heading level={4} class="mb-2">{title}</Heading>
@@ -238,6 +238,19 @@ const pillars = [
         </p>
         <div class="flex flex-wrap gap-3">
           <Button href="/newsletter" variant="primary">Subscribe to the Newsletter</Button>
+          <Button href="/rss.xml" variant="outline">RSS Feed</Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+</Layout>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+</Layout>
           <Button href="/rss.xml" variant="outline">RSS Feed</Button>
         </div>
       </div>

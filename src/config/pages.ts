@@ -36,6 +36,12 @@ export const packages: PageMeta = {
   ogImage: '/og/pages/packages.webp',
 };
 
+export const projects: PageMeta = {
+  title: 'Projects',
+  description: 'A curated list of projects, applications, and tools I have built and led.',
+  ogImage: '/og/pages/projects.webp',
+};
+
 export const apiGuides: PageMeta = {
   title: 'API Guides',
   description: 'Practical guides to working with third-party APIs in PHP and Laravel.',
