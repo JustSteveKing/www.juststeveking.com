@@ -31,6 +31,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^25.5.0",
     "playwright": "^1.58.2",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "wrangler": "^4.77.0"
   }
 }
