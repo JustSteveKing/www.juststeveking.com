@@ -4,12 +4,13 @@ import { siteConfig } from '@/config';
 
 export async function GET(context: any) {
   const articles = await getCollection('articles');
-  
+  const sorted = articles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
   return rss({
     title: siteConfig.title,
     description: siteConfig.description,
     site: context.site,
-    items: articles.map((article) => ({
+    items: sorted.map((article) => ({
       title: article.data.title,
       pubDate: article.data.pubDate,
       description: article.data.description,
