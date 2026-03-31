@@ -12,6 +12,12 @@ export const articles: PageMeta = {
   ogImage: '/og/pages/articles.webp',
 };
 
+export const series: PageMeta = {
+  title: 'Series',
+  description: 'Curated article series covering specific topics in depth.',
+  ogImage: '/og/pages/series.webp',
+};
+
 export const talks: PageMeta = {
   title: 'Talks',
   description: 'Conference talks and presentations on PHP, APIs, and developer tooling.',

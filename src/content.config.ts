@@ -1,4 +1,4 @@
-import { defineCollection } from 'astro:content';
+import { defineCollection, reference } from 'astro:content';
 import { z } from 'astro/zod';
 import { GITHUB_TOKEN } from 'astro:env/server';
 import { githubLoader } from '@/loaders/github';
@@ -11,6 +11,14 @@ const REPO = 'content';
 function collection(path: string) {
   return githubLoader({ owner: OWNER, repo: REPO, path, token: GITHUB_TOKEN });
 }
+
+const series = defineCollection({
+  loader: collection('series'),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+  }),
+});
 
 const apiGuides = defineCollection({
   loader: collection('api-guides'),
@@ -46,6 +54,7 @@ const articles = defineCollection({
     featured: z.boolean().default(false).optional(),
     readingTime: z.number().optional(),
     canonical: z.string().url().optional(),
+    series: reference('series').optional(),
     sponsor: z
       .object({
         name: z.string(),
@@ -324,6 +333,7 @@ export const collections = {
   apiGuides,
   articles,
   resume,
+  series,
   testimonials,
   tools,
   videos,

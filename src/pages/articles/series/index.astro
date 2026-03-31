@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { Hero, Section, Container, Card } from '@/components';
+import { series as seriesMeta } from '@/config/pages';
+
+const allSeries = await getCollection('series');
+const allArticles = await getCollection('articles');
+
+const seriesWithCount = allSeries.map((series) => {
+  const count = allArticles.filter((article) => article.data.series?.id === series.id).length;
+  return {
+    ...series,
+    count,
+  };
+}).sort((a, b) => b.count - a.count);
+---
+
+<Layout meta={seriesMeta}>
+  <Hero title={seriesMeta.title} description={seriesMeta.description} />
+
+  <Section class="py-12">
+    <Container>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {seriesWithCount.map((series) => (
+          <a href={`/articles/series/${series.id}`} class="group">
+            <Card class="h-full transition-colors hover:border-stone-700">
+              <div class="flex flex-col h-full">
+                <div class="mb-4">
+                   <span class="text-xs font-medium text-stone-500 uppercase tracking-wider">
+                    {series.count} {series.count === 1 ? 'Article' : 'Articles'}
+                  </span>
+                </div>
+                <h2 class="text-xl font-bold text-stone-100 group-hover:text-white mb-2">
+                  {series.data.title}
+                </h2>
+                {series.data.description && (
+                  <p class="text-sm text-stone-400 leading-relaxed line-clamp-3">
+                    {series.data.description}
+                  </p>
+                )}
+                <div class="mt-auto pt-6 text-sm font-medium text-stone-500 group-hover:text-stone-300 flex items-center gap-1">
+                  View Series <span class="transition-transform group-hover:translate-x-1">&rarr;</span>
+                </div>
+              </div>
+            </Card>
+          </a>
+        ))}
+      </div>
+    </Container>
+  </Section>
+</Layout>

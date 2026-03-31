@@ -24,6 +24,7 @@ export const footerNav: NavGroup[] = [
       { label: 'Talks', href: '/talks' },
       { label: 'Videos', href: '/videos' },
       { label: 'Podcasts', href: '/podcasts' },
+      { label: 'Series', href: '/articles/series' },
     ],
   },
   {

@@ -1,0 +1,71 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { Hero, Section, Badge, Container } from '@/components';
+
+export async function getStaticPaths() {
+  const allSeries = await getCollection('series');
+  return allSeries.map((series) => ({
+    params: { slug: series.id },
+    props: { series },
+  }));
+}
+
+interface Props {
+  series: CollectionEntry<'series'>;
+}
+
+const { series } = Astro.props;
+
+const allArticles = await getCollection('articles');
+const articles = allArticles
+  .filter((article) => article.data.series?.id === series.id)
+  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
+
+const meta = {
+  title: `${series.data.title} Series`,
+  description: series.data.description || `Articles in the ${series.data.title} series.`,
+  ogImage: `/og/series/${series.id}.webp`,
+};
+---
+
+<Layout meta={meta}>
+  <Hero title={series.data.title} description={series.data.description} />
+
+  <Section class="py-12">
+    <Container>
+      <div class="divide-y divide-stone-800">
+        {articles.map((article) => (
+          <a
+            href={`/articles/${article.id}`}
+            class="group flex flex-col gap-3 py-8 first:pt-0 last:pb-0 transition-opacity hover:opacity-90 sm:flex-row sm:items-start sm:gap-8"
+          >
+            <time
+              datetime={new Date(article.data.pubDate).toISOString()}
+              class="shrink-0 text-xs text-stone-500 sm:w-28 sm:pt-1.5"
+            >
+              {new Date(article.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+            </time>
+
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <Badge variant="primary">{article.data.category}</Badge>
+                {(article.data.readingTime ?? article.data.minRead) && (
+                  <span class="text-xs text-stone-500">
+                    {article.data.readingTime ?? article.data.minRead} min read
+                  </span>
+                )}
+              </div>
+              <h2 class="text-lg font-semibold text-stone-100 group-hover:text-white mb-2 leading-snug">
+                {article.data.title}
+              </h2>
+              <p class="text-sm text-stone-400 leading-relaxed line-clamp-2">
+                {article.data.description}
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </Container>
+  </Section>
+</Layout>

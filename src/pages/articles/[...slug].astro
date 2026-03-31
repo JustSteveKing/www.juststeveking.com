@@ -1,7 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro';
 import type { CollectionEntry } from 'astro:content';
-import { getCollection, render } from 'astro:content';
+import { getCollection, render, getEntry } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import { Badge, Container, Divider, Prose } from '@/components';
 
@@ -19,6 +19,8 @@ interface Props {
 
 const { entry } = Astro.props as unknown as Props;
 const { Content } = await render(entry);
+
+const series = entry.data.series ? await getEntry(entry.data.series) : null;
 
 const meta = {
   title: entry.data.title,
@@ -65,6 +67,16 @@ const meta = {
 
     <Container>
       <div class="max-w-3xl py-12">
+        {series && (
+          <aside class="mb-8 rounded-lg border border-stone-700 bg-stone-900/50 p-5 text-sm text-stone-400">
+            This article is part of the{' '}
+            <a href={`/articles/series/${series.id}`} class="text-stone-300 font-medium underline underline-offset-4 hover:text-white transition-colors">
+              {series.data.title}
+            </a>{' '}
+            series.
+          </aside>
+        )}
+
         {entry.data.sponsor && (
           <aside class="mb-8 rounded-lg border border-stone-700 bg-stone-900/50 p-5 text-sm text-stone-400">
             This article is sponsored by{' '}
