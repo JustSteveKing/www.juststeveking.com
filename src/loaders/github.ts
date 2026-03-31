@@ -132,7 +132,14 @@ export function githubLoader({
           }
 
           const digest = generateDigest(raw);
-          const data = await parseData({ id, data: frontmatter });
+          let data;
+          try {
+            data = await parseData({ id, data: frontmatter });
+          } catch (e) {
+            logger.error(`Validation failed for ${file.path}: ${e instanceof Error ? e.message : String(e)}`);
+            return;
+          }
+
           const rendered = await renderMarkdown(body);
 
           store.set({ id, data, body, digest, rendered });
