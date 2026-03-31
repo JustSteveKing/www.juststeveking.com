@@ -37,9 +37,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
     })),
     ...talks.map((e) => ({
       params: { collection: 'talks', id: e.id },
-      props: {
-...
-packages.map((e) => ({
+      props: { title: e.data.title, description: e.data.event } satisfies Props,
+    })),
+    ...packages.map((e) => ({
       params: { collection: 'packages', id: e.id },
       props: { title: e.data.name, description: e.data.description } satisfies Props,
     })),
