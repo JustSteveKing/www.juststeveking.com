@@ -3,10 +3,12 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, envField } from 'astro/config';
 import icon from 'astro-icon';
 
+import sitemap from '@astrojs/sitemap';
+
 export default defineConfig({
   output: 'static',
 
-  integrations: [icon()],
+  integrations: [icon(), sitemap()],
 
   env: {
     schema: {
