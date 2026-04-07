@@ -24,6 +24,7 @@ const meta = {
   title: entry.data.title,
   description: entry.data.description,
   type: 'article' as const,
+  ogImage: `/og/reviews/${entry.id}.webp`,
   publishedTime: new Date(entry.data.pubDate).toISOString(),
   modifiedTime: entry.data.updatedDate ? new Date(entry.data.updatedDate).toISOString() : undefined,
   tags: entry.data.tags,

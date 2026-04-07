@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const [articles, talks, packages, videos, apiGuides, testimonials, podcasts, series] =
+  const [articles, talks, packages, videos, apiGuides, testimonials, podcasts, series, reviews] =
     await Promise.all([
       getCollection('articles'),
       getCollection('talks'),
@@ -21,6 +21,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       getCollection('testimonials'),
       getCollection('podcasts'),
       getCollection('series'),
+      getCollection('reviews'),
     ]);
 
   const dynamicPaths = [
@@ -60,6 +61,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
       props: {
         title: e.data.title,
         description: e.data.description ?? '',
+      } satisfies Props,
+    })),
+    ...reviews.map((e) => ({
+      params: { collection: 'reviews', id: e.id },
+      props: {
+        title: e.data.title,
+        description: e.data.description,
       } satisfies Props,
     })),
   ];

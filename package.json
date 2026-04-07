@@ -12,7 +12,8 @@
     "check": "astro check",
     "astro": "astro",
     "newsletter": "bun ./scripts/generate-newsletter.mjs",
-    "resume": "bun ./scripts/generate-resume.mjs"
+    "resume": "bun ./scripts/generate-resume.mjs",
+    "reviews:export": "bun ./scripts/export-reviews-markdown.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.14",

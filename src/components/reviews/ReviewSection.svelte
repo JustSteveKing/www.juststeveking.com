@@ -66,6 +66,26 @@
   function toggleEvidence(index: number) {
     openEvidence = openEvidence === index ? -1 : index;
   }
+
+  function withRef(url: string): string {
+    try {
+      const hasWindow = typeof window !== 'undefined';
+      const base = hasWindow ? window.location.href : 'https://example.com';
+      const parsed = new URL(url, base);
+
+      // Only tag outbound http(s) links.
+      const isHttp = parsed.protocol === 'http:' || parsed.protocol === 'https:';
+      const isExternal = hasWindow ? parsed.origin !== window.location.origin : true;
+      if (!isHttp || !isExternal) {
+        return url;
+      }
+
+      parsed.searchParams.set('ref', 'juststeveking');
+      return parsed.toString();
+    } catch {
+      return url;
+    }
+  }
 </script>
 
 <section
@@ -161,7 +181,7 @@
                     <p>{@html sanitizeHtml(body)}</p>
                   {/each}
                   {#if evidence.sourceUrl}
-                    <a class="source-url" href={evidence.sourceUrl} target="_blank" rel="noreferrer noopener">
+                    <a class="source-url" href={withRef(evidence.sourceUrl)} target="_blank" rel="noreferrer noopener">
                       {evidence.sourceLabel ?? evidence.sourceUrl}
                     </a>
                   {/if}
