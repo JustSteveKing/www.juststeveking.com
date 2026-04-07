@@ -1,0 +1,150 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { Badge, Container, Hero, Section } from '@/components';
+import { reviews as reviewsMeta } from '@/config/pages';
+import { getOverallScoreForSlug } from '@/content/reviews/data';
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const allReviews = await getCollection('reviews');
+  const sorted = allReviews.sort(
+    (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
+  );
+
+  return paginate(sorted, { pageSize: 12 });
+};
+
+interface Props {
+  page: Page<CollectionEntry<'reviews'>>;
+}
+
+const { page } = Astro.props as Props;
+const availableTags = Array.from(new Set(page.data.flatMap((review) => review.data.tags))).sort();
+---
+
+<Layout meta={reviewsMeta}>
+  <Hero title={reviewsMeta.title} description={reviewsMeta.description} />
+
+  <Section class="py-12">
+    <Container>
+      {availableTags.length > 0 && (
+        <div class="mb-8">
+          <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-stone-500">Filter by topic</p>
+          <div class="flex flex-wrap gap-2" data-review-filters>
+            <button
+              type="button"
+              class="rounded-full border border-stone-700 bg-stone-900 px-3 py-1.5 text-xs text-stone-200"
+              data-filter="all"
+              aria-pressed="true"
+            >
+              All
+            </button>
+            {availableTags.map((tag) => (
+              <button
+                type="button"
+                class="rounded-full border border-stone-800 bg-stone-950 px-3 py-1.5 text-xs text-stone-400 hover:text-stone-200"
+                data-filter={tag.toLowerCase()}
+                aria-pressed="false"
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div class="divide-y divide-stone-800" id="review-list">
+        {page.data.map((review) => {
+          const score = getOverallScoreForSlug(review.id);
+
+          return (
+            <a
+              href={`/reviews/${review.id}`}
+              class="group flex flex-col gap-3 py-8 first:pt-0 last:pb-0 transition-opacity hover:opacity-90 sm:flex-row sm:items-start sm:gap-8"
+              data-review-card
+              data-tags={review.data.tags.map((tag) => tag.toLowerCase()).join(',')}
+            >
+              <time
+                datetime={new Date(review.data.pubDate).toISOString()}
+                class="shrink-0 text-xs text-stone-500 sm:w-28 sm:pt-1.5"
+              >
+                {new Date(review.data.pubDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })}
+              </time>
+
+              <div class="min-w-0 flex-1">
+                <div class="mb-2 flex flex-wrap items-center gap-2">
+                  <Badge variant="primary">{review.data.badge}</Badge>
+                  <span class="text-xs text-stone-500">{review.data.subject}</span>
+                  {score !== null && (
+                    <span class="rounded-full border border-sky-400/30 bg-sky-500/10 px-2 py-0.5 text-xs font-medium text-sky-200">
+                      Score {score}
+                    </span>
+                  )}
+                </div>
+                <h2 class="mb-2 text-lg font-semibold leading-snug text-stone-100 group-hover:text-white">
+                  {review.data.title}
+                </h2>
+                <p class="mb-3 text-sm leading-relaxed text-stone-400 line-clamp-2">
+                  {review.data.description}
+                </p>
+                {review.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-2">
+                    {review.data.tags.map((tag) => (
+                      <Badge variant="outline" size="xs">{tag}</Badge>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </a>
+          );
+        })}
+      </div>
+
+      {(page.url.prev || page.url.next) && (
+        <nav aria-label="Pagination" class="mt-16 flex items-center justify-between border-t border-stone-800 pt-8">
+          <div>
+            {page.url.prev && <a class="text-sm text-stone-300 hover:text-white" href={page.url.prev}>&larr; Newer</a>}
+          </div>
+
+          <span class="text-sm text-stone-500">
+            Page {page.currentPage} of {page.lastPage}
+          </span>
+
+          <div>
+            {page.url.next && <a class="text-sm text-stone-300 hover:text-white" href={page.url.next}>Older &rarr;</a>}
+          </div>
+        </nav>
+      )}
+    </Container>
+  </Section>
+</Layout>
+
+<script>
+  const filterRoot = document.querySelector('[data-review-filters]');
+  if (filterRoot) {
+    const buttons = Array.from(filterRoot.querySelectorAll('button[data-filter]'));
+    const cards = Array.from(document.querySelectorAll('[data-review-card]'));
+
+    for (const button of buttons) {
+      button.addEventListener('click', () => {
+        const selected = button.getAttribute('data-filter') ?? 'all';
+
+        for (const current of buttons) {
+          current.setAttribute('aria-pressed', current === button ? 'true' : 'false');
+        }
+
+        for (const card of cards) {
+          const tags = (card.getAttribute('data-tags') ?? '').split(',').filter(Boolean);
+          const visible = selected === 'all' || tags.includes(selected);
+          card.toggleAttribute('hidden', !visible);
+        }
+      });
+    }
+  }
+</script>

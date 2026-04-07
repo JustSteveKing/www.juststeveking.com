@@ -4,6 +4,7 @@ import { GITHUB_TOKEN } from 'astro:env/server';
 import { githubLoader } from '@/loaders/github';
 import { githubJsonLoader } from '@/loaders/github-json';
 import { resumeLoader } from '@/loaders/resume';
+import { glob } from 'astro/loaders';
 
 const OWNER = 'juststeveking';
 const REPO = 'content';
@@ -329,9 +330,29 @@ const resume = defineCollection({
       .default([]),
   }),
 });
+
+const reviews = defineCollection({
+  loader: glob({
+    base: 'src/content/reviews',
+    pattern: '**/*.{md,mdx}',
+  }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().max(220),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    subject: z.string(),
+    subjectUrl: z.string().url().optional(),
+    badge: z.string().default('In Review'),
+    meta: z.array(z.string()).default([]),
+    tags: z.array(z.string()).default([]),
+    featured: z.boolean().default(false),
+  }),
+});
 export const collections = {
   apiGuides,
   articles,
+  reviews,
   resume,
   series,
   testimonials,

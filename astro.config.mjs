@@ -2,13 +2,15 @@
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, envField } from 'astro/config';
 import icon from 'astro-icon';
+import mdx from '@astrojs/mdx';
+import svelte from '@astrojs/svelte';
 
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   output: 'static',
 
-  integrations: [icon(), sitemap()],
+  integrations: [icon(), mdx(), svelte(), sitemap()],
 
   env: {
     schema: {

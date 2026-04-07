@@ -11,12 +11,14 @@
     "preview": "astro preview",
     "check": "astro check",
     "astro": "astro",
-    "newsletter": "node ./scripts/generate-newsletter.mjs",
+    "newsletter": "bun ./scripts/generate-newsletter.mjs",
     "resume": "bun ./scripts/generate-resume.mjs"
   },
   "dependencies": {
+    "@astrojs/mdx": "^4.3.14",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
+    "@astrojs/svelte": "^7.2.5",
     "@iconify-json/lucide": "^1.2.99",
     "@tailwindcss/vite": "^4.2.2",
     "astro": "^6.1.0",
@@ -25,6 +27,7 @@
     "gray-matter": "^4.0.3",
     "satori": "^0.26.0",
     "sharp": "^0.34.5",
+    "svelte": "^5.39.6",
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {

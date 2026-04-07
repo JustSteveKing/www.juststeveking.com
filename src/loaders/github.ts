@@ -41,28 +41,71 @@ function checkRateLimit(response: Response, logger: LoaderContext['logger']): vo
   }
 }
 
-export function githubLoader({
+export async function fetchGitHubContent({
   owner,
   repo,
   path,
   branch = 'main',
   token,
-}: GitHubLoaderOptions): Loader {
+}: GitHubLoaderOptions) {
+  const headers: Record<string, string> = {
+    Accept: 'application/vnd.github.v3+json',
+    'X-GitHub-Api-Version': '2022-11-28',
+  };
+
+  if (token) headers.Authorization = `Bearer ${token}`;
+
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
+  const response = await fetch(url, { headers });
+
+  if (!response.ok) {
+    throw new Error(`GitHub API error fetching ${owner}/${repo}/${path}: ${response.status} ${response.statusText}`);
+  }
+
+  const entries = (await response.json()) as GitHubEntry[];
+  const markdownFiles = entries.filter(
+    (e) => e.type === 'file' && /\.mdx?$/.test(e.name) && e.download_url !== null,
+  );
+
+  return Promise.all(
+    markdownFiles.map(async (file) => {
+      const fileResponse = await fetch(file.download_url!);
+      if (!fileResponse.ok) return null;
+
+      const raw = await fileResponse.text();
+      const { data: frontmatter, content: body } = matter(raw);
+
+      if (frontmatter.readingTime === undefined) {
+        frontmatter.readingTime = readingTime(body);
+      }
+
+      return {
+        id: file.name.replace(/\.mdx?$/, ''),
+        data: frontmatter,
+        body,
+        sha: file.sha,
+      };
+    }),
+  ).then(results => results.filter((r): r is NonNullable<typeof r> => r !== null));
+}
+
+export function githubLoader(options: GitHubLoaderOptions): Loader {
+  const { owner, repo, path, token } = options;
   return {
     name: 'github-loader',
     async load({ store, logger, parseData, generateDigest, renderMarkdown, meta }: LoaderContext) {
+      const etagKey = `etag:${owner}/${repo}/${path}`;
+      const storedEtag = meta.get(etagKey);
+      
+      // We still use the manual fetch here to handle ETags correctly within Astro's loader context
       const headers: Record<string, string> = {
         Accept: 'application/vnd.github.v3+json',
         'X-GitHub-Api-Version': '2022-11-28',
       };
-
       if (token) headers.Authorization = `Bearer ${token}`;
-
-      const etagKey = `etag:${owner}/${repo}/${path}`;
-      const storedEtag = meta.get(etagKey);
       if (storedEtag) headers['If-None-Match'] = storedEtag;
 
-      const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
+      const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${options.branch || 'main'}`;
       let listResponse = await fetch(url, { headers });
 
       checkRateLimit(listResponse, logger);
@@ -72,7 +115,6 @@ export function githubLoader({
           logger.info(`No changes in ${owner}/${repo}/${path}, skipping`);
           return;
         }
-        // Store was cleared but meta still has a stale ETag — re-fetch without it
         meta.delete(etagKey);
         delete headers['If-None-Match'];
         listResponse = await fetch(url, { headers });
@@ -94,7 +136,6 @@ export function githubLoader({
         (e) => e.type === 'file' && /\.mdx?$/.test(e.name) && e.download_url !== null,
       );
 
-      // Remove entries for files that no longer exist in the repo
       const currentIds = new Set(markdownFiles.map((f) => f.name.replace(/\.mdx?$/, '')));
       for (const id of store.keys()) {
         if (!currentIds.has(id)) {
@@ -111,14 +152,12 @@ export function githubLoader({
           const shaKey = `sha:${file.path}`;
           const id = file.name.replace(/\.mdx?$/, '');
 
-          // Skip if file content is unchanged and entry is in the store
           if (meta.get(shaKey) === file.sha && store.has(id)) {
             skipped++;
             return;
           }
 
           const fileResponse = await fetch(file.download_url!);
-
           if (!fileResponse.ok) {
             logger.warn(`Skipping ${file.path}: ${fileResponse.status}`);
             return;
@@ -141,7 +180,6 @@ export function githubLoader({
           }
 
           const rendered = await renderMarkdown(body);
-
           store.set({ id, data, body, digest, rendered });
           meta.set(shaKey, file.sha);
           updated++;
@@ -152,3 +190,4 @@ export function githubLoader({
     },
   };
 }
+

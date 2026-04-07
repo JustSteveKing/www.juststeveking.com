@@ -1,19 +1,22 @@
 import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
 import { fileURLToPath } from 'url';
+import { fetchGitHubContent } from '../src/loaders/github.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.resolve(__dirname, '..');
 const STATE_FILE = path.resolve(ROOT_DIR, 'newsletter-state.json');
 
 // 1. Get configuration
-// Note: In local development, you might need to use dotenv or similar if these aren't in your shell
 const API_KEY = process.env.BUTTONDOWN_API_KEY;
 if (!API_KEY) {
   console.error("Error: BUTTONDOWN_API_KEY is not set in environment.");
   process.exit(1);
 }
+
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const OWNER = 'juststeveking';
+const REPO = 'content';
 
 // 2. Get last sent date
 let lastSentDate = new Date(0);
@@ -28,37 +31,34 @@ const newContent = [];
 console.log(`\n--- SCANNING CONTENT ---`);
 console.log(`Looking for updates since: ${lastSentDate.toLocaleString()}`);
 
-// 3. Scan content collections
-// Note: This assumes local content files exist. If using remote loaders, 
-// you may need to adjust this to fetch from your API or data-store.json.
-collections.forEach(collection => {
-  const collectionPath = path.resolve(ROOT_DIR, 'src/content', collection);
-  if (!fs.existsSync(collectionPath)) {
-    console.warn(`Warning: Collection path not found: ${collectionPath}`);
-    return;
+// 3. Scan content collections using GitHub Loader logic
+await Promise.all(collections.map(async (collection) => {
+  try {
+    const entries = await fetchGitHubContent({
+      owner: OWNER,
+      repo: REPO,
+      path: collection,
+      token: GITHUB_TOKEN
+    });
+
+    entries.forEach(entry => {
+      const { data, id } = entry;
+      const pubDate = new Date(data.pubDate || data.publishedDate);
+
+      if (pubDate > lastSentDate) {
+        newContent.push({
+          collection,
+          title: data.title,
+          description: data.description,
+          url: `https://www.juststeveking.com/${collection}/${id}`,
+          date: pubDate
+        });
+      }
+    });
+  } catch (error) {
+    console.warn(`Warning: Failed to fetch collection ${collection}:`, error.message);
   }
-
-  const files = fs.readdirSync(collectionPath);
-  files.forEach(file => {
-    if (!file.endsWith('.md') && !file.endsWith('.mdx')) return;
-    
-    const content = fs.readFileSync(path.join(collectionPath, file), 'utf8');
-    const { data } = matter(content);
-    
-    // Support different date field names across collections
-    const pubDate = new Date(data.pubDate || data.publishedDate);
-
-    if (pubDate > lastSentDate) {
-      newContent.push({
-        collection,
-        title: data.title,
-        description: data.description,
-        url: `https://www.juststeveking.com/${collection}/${file.replace(/\.(md|mdx)$/, '')}`,
-        date: pubDate
-      });
-    }
-  });
-});
+}));
 
 if (newContent.length === 0) {
   console.log("No new content found since last newsletter.");

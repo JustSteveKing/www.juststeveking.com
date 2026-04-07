@@ -1,0 +1,39 @@
+---
+import type { GetStaticPaths } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { Container } from '@/components';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const reviews = await getCollection('reviews');
+  return reviews.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+};
+
+interface Props {
+  entry: CollectionEntry<'reviews'>;
+}
+
+const { entry } = Astro.props as unknown as Props;
+const { Content } = await render(entry);
+
+const meta = {
+  title: entry.data.title,
+  description: entry.data.description,
+  type: 'article' as const,
+  publishedTime: new Date(entry.data.pubDate).toISOString(),
+  modifiedTime: entry.data.updatedDate ? new Date(entry.data.updatedDate).toISOString() : undefined,
+  tags: entry.data.tags,
+};
+---
+
+<Layout {meta}>
+  <section class="py-10 sm:py-14">
+    <Container class="max-w-6xl">
+      <Content />
+    </Container>
+  </section>
+</Layout>

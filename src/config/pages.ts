@@ -12,6 +12,12 @@ export const articles: PageMeta = {
   ogImage: '/og/pages/articles.webp',
 };
 
+export const reviews: PageMeta = {
+  title: 'Reviews',
+  description: 'Deep-dive product and developer experience reviews with interactive scorecards and evidence.',
+  ogImage: '/og/pages/articles.webp',
+};
+
 export const series: PageMeta = {
   title: 'Series',
   description: 'Curated article series covering specific topics in depth.',
