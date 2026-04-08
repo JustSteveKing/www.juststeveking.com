@@ -833,10 +833,262 @@ export const confidentAiReview: ReviewExperienceProps = {
     'Overall score: 78. Confident AI has strong technical depth, excellent docs, and a credible open-source moat via DeepEval. The biggest gains now are narrative compression, stronger testimonial depth, and clearer CTA hierarchy. Assessment is based on publicly visible homepage, docs, pricing, and repository signals as of April 2026.',
 };
 
+export const ozigiReview: ReviewExperienceProps = {
+  hero: {
+    badge: 'In Review - Deep Dive',
+    titleAccent: 'Ozigi',
+    title: 'Developer Experience',
+    subtitle:
+      'A deep-dive evaluation of Ozigi across API design, documentation, developer community, and developer education.',
+    meta: ['April 2026', 'ozigi.app', 'Developer tool for AI content workflows'],
+  },
+  scores: [
+    {
+      id: 'api',
+      label: 'API',
+      score: 62,
+      verdict: 'Developing',
+      tone: 'amber',
+      sectionId: 'section-api',
+    },
+    {
+      id: 'documentation',
+      label: 'Documentation',
+      score: 82,
+      verdict: 'Strong',
+      tone: 'green',
+      sectionId: 'section-docs',
+    },
+    {
+      id: 'community',
+      label: 'Community',
+      score: 38,
+      verdict: 'Early',
+      tone: 'red',
+      sectionId: 'section-community',
+    },
+    {
+      id: 'education',
+      label: 'Education',
+      score: 65,
+      verdict: 'Promising',
+      tone: 'amber',
+      sectionId: 'section-education',
+    },
+  ],
+  sections: [
+    {
+      id: 'section-api',
+      number: '01',
+      title: 'API Design & Developer Experience',
+      subtitle: 'Internal architecture strength versus external integration readiness',
+      findings: [
+        `Ozigi's internal generation pipeline is thoughtfully designed. Persona context, banned lexicon constraints, and raw source context are composed deliberately before inference, which shows strong engineering intent rather than prompt hacking.`,
+        `JSON stability is treated as a production concern through schema-oriented output handling, which is an advanced choice for an early-stage product and reduces downstream parsing failures.`,
+        `Publishing flows are architecture-aware: generation is kept separate from distribution, and explicit user review exists before posting to channels like X.`,
+        `The external developer surface is minimal. There is no public API reference, no documented auth model, and no SDK path for teams that want to integrate Ozigi into their own tooling.`,
+      ],
+      evidence: [
+        {
+          kind: 'strength',
+          title: 'Internal API architecture is credible and intentional',
+          body: [
+            `The architecture and docs indicate a builder who understands generation quality controls at system level. The separation of generation and publishing reduces accidental automation risks and keeps human review in the loop.`,
+          ],
+        },
+        {
+          kind: 'gap',
+          title: 'Public API capability is currently absent or undocumented',
+          body: [
+            `Enterprise API access is referenced, but there is no public endpoint catalog, auth guide, request-response schema, or client library. This is a mismatch for a developer-positioned tool.`,
+          ],
+        },
+        {
+          kind: 'opportunity',
+          title: 'Expose engine capabilities as a productized developer surface',
+          body: [
+            `Packaging campaign generation and publish actions into a stable API with webhooks would unlock workflows in CI/CD, automation tools, and internal content systems.`,
+          ],
+        },
+      ],
+      breakdownIntro: 'Score breakdown across API and integration sub-dimensions:',
+      breakdown: [
+        { label: 'Internal Architecture', value: 78, tone: 'green' },
+        { label: 'Public API Existence', value: 15, tone: 'red' },
+        { label: 'API Documentation', value: 10, tone: 'red' },
+        { label: 'SDK / Client Libraries', value: 5, tone: 'red' },
+        { label: 'JSON Schema Design', value: 80, tone: 'green' },
+        { label: 'Auth Patterns', value: 76, tone: 'green' },
+        { label: 'Local Dev Setup', value: 82, tone: 'green' },
+        { label: 'Integration Points', value: 30, tone: 'red' },
+      ],
+      recommendations: [
+        'Ship public REST endpoints for campaign creation, retrieval, and publish actions',
+        'Publish webhook events for campaign lifecycle states',
+        'Extract core generation logic into a standalone package for developers',
+      ],
+    },
+    {
+      id: 'section-docs',
+      number: '02',
+      title: 'Documentation',
+      subtitle: 'Narrative quality, technical depth, and operational completeness',
+      findings: [
+        `Ozigi documentation is structured as a progressive workflow, not a disconnected reference index. The sequence from setup through generation, editing, publishing, and newsletters makes the system easier to learn.`,
+        `The writing quality is unusually high. Core pages teach conceptual thinking, not just button-clicking, and the TL;DR pattern makes each page skimmable without losing depth.`,
+        `Deep-dive docs such as Banned Lexicon, System Personas, and Human-in-the-Loop communicate product philosophy and implementation trade-offs with real clarity.`,
+        `Completeness is the gap: there is no public API reference, little documented error handling, and setup guides for some integrations need stronger step-by-step treatment.`,
+      ],
+      evidence: [
+        {
+          kind: 'strength',
+          title: 'Documentation teaches both workflow and reasoning',
+          body: [
+            `The docs read like engineering guidance written by the builder. They explain why certain constraints exist and how to think about output quality, which is far more useful than surface-level feature documentation.`,
+          ],
+        },
+        {
+          kind: 'gap',
+          title: 'Operational docs are missing in key reliability areas',
+          body: [
+            `Troubleshooting content for model rate limits, failed URL ingestion, persona limits, and platform delivery failures is limited or absent. These scenarios need first-class documentation.`,
+          ],
+        },
+        {
+          kind: 'opportunity',
+          title: 'Add practical templates and setup walkthroughs',
+          body: [
+            `A Persona Cookbook and screenshot-based webhook setup guides would make docs significantly more actionable for founders and operators who are not deeply technical.`,
+          ],
+        },
+      ],
+      breakdownIntro: 'Score breakdown across documentation sub-dimensions:',
+      breakdown: [
+        { label: 'Structure', value: 86, tone: 'green' },
+        { label: 'Clarity of Writing', value: 90, tone: 'green' },
+        { label: 'Technical Depth', value: 88, tone: 'green' },
+        { label: 'Code Samples', value: 80, tone: 'green' },
+        { label: 'TL;DR Pattern', value: 92, tone: 'green' },
+        { label: 'API Reference', value: 5, tone: 'red' },
+        { label: 'Error Handling', value: 10, tone: 'red' },
+        { label: 'Quickstart', value: 84, tone: 'green' },
+      ],
+      recommendations: [
+        'Add a troubleshooting and error-states documentation page',
+        'Create a Persona Cookbook with reusable, proven templates',
+        'Publish complete Discord and Slack webhook setup guides with screenshots',
+      ],
+    },
+    {
+      id: 'section-community',
+      number: '03',
+      title: 'Developer Community',
+      subtitle: 'GitHub engagement, social channels, and participation signals',
+      findings: [
+        `The project shows active founder shipping velocity, but external participation is minimal. Repo activity exists without strong contributor or discussion momentum.`,
+        `Community scaffolding is present, including contribution guidelines and starter labels, but usage is low and public conversation channels are mostly quiet.`,
+        `There is no clear product community center. Support appears email-first, with limited visible social or forum-based community interaction loops.`,
+        `This weakens the signal for a creator and developer product where public proof, shared outputs, and user interaction are core trust multipliers.`,
+      ],
+      evidence: [
+        {
+          kind: 'gap',
+          title: 'Community infrastructure exists but has low activation',
+          body: [
+            `GitHub discussions and contribution paths are available, but they currently show little ongoing user engagement. Without visible activity, potential contributors assume the project is early or inactive from the outside.`,
+          ],
+        },
+        {
+          kind: 'opportunity',
+          title: 'Launch a dedicated user and builder community channel',
+          body: [
+            `A focused Discord with channels for showcases, persona templates, feature requests, and developer contributions would create recurring participation and organic proof.`,
+          ],
+        },
+        {
+          kind: 'opportunity',
+          title: 'Use product social identity to amplify user outcomes',
+          body: [
+            `A dedicated product account that regularly highlights user-created content can function as both social proof and living product demo.`,
+          ],
+        },
+      ],
+      breakdownIntro: 'Score breakdown across community sub-dimensions:',
+      breakdown: [
+        { label: 'GitHub Stars', value: 20, tone: 'red' },
+        { label: 'External Contributors', value: 15, tone: 'red' },
+        { label: 'Discussion Activity', value: 5, tone: 'red' },
+        { label: 'Issue Engagement', value: 15, tone: 'red' },
+        { label: 'Social Presence', value: 25, tone: 'red' },
+        { label: 'Contribution Scaffolding', value: 65, tone: 'amber' },
+        { label: 'Support Channels', value: 20, tone: 'red' },
+      ],
+      recommendations: [
+        'Launch a Discord community and seed it with real user activity',
+        'Create a dedicated product social account and showcase user outputs',
+        'Seed GitHub Discussions with targeted prompts and roadmap threads',
+      ],
+    },
+    {
+      id: 'section-education',
+      number: '04',
+      title: 'Developer Education',
+      subtitle: 'Conceptual teaching, tutorials, and first-run guidance',
+      findings: [
+        `Conceptual education is a strength. Core docs and architecture notes teach practical AI product thinking, not just product mechanics.`,
+        `Tutorial depth is the major shortfall. There are few end-to-end walkthroughs that guide users from blank slate to successful campaign output with expected inputs and outcomes.`,
+        `Video support and first-run onboarding are underdeveloped, which increases time-to-value for non-technical users and slows early product adoption.`,
+        `The opportunity is execution-focused rather than strategic: the writing quality already exists, and translating it into repeatable tutorials would likely raise activation quickly.`,
+      ],
+      evidence: [
+        {
+          kind: 'strength',
+          title: 'Conceptual education quality is already high',
+          body: [
+            `The docs communicate core ideas like identity-first prompting, banned-lexicon constraints, and human-in-the-loop editing with unusual clarity. This is a high-quality foundation to build from.`,
+          ],
+        },
+        {
+          kind: 'gap',
+          title: 'Practical tutorial and video coverage is sparse',
+          body: [
+            `Users need concrete build-first paths such as PR-to-campaign, notes-to-LinkedIn, and weekly-pipeline workflows. Visual walkthroughs and sample campaigns can reduce onboarding friction significantly.`,
+          ],
+        },
+        {
+          kind: 'opportunity',
+          title: 'Improve onboarding with guided examples',
+          body: [
+            `A pre-populated sample campaign and a short embedded product video can make the human-in-the-loop flow immediately understandable before users create anything from scratch.`,
+          ],
+        },
+      ],
+      breakdownIntro: 'Score breakdown across education sub-dimensions:',
+      breakdown: [
+        { label: 'Conceptual Depth', value: 85, tone: 'green' },
+        { label: 'Step-by-Step Tutorials', value: 15, tone: 'red' },
+        { label: 'Video Content', value: 0, tone: 'red' },
+        { label: 'Blog as Education', value: 55, tone: 'amber' },
+        { label: 'Onboarding Flow', value: 50, tone: 'amber' },
+        { label: 'Sample Content', value: 20, tone: 'red' },
+        { label: 'Architecture Teaching', value: 88, tone: 'green' },
+      ],
+      recommendations: [
+        'Create three end-to-end tutorials for specific, real user jobs',
+        'Ship a short how-to video covering context to persona to edit to publish',
+        'Add a sample campaign to the first-run product experience',
+      ],
+    },
+  ],
+  footerNote:
+    "Overall score: 62. Ozigi's strongest surface today is documentation quality and architectural thinking. The biggest constraints are external developer surface area, low community activity, and limited tutorial depth. The foundation is strong and the path forward is clear: ship a public API, improve onboarding education, and build visible user participation loops.",
+};
+
 export const reviewDataBySlug: Record<string, ReviewExperienceProps> = {
   'docsalot-in-review': docsalotReview,
   'scalekit-in-review': scalekitReview,
   'confident-ai-in-review': confidentAiReview,
+  'ozigi-in-review': ozigiReview,
 };
 
 export function getOverallScore(review: ReviewExperienceProps): number {
