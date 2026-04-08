@@ -143,6 +143,8 @@ export interface NavItem {
   badge?: string;
   external?: boolean;
   active?: boolean;
+  items?: NavItem[];
+  variant?: 'default' | 'highlight' | 'cta';
 }
 
 export interface NavGroup {

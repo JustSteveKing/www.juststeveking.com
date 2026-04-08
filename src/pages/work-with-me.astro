@@ -1,65 +1,181 @@
 ---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
-import { Container, Section, Heading, Card, Button, Badge } from '@/components';
+import { siteConfig } from '@/config';
+import { Container, Section, Heading, Card, Button, Badge, Testimonial } from '@/components';
 import { workWithMe } from '@/config/pages';
+
+const allTestimonials: CollectionEntry<'testimonials'>[] = await getCollection('testimonials');
+const featuredTestimonials = allTestimonials.slice(0, 3);
+
+function contactHref(subject: string) {
+  return `mailto:${siteConfig.author.email}?subject=${encodeURIComponent(subject)}`;
+}
 
 const services = [
   {
     title: 'Team Workshops',
-    description: 'Immersive, hands-on sessions for your engineering team. From API design fundamentals to advanced Laravel architecture.',
-    features: ['Custom curriculum', 'Real-world examples', 'Post-workshop support'],
-    cta: 'Inquire about workshops'
+    description:
+      'Hands-on sessions for engineering teams that want better API decisions, clearer architectural patterns, and stronger delivery habits.',
+    bestFor: 'Platform teams, product engineering groups, and senior developers tackling API design or Laravel architecture.',
+    format: 'Remote or on-site, typically delivered as a half-day, full-day, or two-day workshop.',
+    timeline: 'Usually scoped and scheduled within 2-4 weeks.',
+    scope: 'Most teams book a focused one-off engagement with follow-up notes and recommended next steps.',
+    outcomes: [
+      'Custom material shaped around your stack, standards, and current pain points.',
+      'Examples and exercises grounded in production trade-offs, not generic training slides.',
+      'A clear set of patterns the team can keep using after the workshop ends.',
+    ],
+    cta: 'Plan a workshop',
+    subject: 'Team workshop enquiry',
   },
   {
     title: 'Curriculum Design',
-    description: 'I help engineering organizations build internal learning paths and documentation that actually scales with their team.',
-    features: ['Knowledge gap analysis', 'Structured learning paths', 'Content creation'],
-    cta: 'Build your curriculum'
+    description:
+      'Internal learning systems for organisations that want onboarding, leveling, and technical education to scale beyond tribal knowledge.',
+    bestFor: 'Engineering leaders building learning paths, internal docs, or developer enablement programs.',
+    format: 'A collaborative advisory engagement covering content strategy, structure, and rollout guidance.',
+    timeline: 'Often delivered over a focused 2-6 week sprint depending on scope.',
+    scope: 'Best when you already know learning is a bottleneck and want a system your team will actually use.',
+    outcomes: [
+      'A clearer view of the skills gaps slowing the team down.',
+      'Structured learning paths and documentation priorities tied to real roles.',
+      'A repeatable framework for onboarding and continuous development.',
+    ],
+    cta: 'Design a curriculum',
+    subject: 'Curriculum design enquiry',
   },
   {
     title: 'Engineering Coaching',
-    description: 'Weekly 1-on-1 or small group sessions for senior engineers and leads looking to level up their architectural thinking.',
-    features: ['Code reviews', 'Architectural advisory', 'Direct Slack access'],
-    cta: 'Get coaching'
-  }
+    description:
+      'Direct support for senior engineers and leads who need a thoughtful sounding board on architecture, technical communication, and decision-making.',
+    bestFor: 'Senior ICs, new leads, and engineering managers working through complex systems or team growth.',
+    format: 'Weekly 1:1 or small-group sessions with async follow-up by email.',
+    timeline: 'Usually run as a short sprint or monthly coaching block.',
+    scope: 'Ideal when someone on the team needs momentum, sharper thinking, and external perspective.',
+    outcomes: [
+      'Better framing of architectural trade-offs and technical direction.',
+      'Feedback on code, communication, and leadership habits.',
+      'Support that helps senior people grow without feeling isolated.',
+    ],
+    cta: 'Ask about coaching',
+    subject: 'Engineering coaching enquiry',
+  },
+];
+
+const process = [
+  {
+    step: '1',
+    title: 'Discovery',
+    description:
+      'We start with the team, the current bottlenecks, and the change you want to see after the engagement.',
+  },
+  {
+    step: '2',
+    title: 'Tailored plan',
+    description:
+      'I shape the material, format, and examples around your stack, team maturity, and delivery context.',
+  },
+  {
+    step: '3',
+    title: 'Delivery',
+    description:
+      'Workshops and coaching are practical, conversational, and designed to create useful decisions fast.',
+  },
+  {
+    step: '4',
+    title: 'Follow-through',
+    description:
+      'You leave with concrete next steps, notes, and patterns the team can keep using after I leave.',
+  },
+];
+
+const fit = [
+  'Engineering teams standardising API patterns before growth makes the inconsistencies expensive.',
+  'Laravel teams that want cleaner architecture without disappearing into theory.',
+  'Leads building onboarding and internal learning systems that scale.',
+  'Senior developers who need a trusted external perspective on hard technical calls.',
 ];
 ---
 
 <Layout meta={workWithMe}>
   <Section class="border-b border-stone-800/60">
     <Container>
-      <div class="max-w-3xl">
-        <Badge variant="secondary" class="mb-4">Services</Badge>
-        <Heading level={1} class="mb-5">Work With Me</Heading>
-        <p class="text-xl text-stone-400 leading-relaxed">
-          I help engineering teams build better software through structured learning, architectural guidance, and hands-on enablement.
+      <div class="max-w-4xl">
+        <div class="mb-4 flex flex-wrap items-center gap-2">
+          <Badge variant="secondary">Services</Badge>
+          <Badge variant="primary">15+ years shipping software</Badge>
+          <Badge variant="secondary">30+ talks delivered</Badge>
+        </div>
+
+        <Heading level={1} class="mb-5">Help for engineering teams that want to ship with less drama.</Heading>
+
+        <p class="mb-6 max-w-3xl text-xl leading-relaxed text-stone-300">
+          I work with teams that need stronger API design, better Laravel architecture, and more intentional developer growth.
         </p>
+
+        <p class="mb-8 max-w-3xl text-lg leading-relaxed text-stone-400">
+          If your team is scaling quickly, standardising how it builds, or trying to upskill senior engineers without adding more noise, I can help with focused workshops, curriculum design, and coaching.
+        </p>
+
+        <div class="flex flex-wrap gap-3">
+          <Button href={contactHref('Work with Steve')} variant="primary" size="lg">Email about your team</Button>
+          <Button href="/about" variant="outline" size="lg">Why teams bring me in</Button>
+        </div>
       </div>
     </Container>
   </Section>
 
-  <Section>
+  <Section class="border-b border-stone-800/60">
     <Container>
-      <div class="grid gap-8 lg:grid-cols-3">
-        {services.map((service) => (
-          <Card class="flex flex-col h-full">
-            <Heading level={3} class="mb-4">{service.title}</Heading>
-            <p class="text-stone-400 mb-8 flex-1">
-              {service.description}
-            </p>
-            
-            <ul class="mb-8 space-y-3">
-              {service.features.map((feature) => (
-                <li class="flex items-center text-sm text-stone-300">
-                  <svg class="mr-3 h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                  </svg>
-                  {feature}
-                </li>
-              ))}
-            </ul>
+      <div class="mb-10 max-w-2xl">
+        <Heading level={2} class="mb-3">Choose the right engagement</Heading>
+        <p class="leading-relaxed text-stone-400">
+          Each engagement is shaped around the team and the problem, but these are the three ways most companies work with me.
+        </p>
+      </div>
 
-            <Button variant="primary" class="w-full">
+      <div class="grid gap-8 xl:grid-cols-3">
+        {services.map((service) => (
+          <Card class="flex h-full flex-col">
+            <Heading level={3} class="mb-4">{service.title}</Heading>
+            <p class="mb-6 text-stone-400">{service.description}</p>
+
+            <div class="mb-6 space-y-4 text-sm">
+              <div>
+                <p class="mb-1 font-semibold text-stone-100">Best for</p>
+                <p class="leading-relaxed text-stone-400">{service.bestFor}</p>
+              </div>
+              <div>
+                <p class="mb-1 font-semibold text-stone-100">Format</p>
+                <p class="leading-relaxed text-stone-400">{service.format}</p>
+              </div>
+              <div>
+                <p class="mb-1 font-semibold text-stone-100">Typical timeline</p>
+                <p class="leading-relaxed text-stone-400">{service.timeline}</p>
+              </div>
+              <div>
+                <p class="mb-1 font-semibold text-stone-100">What to expect</p>
+                <p class="leading-relaxed text-stone-400">{service.scope}</p>
+              </div>
+            </div>
+
+            <div class="mb-8 flex-1">
+              <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
+                What teams walk away with
+              </p>
+              <ul class="space-y-3">
+                {service.outcomes.map((outcome) => (
+                  <li class="flex gap-3 text-sm text-stone-300">
+                    <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-blue-400"></span>
+                    <span>{outcome}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <Button href={contactHref(service.subject)} variant="primary" class="w-full">
               {service.cta}
             </Button>
           </Card>
@@ -68,52 +184,84 @@ const services = [
     </Container>
   </Section>
 
-  <Section class="bg-stone-900/30">
+  <Section class="border-b border-stone-800/60 bg-stone-900/20">
     <Container>
-      <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
-        <div>
-          <Heading level={2} class="mb-6">Why work with me?</Heading>
-          <div class="space-y-6">
-            <div class="flex gap-4">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-stone-800 text-blue-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              </div>
-              <div>
-                <p class="font-semibold text-stone-100">Pragmatic Experience</p>
-                <p class="text-sm text-stone-400">15+ years in the trenches, from startups to scale-ups. I don't just teach theory; I teach what works in production.</p>
-              </div>
-            </div>
-            <div class="flex gap-4">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-stone-800 text-blue-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M8 7h6"/><path d="M8 11h8"/></svg>
-              </div>
-              <div>
-                <p class="font-semibold text-stone-100">Standard-Driven</p>
-                <p class="text-sm text-stone-400">As a member of the PHP-FIG Core Committee, I have a deep understanding of standards and how they benefit long-term maintenance.</p>
-              </div>
-            </div>
-            <div class="flex gap-4">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-stone-800 text-blue-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-              </div>
-              <div>
-                <p class="font-semibold text-stone-100">Tailored Approach</p>
-                <p class="text-sm text-stone-400">No generic "off-the-shelf" training. Every engagement is tailored to your team's specific stack, challenges, and goals.</p>
-              </div>
-            </div>
-          </div>
+      <div class="mb-10 max-w-2xl">
+        <Heading level={2} class="mb-3">What working together looks like</Heading>
+        <p class="leading-relaxed text-stone-400">
+          The process is simple on purpose. I want teams spending their energy on better decisions, not heavier consulting theatre.
+        </p>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        {process.map((item) => (
+          <Card class="h-full border-stone-800 bg-stone-950/30">
+            <p class="mb-4 text-sm font-semibold text-blue-300">Step {item.step}</p>
+            <Heading level={4} class="mb-3">{item.title}</Heading>
+            <p class="text-sm leading-relaxed text-stone-400">{item.description}</p>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  {featuredTestimonials.length > 0 && (
+    <Section class="border-b border-stone-800/60">
+      <Container>
+        <div class="mb-10 max-w-2xl">
+          <Heading level={2} class="mb-3">What people say after working with me</Heading>
+          <p class="leading-relaxed text-stone-400">
+            Named feedback matters more than vague praise, so here are a few of the people kind enough to say so publicly.
+          </p>
         </div>
-        <div class="relative rounded-2xl border border-stone-800 bg-stone-900/50 p-8">
-           <p class="mb-6 text-lg italic text-stone-300">
-             "Steve has a rare ability to take complex architectural concepts and make them feel accessible and actionable. His workshop completely changed how our team thinks about API design."
-           </p>
-           <div class="flex items-center gap-3">
-             <div class="h-10 w-10 rounded-full bg-stone-800"></div>
-             <div>
-               <p class="text-sm font-semibold text-stone-100">Engineering Manager</p>
-               <p class="text-xs text-stone-500">Global Fintech Platform</p>
-             </div>
-           </div>
+
+        <div class="grid gap-5 lg:grid-cols-3">
+          {featuredTestimonials.map((testimonial) => (
+            <Testimonial
+              quote={testimonial.data.quote}
+              name={testimonial.data.author.name}
+              role={testimonial.data.author.role}
+              company={testimonial.data.author.company}
+              avatar={testimonial.data.author.avatar?.src}
+              class="h-full w-full"
+            />
+          ))}
+        </div>
+      </Container>
+    </Section>
+  )}
+
+  <Section>
+    <Container>
+      <div class="grid gap-10 xl:grid-cols-[0.95fr_1.05fr] xl:items-start">
+        <div>
+          <Heading level={2} class="mb-4">Who I work best with</Heading>
+          <p class="mb-6 leading-relaxed text-stone-400">
+            The best engagements happen when the team already knows there is a meaningful problem to solve and wants help tackling it thoughtfully.
+          </p>
+          <ul class="space-y-4">
+            {fit.map((item) => (
+              <li class="flex gap-3 text-sm text-stone-300">
+                <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-blue-400"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="rounded-2xl border border-stone-800 bg-stone-900/40 p-8">
+          <Heading level={3} class="mb-4">Start with a conversation</Heading>
+          <p class="mb-6 leading-relaxed text-stone-400">
+            If you are exploring a workshop, coaching, or a curriculum project, send me a note with a little context on the team, the challenge, and what good looks like.
+          </p>
+          <div class="mb-6 space-y-3 text-sm text-stone-300">
+            <p>Include the team size, the problem you want to solve, and whether you are thinking workshop, coaching, or enablement.</p>
+            <p>I will reply with whether I am the right fit and what the next step should look like.</p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <Button href={contactHref('Work with Steve')} variant="primary">Email Steve</Button>
+            <Button href="/start-here" variant="outline">Share the learning tracks</Button>
+          </div>
         </div>
       </div>
     </Container>

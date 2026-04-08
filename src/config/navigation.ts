@@ -5,13 +5,29 @@ import type { NavGroup, NavItem } from '@/types';
  * Keep this short; anything secondary belongs in footerNav.
  */
 export const mainNav: NavItem[] = [
-  { label: 'Start Here', href: '/start-here' },
-  { label: 'Articles', href: '/articles' },
-  { label: 'Reviews', href: '/reviews' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Talks', href: '/talks' },
-  { label: 'Videos', href: '/videos' },
-  { label: 'Work With Me', href: '/work-with-me' },
+  { label: 'Start Here', href: '/start-here', variant: 'highlight' },
+  {
+    label: 'Learn',
+    href: '/articles',
+    items: [
+      { label: 'Articles', href: '/articles' },
+      { label: 'API Guides', href: '/api-guides' },
+      { label: 'Videos', href: '/videos' },
+      { label: 'Talks', href: '/talks' },
+      { label: 'Reviews', href: '/reviews' },
+      { label: 'Newsletter', href: '/newsletter' },
+    ],
+  },
+  {
+    label: 'Projects',
+    href: '/projects',
+    items: [
+      { label: 'Projects', href: '/projects' },
+      { label: 'Packages', href: '/packages' },
+    ],
+  },
+  { label: 'About', href: '/about' },
+  { label: 'Work With Me', href: '/work-with-me', variant: 'cta' },
 ];
 
 /**

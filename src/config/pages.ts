@@ -2,7 +2,7 @@ import type { PageMeta } from '@/types';
 
 export const home: PageMeta = {
   title: 'Home',
-  description: 'Developer, speaker, and open-source author. Writing about PHP, APIs, and the web.',
+  description: 'Practical guidance on APIs, Laravel architecture, and developer growth for engineering teams that want to ship with confidence.',
   ogImage: '/og/pages/home.webp',
 };
 
@@ -74,7 +74,7 @@ export const startHere: PageMeta = {
 
 export const workWithMe: PageMeta = {
   title: 'Work With Me',
-  description: 'Professional services including team workshops, curriculum design, and engineering coaching.',
+  description: 'Workshops, coaching, and enablement for engineering teams improving API design, Laravel architecture, and developer growth.',
   ogImage: '/og/pages/workwithme.webp',
 };
 
