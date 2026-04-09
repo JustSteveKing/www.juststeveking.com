@@ -1337,12 +1337,266 @@ export const orgnReview: ReviewExperienceProps = {
     "Launch-day review for ORGN and OLLM based on publicly available surfaces. Security architecture ambition is unusually strong, while community and educational infrastructure are still early. Pillar scores reflect launch state; overall narrative assessment in source material was 51, while computed score in this review system is derived from mean pillar average.",
 };
 
+export const aiCousticsReview: ReviewExperienceProps = {
+  hero: {
+    badge: 'In Review - Deep Dive',
+    titleAccent: 'ai-coustics',
+    title: 'Developer Experience',
+    subtitle:
+      'A deep-dive evaluation of the ai-coustics developer experience across API design, documentation, developer community, and developer education. Real-time speech enhancement for Voice AI.',
+    meta: ['April 2026', 'ai-coustics.com', 'Berlin, Germany', '$6.6M raised'],
+  },
+  scores: [
+    {
+      id: 'api',
+      label: 'API',
+      score: 85,
+      verdict: 'Strong',
+      tone: 'green',
+      sectionId: 'section-api',
+    },
+    {
+      id: 'documentation',
+      label: 'Documentation',
+      score: 78,
+      verdict: 'Solid',
+      tone: 'green',
+      sectionId: 'section-docs',
+    },
+    {
+      id: 'community',
+      label: 'Community',
+      score: 62,
+      verdict: 'Growing',
+      tone: 'amber',
+      sectionId: 'section-community',
+    },
+    {
+      id: 'education',
+      label: 'Education',
+      score: 80,
+      verdict: 'Strong',
+      tone: 'green',
+      sectionId: 'section-education',
+    },
+  ],
+  sections: [
+    {
+      id: 'section-api',
+      number: '01',
+      title: 'API Design & Developer Experience',
+      subtitle: 'SDK architecture, model design, and integration readiness',
+      findings: [
+        `ai-coustics ships a native SDK rather than a cloud-only API, with language bindings in C, Python, Rust, and Node.js plus integration paths for LiveKit and Pipecat. For real-time audio processing, this architecture is practical and performant.` ,
+        `The model line-up is clearly segmented: Quail for machine-optimized voice AI pipelines and Rook for human-listening quality. Variant naming is consistent, and trade-offs are documented clearly enough to support practical model selection in production flows.`,
+        `The developer platform provides a real self-serve workflow: account creation, SDK key generation, model testing, and billing controls in one place with a free trial and no credit card required.`,
+      ],
+      evidence: [
+        {
+          kind: 'strength',
+          title: 'Native SDK architecture is production-oriented',
+          body: [
+            `The C-core plus language-wrapper model is a strong fit for low-latency audio enhancement and avoids GPU dependency in common deployment paths.`,
+            `This design gives ai-coustics both portability and performance for teams shipping voice systems at scale.`,
+          ],
+        },
+        {
+          kind: 'strength',
+          title: 'Framework integrations are practical and quick to adopt',
+          body: [
+            `The LiveKit path is lightweight to start and exposes an enhancement-level parameter that gives explicit control over insertion vs deletion behavior in speech pipelines.`,
+            `Pipecat presence adds ecosystem reach in voice-agent workflows where integration speed matters.`,
+          ],
+        },
+        {
+          kind: 'opportunity',
+          title: 'No permanent free tier for long-tail builders',
+          body: [
+            `There is a free trial, but no ongoing hobby-tier option for students and side projects to stay active after initial evaluation.`,
+            `A capped permanent free plan would likely increase ecosystem adoption and future paid conversion as projects mature.`,
+          ],
+        },
+      ],
+      breakdownIntro: 'Score breakdown across API sub-dimensions:',
+      breakdown: [
+        { label: 'SDK Architecture', value: 92, tone: 'green' },
+        { label: 'Language Coverage', value: 88, tone: 'green' },
+        { label: 'Framework Integrations', value: 86, tone: 'green' },
+        { label: 'Developer Platform', value: 82, tone: 'green' },
+        { label: 'Model Selection UX', value: 85, tone: 'green' },
+        { label: 'Try-Before-Buy', value: 88, tone: 'green' },
+        { label: 'Pricing Transparency', value: 82, tone: 'green' },
+      ],
+      recommendations: [
+        'Add a permanent free tier with a capped monthly minute allowance',
+        'Publish platform API endpoints for key automation workflows',
+        'Explore a WebAssembly SDK path for browser-native voice applications',
+      ],
+    },
+    {
+      id: 'section-docs',
+      number: '02',
+      title: 'Documentation',
+      subtitle: 'Integration-first structure and practical quickstarts',
+      findings: [
+        `The docs are organized around integration paths (LiveKit, Pipecat, low-level bindings) rather than generic feature lists. That framing answers the developer's first question quickly: where this fits in an existing stack.`,
+        `The model guide is detailed and candid, including variant IDs, sizes, sample rates, delay characteristics, and realistic caveats about human-perceived quality versus machine-optimized output.`,
+        `Coverage gaps remain around deep function-level SDK reference detail, migration guidance from legacy API surfaces, and production edge-case documentation.`,
+      ],
+      evidence: [
+        {
+          kind: 'strength',
+          title: 'Integration-path navigation is well executed',
+          body: [
+            `The docs present practical entry points and reduce time spent mapping product concepts to implementation context.`,
+            `Quickstarts are command-level and implementation-ready rather than purely conceptual walkthroughs.`,
+          ],
+        },
+        {
+          kind: 'strength',
+          title: 'Model documentation quality is high',
+          body: [
+            `The docs provide enough operational context for teams to make informed model choices across Voice AI and communications use cases.`,
+          ],
+        },
+        {
+          kind: 'gap',
+          title: 'Reference depth and production edge-case docs need expansion',
+          body: [
+            `The SDK reference surface appears thinner than expected for C and Rust at function-signature and error-handling depth.`,
+            `Operational guidance for memory footprint, CPU behavior under load, and failure modes would improve production readiness.`,
+          ],
+        },
+      ],
+      breakdownIntro: 'Score breakdown across documentation sub-dimensions:',
+      breakdown: [
+        { label: 'Structure', value: 84, tone: 'green' },
+        { label: 'Integration Paths', value: 86, tone: 'green' },
+        { label: 'Model Guide', value: 90, tone: 'green' },
+        { label: 'LiveKit Quickstart', value: 88, tone: 'green' },
+        { label: 'SDK Reference Depth', value: 58, tone: 'amber' },
+        { label: 'Error Handling', value: 35, tone: 'red' },
+        { label: 'Changelog', value: 80, tone: 'green' },
+        { label: 'Pricing Docs', value: 82, tone: 'green' },
+      ],
+      recommendations: [
+        'Expand SDK reference pages with full signatures, types, and error codes',
+        'Add a deployment guide covering CPU, memory, and model-distribution strategy',
+        'Publish a migration guide from the legacy API model to the SDK architecture',
+      ],
+    },
+    {
+      id: 'section-community',
+      number: '03',
+      title: 'Developer Community',
+      subtitle: 'Early but multi-channel with credible ecosystem anchors',
+      findings: [
+        `Community presence exists across Discord, GitHub, and Hugging Face, with customer validation from known companies and integrations in major voice-agent ecosystems.`,
+        `GitHub coverage is broad for the stage, with multiple SDK repositories and active recent commits, but external engagement metrics remain modest relative to product quality.`,
+        `Discord appears oriented toward technical support more than broad community participation, which is useful for onboarding but weaker for peer-to-peer momentum.`,
+      ],
+      evidence: [
+        {
+          kind: 'strength',
+          title: 'Customer proof is specific and credible',
+          body: [
+            `Named testimonials and published technical case-study material provide stronger trust signals than anonymous quotes.`,
+          ],
+        },
+        {
+          kind: 'strength',
+          title: 'Ecosystem integrations improve discoverability',
+          body: [
+            `First-class positioning in LiveKit and Pipecat integration flows creates partner-led distribution and practical adoption paths.`,
+          ],
+        },
+        {
+          kind: 'opportunity',
+          title: 'Community channels are present but not yet compounding',
+          body: [
+            `The infrastructure exists, but visible community-generated content and contribution loops are still early.`,
+            `Expanding case studies and encouraging public benchmark sharing would raise activity quality and trust density.`,
+          ],
+        },
+      ],
+      breakdownIntro: 'Score breakdown across community sub-dimensions:',
+      breakdown: [
+        { label: 'Discord', value: 55, tone: 'amber' },
+        { label: 'GitHub Activity', value: 52, tone: 'amber' },
+        { label: 'Hugging Face', value: 75, tone: 'green' },
+        { label: 'Customer Proof', value: 82, tone: 'green' },
+        { label: 'Partner Ecosystem', value: 78, tone: 'green' },
+        { label: 'Blog Cadence', value: 65, tone: 'amber' },
+        { label: 'Social Media', value: 45, tone: 'amber' },
+      ],
+      recommendations: [
+        'Publish more technical customer case studies beyond Synthesia',
+        'Expand Discord into community channels for showcases, benchmarks, and integrations',
+        'Deepen partner co-marketing with framework ecosystems like LiveKit and Pipecat',
+      ],
+    },
+    {
+      id: 'section-education',
+      number: '04',
+      title: 'Developer Education',
+      subtitle: 'High-quality technical content with room for interactive onboarding',
+      findings: [
+        `The strongest educational asset is the Voice Focus 2.0 deep-dive: benchmark methodology, error-type decomposition, model behavior, and practical implications are all explained at a high technical standard.`,
+        `The Dawn Chorus dataset and public benchmark narratives create meaningful research credibility and allow independent evaluation beyond marketing claims.`,
+        `Onboarding paths are varied (demo, platform, framework quickstart, blog), but there is still no browser-based real-time demo moment for immediate product feel.`,
+      ],
+      evidence: [
+        {
+          kind: 'strength',
+          title: 'Technical educational content quality is top-tier',
+          body: [
+            `The best content goes beyond product explanation and teaches developers how to reason about speech pipeline quality in production systems.`,
+          ],
+        },
+        {
+          kind: 'strength',
+          title: 'Open dataset work supports category trust',
+          body: [
+            `Publishing evaluation data in public channels helps position ai-coustics as a contributor to the field, not only a vendor.`,
+          ],
+        },
+        {
+          kind: 'opportunity',
+          title: 'Interactive first-five-minutes experience is missing',
+          body: [
+            `A browser-native microphone demo would likely improve activation for developers who need direct experiential validation before integration.`,
+          ],
+        },
+      ],
+      breakdownIntro: 'Score breakdown across education sub-dimensions:',
+      breakdown: [
+        { label: 'Technical Deep-Dives', value: 94, tone: 'green' },
+        { label: 'Research Credibility', value: 90, tone: 'green' },
+        { label: 'Blog Quality', value: 86, tone: 'green' },
+        { label: 'Category Education', value: 82, tone: 'green' },
+        { label: 'Tutorials', value: 78, tone: 'green' },
+        { label: 'Onboarding Paths', value: 76, tone: 'green' },
+        { label: 'Interactive Demo', value: 45, tone: 'amber' },
+        { label: 'Glossary', value: 75, tone: 'green' },
+      ],
+      recommendations: [
+        'Build a browser-based live microphone demo for immediate product validation',
+        'Publish a complete voice-agent audio architecture guide from mic to speaker',
+        'Run recurring benchmark updates whenever major STT providers ship model changes',
+      ],
+    },
+  ],
+  footerNote:
+    'ai-coustics presents a mature developer experience with strong SDK architecture, practical integrations, clear documentation structure, and high-quality technical education. Remaining gaps are primarily around deeper SDK reference detail, stronger community participation loops, and a more interactive first-run experience.',
+};
+
 export const reviewDataBySlug: Record<string, ReviewExperienceProps> = {
   'docsalot-in-review': docsalotReview,
   'scalekit-in-review': scalekitReview,
   'confident-ai-in-review': confidentAiReview,
   'ozigi-in-review': ozigiReview,
   'orgn-in-review': orgnReview,
+  'ai-coustics-in-review': aiCousticsReview,
 };
 
 export function getOverallScore(review: ReviewExperienceProps): number {
