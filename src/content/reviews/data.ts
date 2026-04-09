@@ -1084,11 +1084,265 @@ export const ozigiReview: ReviewExperienceProps = {
     "Overall score: 62. Ozigi's strongest surface today is documentation quality and architectural thinking. The biggest constraints are external developer surface area, low community activity, and limited tutorial depth. The foundation is strong and the path forward is clear: ship a public API, improve onboarding education, and build visible user participation loops.",
 };
 
+export const orgnReview: ReviewExperienceProps = {
+  hero: {
+    badge: 'In Review - Deep Dive',
+    titleAccent: 'ORGN',
+    title: 'Developer Experience',
+    subtitle:
+      "A deep-dive evaluation of Origin's developer experience across API design, documentation, developer community, and developer education. Includes the companion product OLLM.",
+    meta: ['April 2026', 'orgn.com', 'ollm.com', 'Product Hunt launch day'],
+  },
+  scores: [
+    {
+      id: 'api',
+      label: 'API',
+      score: 76,
+      verdict: 'Strong',
+      tone: 'green',
+      sectionId: 'section-api',
+    },
+    {
+      id: 'documentation',
+      label: 'Documentation',
+      score: 68,
+      verdict: 'Solid',
+      tone: 'amber',
+      sectionId: 'section-docs',
+    },
+    {
+      id: 'community',
+      label: 'Community',
+      score: 22,
+      verdict: 'Absent',
+      tone: 'red',
+      sectionId: 'section-community',
+    },
+    {
+      id: 'education',
+      label: 'Education',
+      score: 32,
+      verdict: 'Early',
+      tone: 'red',
+      sectionId: 'section-education',
+    },
+  ],
+  sections: [
+    {
+      id: 'section-api',
+      number: '01',
+      title: 'API Design & Developer Experience',
+      subtitle: 'OLLM interoperability strengths and CDE automation gaps',
+      findings: [
+        `OLLM is OpenAI-compatible and practical to adopt. The API uses the standard <code>/v1/chat/completions</code> pattern with bearer token auth, so existing OpenAI SDK integrations can be adapted by changing base URL and model identifiers.`,
+        `Model IDs are provider namespaced (for example <code>phala/gemma-3-27b-it</code>), and the console exposes model availability with confidentiality status for TEE-backed execution.`,
+        `Attestation UX is integrated directly into request flows. Metadata like request ID, model, provider, usage, latency, and cryptographic verification artifacts are visible while prompts and outputs remain private.`,
+        `Origin CDE itself has no documented public API, CLI, or SDK yet. Workflow automation for projects, tasks, trials, and attestations is currently product-UI driven.`,
+      ],
+      evidence: [
+        {
+          kind: 'strength',
+          title: 'OLLM delivers a clean compatibility layer for existing AI integrations',
+          body: [
+            `OpenAI-style endpoint shape and straightforward quickstart examples reduce migration friction for teams that already have OpenAI-compatible clients in production.`,
+            `This is one of the strongest launch-day choices because it lowers adoption cost without requiring new mental models for request flow structure.`,
+          ],
+        },
+        {
+          kind: 'strength',
+          title: 'Attestation visibility is productized instead of hidden in compliance docs',
+          body: [
+            `The cryptographic evidence model is surfaced as part of developer workflow, making verification tangible rather than theoretical for regulated enterprise teams.`,
+          ],
+        },
+        {
+          kind: 'gap',
+          title: 'Origin CDE lacks public automation interfaces',
+          body: [
+            `No public endpoints, SDKs, or CLI commands are documented for project lifecycle automation. That blocks CI/CD integration patterns many enterprise teams will expect at GA.`,
+          ],
+        },
+      ],
+      breakdownIntro: 'Score breakdown across API sub-dimensions:',
+      breakdown: [
+        { label: 'OLLM API Design', value: 85, tone: 'green' },
+        { label: 'OpenAI Compatibility', value: 92, tone: 'green' },
+        { label: 'Attestation UX', value: 80, tone: 'green' },
+        { label: 'IDE Integrations', value: 78, tone: 'green' },
+        { label: 'CDE Public API', value: 5, tone: 'red' },
+        { label: 'CLI / SDK', value: 0, tone: 'red' },
+        { label: 'Agent Mode UX', value: 82, tone: 'green' },
+        { label: 'Workspace Model', value: 78, tone: 'green' },
+      ],
+      recommendations: [
+        'Ship a CDE CLI at GA for project, trial, and attestation workflows',
+        'Add an OLLM attestation export endpoint for compliance automation',
+        'Publish a public model catalog endpoint with capabilities and pricing metadata',
+      ],
+    },
+    {
+      id: 'section-docs',
+      number: '02',
+      title: 'Documentation',
+      subtitle: 'Thorough security material, but missing reference depth and teaching layer',
+      findings: [
+        `Documentation scope is broad for launch day. Origin and OLLM docs cover quickstarts, architecture, security model, access control, and core workflows with practical sequencing and screenshots.`,
+        `Security coverage is notably deep. TEE mechanics, attestation concepts, encryption layers, and zero-retention claims are described with a level of detail aligned to enterprise security evaluation.`,
+        `The writing style trends toward internal engineering specification tone, with occasional marketing language mixed into technical pages.`,
+        `Key reference gaps remain: no full OLLM API reference, limited parameter and error-code coverage, no public rate-limit detail, and no published pricing matrix by model.`,
+        `Agent modes are referenced as product differentiators but are not documented with role behavior, use-case guidance, or example prompts.`,
+      ],
+      evidence: [
+        {
+          kind: 'strength',
+          title: 'Quickstart and security docs are strong for a pre-GA launch',
+          body: [
+            `The stepwise quickstart provides practical onboarding structure, and the security pages show enough architecture depth to support enterprise stakeholder review.`,
+          ],
+        },
+        {
+          kind: 'gap',
+          title: 'OLLM lacks a complete public API reference surface',
+          body: [
+            `A single endpoint quickstart is not enough for production API evaluation. Teams need full schemas, parameter behavior, errors, limits, and pricing details to compare alternatives reliably.`,
+          ],
+        },
+        {
+          kind: 'opportunity',
+          title: 'Translate security architecture into developer-focused conceptual education',
+          body: [
+            `The technical depth already exists. Adding plain-language explainers and concrete developer scenarios would make confidential computing concepts much more accessible.`,
+          ],
+        },
+      ],
+      breakdownIntro: 'Score breakdown across documentation sub-dimensions:',
+      breakdown: [
+        { label: 'Structure', value: 76, tone: 'green' },
+        { label: 'Quickstart Quality', value: 80, tone: 'green' },
+        { label: 'Security Docs Depth', value: 88, tone: 'green' },
+        { label: 'Writing Voice', value: 52, tone: 'amber' },
+        { label: 'API Reference', value: 20, tone: 'red' },
+        { label: 'Agent Mode Docs', value: 10, tone: 'red' },
+        { label: 'Pricing Transparency', value: 15, tone: 'red' },
+        { label: 'Screenshots', value: 78, tone: 'green' },
+      ],
+      recommendations: [
+        'Publish a full OLLM API reference with parameters, errors, limits, and pricing',
+        'Add dedicated docs for Reviewer, Researcher, Architect, and Explorer modes',
+        'Separate marketing statements from technical documentation voice',
+      ],
+    },
+    {
+      id: 'section-community',
+      number: '03',
+      title: 'Developer Community',
+      subtitle: 'Product Hunt visibility exists, but ecosystem channels are largely absent',
+      findings: [
+        `Origin launched on Product Hunt with focused positioning around architecture-level privacy and confidential development infrastructure.`,
+        `Launch-day traction exists but appears early, with limited upvotes, comments, and no broad evidence of distributed community activation yet.`,
+        `Outside Product Hunt, developer community presence is minimal: no clear GitHub org footprint, no active product social channel, and no visible forum, Discord, or Slack community path.`,
+        `Current engagement flow is mostly demo booking or early-access application, which limits public conversation and community-led trust formation.`,
+      ],
+      evidence: [
+        {
+          kind: 'strength',
+          title: 'Product Hunt launch message is sharp and memorable',
+          body: [
+            `The positioning language is clear and differentiated for a security-first AI coding product, giving the launch a distinct narrative hook.`,
+          ],
+        },
+        {
+          kind: 'gap',
+          title: 'No sustained public community infrastructure beyond launch channel',
+          body: [
+            `Without public social, GitHub, or chat community surfaces, launch-day interest has limited pathways for retention and ongoing engagement.`,
+          ],
+        },
+        {
+          kind: 'opportunity',
+          title: 'Build community scaffolding before GA attention accelerates',
+          body: [
+            `A product social identity, public changelog, and early-access community space would convert launch visibility into an owned, compounding audience.`,
+          ],
+        },
+      ],
+      breakdownIntro: 'Score breakdown across community sub-dimensions:',
+      breakdown: [
+        { label: 'Product Hunt Launch', value: 55, tone: 'amber' },
+        { label: 'GitHub Presence', value: 0, tone: 'red' },
+        { label: 'Social Media', value: 0, tone: 'red' },
+        { label: 'Community Channels', value: 0, tone: 'red' },
+        { label: 'Blog / Content', value: 8, tone: 'red' },
+        { label: 'Customer Stories', value: 5, tone: 'red' },
+        { label: 'Support Access', value: 15, tone: 'red' },
+      ],
+      recommendations: [
+        'Create and maintain product accounts on X, LinkedIn, and GitHub',
+        'Publish a launch architecture blog that explains confidential development design',
+        'Open a private early-access community channel for direct product feedback',
+      ],
+    },
+    {
+      id: 'section-education',
+      number: '04',
+      title: 'Developer Education',
+      subtitle: 'High-concept category with limited tutorial and media support',
+      findings: [
+        `Origin introduces concepts many developers have not used directly: confidential computing, TEEs, and attestation-backed AI workflows.`,
+        `Current materials explain mechanics but do less to teach practical why-this-matters reasoning across real developer scenarios and threat models.`,
+        `Tutorial coverage is sparse, with minimal scenario-based guides and no substantial public video walkthroughs despite a visually rich product flow.`,
+        `Onboarding design appears promising from documented screenshots and workflow sequence, but invite-only access limits experiential learning and community-shared tutorials.`,
+      ],
+      evidence: [
+        {
+          kind: 'gap',
+          title: 'Conceptual education does not yet match product novelty',
+          body: [
+            `Category-creation products require plain-language teaching and concrete examples. The current docs are strong on architecture detail but lighter on practical conceptual onboarding.`,
+          ],
+        },
+        {
+          kind: 'gap',
+          title: 'Tutorial and video ecosystem is mostly absent at launch',
+          body: [
+            `There are few end-to-end use-case guides and no clear walkthrough media path for users who need to see full workflow execution before applying for access.`,
+          ],
+        },
+        {
+          kind: 'opportunity',
+          title: 'A strong educational layer could accelerate category adoption quickly',
+          body: [
+            `Focused explainers and industry-specific examples can convert abstract security claims into concrete developer and compliance value propositions.`,
+          ],
+        },
+      ],
+      breakdownIntro: 'Score breakdown across education sub-dimensions:',
+      breakdown: [
+        { label: 'Conceptual Teaching', value: 35, tone: 'red' },
+        { label: 'Tutorials', value: 0, tone: 'red' },
+        { label: 'Video Content', value: 0, tone: 'red' },
+        { label: 'Blog / Articles', value: 5, tone: 'red' },
+        { label: 'Onboarding Design', value: 60, tone: 'amber' },
+        { label: 'Use Case Guides', value: 0, tone: 'red' },
+        { label: 'Security Education', value: 45, tone: 'amber' },
+      ],
+      recommendations: [
+        'Publish a foundational confidential-computing explainer for developers',
+        'Create a short end-to-end product walkthrough video',
+        'Ship regulated-industry guides for fintech, healthcare, and government workflows',
+      ],
+    },
+  ],
+  footerNote:
+    "Launch-day review for ORGN and OLLM based on publicly available surfaces. Security architecture ambition is unusually strong, while community and educational infrastructure are still early. Pillar scores reflect launch state; overall narrative assessment in source material was 51, while computed score in this review system is derived from mean pillar average.",
+};
+
 export const reviewDataBySlug: Record<string, ReviewExperienceProps> = {
   'docsalot-in-review': docsalotReview,
   'scalekit-in-review': scalekitReview,
   'confident-ai-in-review': confidentAiReview,
   'ozigi-in-review': ozigiReview,
+  'orgn-in-review': orgnReview,
 };
 
 export function getOverallScore(review: ReviewExperienceProps): number {
