@@ -19,8 +19,7 @@ const { series } = Astro.props;
 
 const allArticles = await getCollection('articles');
 const articles = allArticles
-  .filter((article) => article.data.series?.id === series.id)
-  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
+  .filter((article) => article.data.series?.id === series.id);
 
 const meta = {
   title: `${series.data.title} Series`,
