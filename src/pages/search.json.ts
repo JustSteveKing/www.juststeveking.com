@@ -41,6 +41,12 @@ export async function GET() {
     // Static pages
     { title: 'Projects', description: 'Curated list of projects and applications.', href: '/projects', category: 'Page' },
     { title: 'Start Here', description: 'Practical entry point for new visitors.', href: '/start-here', category: 'Page' },
+    {
+      title: 'Career Framework',
+      description: 'Engineering career progression framework with IC and manager tracks.',
+      href: '/career-framework',
+      category: 'Page',
+    },
     { title: 'Work With Me', description: 'Professional services and coaching.', href: '/work-with-me', category: 'Page' },
     { title: 'About', description: 'A little about who I am.', href: '/about', category: 'Page' },
     { title: 'Uses', description: 'Hardware and software I use.', href: '/uses', category: 'Page' },

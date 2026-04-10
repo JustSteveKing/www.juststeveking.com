@@ -11,6 +11,7 @@ export const mainNav: NavItem[] = [
     href: '/articles',
     items: [
       { label: 'Articles', href: '/articles' },
+      { label: 'Career Framework', href: '/career-framework' },
       { label: 'API Guides', href: '/api-guides' },
       { label: 'Videos', href: '/videos' },
       { label: 'Talks', href: '/talks' },
@@ -55,6 +56,7 @@ export const footerNav: NavGroup[] = [
   {
     label: 'Resources',
     items: [
+      { label: 'Career Framework', href: '/career-framework' },
       { label: 'API Guides', href: '/api-guides' },
       { label: 'RSS Feed', href: '/rss.xml' },
     ],

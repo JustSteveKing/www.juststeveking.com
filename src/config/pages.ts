@@ -101,3 +101,9 @@ export const newsletter: PageMeta = {
   description: 'Subscribe for articles, tips, and updates delivered straight to your inbox.',
   ogImage: '/og/pages/newsletter.webp',
 };
+
+export const careerFramework: PageMeta = {
+  title: 'Engineering Career Framework',
+  description: "A clear, honest guide to every level in our engineering organisation - what's expected, what good looks like, and how to think about your progression.",
+  ogImage: '/og/pages/careerframework.webp',
+};

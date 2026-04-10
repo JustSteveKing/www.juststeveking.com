@@ -1,0 +1,349 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { Container, Section, Heading, Card } from '@/components';
+import { careerFramework } from '@/config/pages';
+import { levels, icLevels, managerLevels } from '@/data/career-framework';
+import LevelCard from '@/components/career/LevelCard.astro';
+import PathwayDiagram from '@/components/career/PathwayDiagram.astro';
+---
+
+<Layout meta={careerFramework}>
+	<div id="top"></div>
+	<Section class="relative border-b border-stone-800/60 bg-stone-950/60">
+		<div data-hero-glow class="hero-glow pointer-events-none absolute inset-x-0 -top-24 mx-auto h-64 w-208 rounded-full bg-linear-to-r from-blue-500/20 via-cyan-400/10 to-violet-500/20 blur-3xl"></div>
+		<Container>
+			<div class="relative max-w-4xl rounded-2xl border border-stone-800/80 bg-linear-to-b from-stone-900/70 to-stone-900/20 p-6 shadow-[0_16px_80px_-40px_rgba(59,130,246,0.35)] sm:p-8">
+				<p class="font-mono text-xs font-semibold uppercase tracking-[0.12em] text-stone-500">Engineering</p>
+				<Heading level={1} class="mt-4 mb-4 text-4xl sm:text-5xl">
+					<span class="bg-linear-to-r from-stone-100 via-blue-100 to-violet-200 bg-clip-text text-transparent">Career Framework</span>
+				</Heading>
+				<p class="max-w-3xl text-lg leading-relaxed text-stone-400">
+					A clear, honest guide to every level in the engineering organisation. What is expected at each level,
+					what good looks like, and how to think about your own progression. No vague language, no moving
+					goalposts.
+				</p>
+
+			</div>
+		</Container>
+	</Section>
+
+	<Section class="border-b border-stone-800/60 bg-stone-950/45 py-3">
+		<Container>
+			<div class="jump-nav-wrap">
+				<div class="inline-flex rounded-full border border-stone-700/80 bg-stone-900/70 px-3 py-1 backdrop-blur">
+					<p class="font-mono text-[0.65rem] uppercase tracking-[0.12em] text-stone-400">Jump to level</p>
+				</div>
+
+				<nav class="jump-nav mt-3 flex flex-wrap gap-2" aria-label="Jump to level">
+					{levels.map((level) => (
+						<a
+							href={`#${level.id}`}
+							data-level-link
+							data-level-id={level.id}
+							data-track={level.track}
+							class:list={[
+								'rounded-md border border-stone-700 bg-stone-900/50 px-3 py-1.5 font-mono text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-stone-400 transition-all duration-200 hover:-translate-y-0.5',
+								level.track === 'ic' && 'hover:border-blue-500 hover:bg-blue-500/10 hover:text-blue-300',
+								level.track === 'manager' && 'hover:border-violet-500 hover:bg-violet-500/10 hover:text-violet-300',
+							]}
+						>
+							{level.shortTitle}
+						</a>
+					))}
+				</nav>
+			</div>
+		</Container>
+	</Section>
+
+	<Section class="border-b border-stone-800/60">
+		<Container>
+			<div class="fade-up max-w-4xl" style="--fade-delay: 60ms;">
+				<p class="mb-3 inline-flex rounded-full border border-stone-700 bg-stone-900/60 px-3 py-1 font-mono text-[0.7rem] uppercase tracking-[0.08em] text-stone-400">Framework shape</p>
+				<Heading level={2} class="mb-3 text-2xl">Two Paths</Heading>
+				<p class="max-w-3xl text-stone-400 leading-relaxed">
+					There are two distinct career paths in engineering, and it is worth being explicit about that upfront.
+					The Individual Contributor path measures impact at the individual level through technical contributions,
+					code, design and influence that flows from deep expertise. The People Manager path measures impact as a
+					multiplier: how many people you are making more effective, and how that compounds. Neither is more senior
+					than the other.
+				</p>
+
+				<div class="mt-6">
+					<PathwayDiagram />
+				</div>
+			</div>
+		</Container>
+	</Section>
+
+	<Section class="border-b border-stone-800/60">
+		<Container>
+			<div class="fade-up max-w-4xl" style="--fade-delay: 120ms;">
+				<p class="mb-3 inline-flex rounded-full border border-blue-500/40 bg-blue-500/10 px-3 py-1 font-mono text-[0.7rem] uppercase tracking-[0.08em] text-blue-300">Individual contributor</p>
+				<Heading level={2} class="mb-3 text-2xl">Individual Contributor Track</Heading>
+				<p class="max-w-3xl text-stone-400 leading-relaxed">
+					Six levels from early career through to company-wide engineering leadership. SE3 is explicitly valid as a
+					long-term destination. Progression beyond it is optional and depends on what you want, not on the
+					organisation needing everyone to keep climbing.
+				</p>
+
+				<div class="mt-8 rounded-2xl border border-stone-700/75 bg-linear-to-b from-stone-900/42 to-stone-900/24 p-5 shadow-[0_26px_55px_-44px_rgba(56,189,248,0.55)]">
+					<div class="mb-4 flex items-center gap-2 border-b border-stone-700/70 pb-3.5">
+						<span class="h-2.5 w-2.5 rounded-full bg-blue-500"></span>
+						<p class="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-stone-500">SE1 - SE6</p>
+					</div>
+					<div class="space-y-3">
+						{icLevels.map((level, index) => (
+							<LevelCard level={level} index={index} defaultOpen={index === 0} />
+						))}
+					</div>
+				</div>
+			</div>
+		</Container>
+	</Section>
+
+	<Section class="border-b border-stone-800/60">
+		<Container>
+			<div class="fade-up max-w-4xl" style="--fade-delay: 180ms;">
+				<p class="mb-3 inline-flex rounded-full border border-violet-500/40 bg-violet-500/10 px-3 py-1 font-mono text-[0.7rem] uppercase tracking-[0.08em] text-violet-300">People manager</p>
+				<Heading level={2} class="mb-3 text-2xl">People Manager Track</Heading>
+				<p class="max-w-3xl text-stone-400 leading-relaxed">
+					Two levels covering team-level and multi-team leadership. Choosing this path means committing to the
+					multiplier model: your primary measure of success becomes the output, growth and culture of your people,
+					not your individual technical contribution.
+				</p>
+
+				<div class="mt-8 rounded-2xl border border-stone-700/75 bg-linear-to-b from-stone-900/42 to-stone-900/24 p-5 shadow-[0_26px_55px_-44px_rgba(167,139,250,0.55)]">
+					<div class="mb-4 flex items-center gap-2 border-b border-stone-700/70 pb-3.5">
+						<span class="h-2.5 w-2.5 rounded-full bg-violet-500"></span>
+						<p class="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-stone-500">EM - Sr EM</p>
+					</div>
+					<div class="space-y-3">
+						{managerLevels.map((level, index) => (
+							<LevelCard level={level} index={icLevels.length + index} />
+						))}
+					</div>
+				</div>
+			</div>
+		</Container>
+	</Section>
+
+	<Section>
+		<Container>
+			<div class="fade-up max-w-4xl" style="--fade-delay: 240ms;">
+				<p class="mb-3 inline-flex rounded-full border border-stone-700 bg-stone-900/60 px-3 py-1 font-mono text-[0.7rem] uppercase tracking-[0.08em] text-stone-400">Operating principles</p>
+				<Heading level={2} class="mb-3 text-2xl">What Makes This Work</Heading>
+				<p class="max-w-3xl text-stone-400 leading-relaxed">
+					A career framework only works if it is actually used, not just published and forgotten. These are the
+					principles that make the difference between a useful tool and a document nobody reads.
+				</p>
+
+				<div class="mt-8 grid gap-4.5 sm:grid-cols-2">
+					<Card class="group relative overflow-hidden rounded-2xl border-stone-700/75 bg-linear-to-b from-stone-900/46 to-stone-900/24 p-5 shadow-[0_24px_48px_-44px_rgba(56,189,248,0.6)] transition-all duration-200 hover:-translate-y-0.5 hover:border-stone-600/70">
+						<div class="absolute inset-x-0 top-0 h-px bg-linear-to-r from-blue-400/85 to-cyan-400/85"></div>
+						<h3 class="text-sm font-semibold text-stone-100">Honest timelines</h3>
+						<p class="mt-2 text-sm leading-relaxed text-stone-400/95">
+							Vague language like "when you are ready" is not useful. Concrete guidance sets expectations on both
+							sides and creates a basis for real conversations.
+						</p>
+					</Card>
+
+					<Card class="group relative overflow-hidden rounded-2xl border-stone-700/75 bg-linear-to-b from-stone-900/46 to-stone-900/24 p-5 shadow-[0_24px_48px_-44px_rgba(74,222,128,0.55)] transition-all duration-200 hover:-translate-y-0.5 hover:border-stone-600/70">
+						<div class="absolute inset-x-0 top-0 h-px bg-linear-to-r from-emerald-400/85 to-lime-400/85"></div>
+						<h3 class="text-sm font-semibold text-stone-100">SE3 is a destination</h3>
+						<p class="mt-2 text-sm leading-relaxed text-stone-400/95">
+							Not everyone needs or wants to progress beyond SE3, and that is explicitly valid. Removing implicit
+							pressure to keep climbing makes career conversations more honest.
+						</p>
+					</Card>
+
+					<Card class="group relative overflow-hidden rounded-2xl border-stone-700/75 bg-linear-to-b from-stone-900/46 to-stone-900/24 p-5 shadow-[0_24px_48px_-44px_rgba(59,130,246,0.6)] transition-all duration-200 hover:-translate-y-0.5 hover:border-stone-600/70">
+						<div class="absolute inset-x-0 top-0 h-px bg-linear-to-r from-sky-400/85 to-blue-500/85"></div>
+						<h3 class="text-sm font-semibold text-stone-100">Different shapes are real</h3>
+						<p class="mt-2 text-sm leading-relaxed text-stone-400/95">
+							SE4 especially has multiple valid profiles. A framework that only recognises one archetype of senior
+							engineer systematically fails a large portion of its senior people.
+						</p>
+					</Card>
+
+					<Card class="group relative overflow-hidden rounded-2xl border-stone-700/75 bg-linear-to-b from-stone-900/46 to-stone-900/24 p-5 shadow-[0_24px_48px_-44px_rgba(167,139,250,0.62)] transition-all duration-200 hover:-translate-y-0.5 hover:border-stone-600/70">
+						<div class="absolute inset-x-0 top-0 h-px bg-linear-to-r from-violet-400/85 to-fuchsia-400/85"></div>
+						<h3 class="text-sm font-semibold text-stone-100">Used in both directions</h3>
+						<p class="mt-2 text-sm leading-relaxed text-stone-400/95">
+							It is a tool for engineers to understand what is expected of them, and equally a tool for managers to
+							have calibrated, evidence-based conversations about performance and progression.
+						</p>
+					</Card>
+				</div>
+			</div>
+		</Container>
+	</Section>
+
+	<button
+		type="button"
+		id="back-to-top"
+		class="pointer-events-none fixed right-5 bottom-5 z-30 inline-flex h-11 w-11 translate-y-2 items-center justify-center rounded-full border border-stone-700 bg-stone-900/90 text-stone-200 opacity-0 shadow-[0_20px_40px_-30px_rgba(0,0,0,0.9)] backdrop-blur transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-400/70 hover:text-blue-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+		aria-label="Back to top"
+	>
+		<span aria-hidden="true" class="text-lg leading-none">↑</span>
+	</button>
+
+	<style>
+		.jump-nav-wrap {
+			position: sticky;
+			top: 0.75rem;
+			z-index: 20;
+		}
+
+		.jump-nav {
+			position: sticky;
+			top: 2.6rem;
+			z-index: 21;
+		}
+
+		.jump-nav a[data-active='true'] {
+			transform: translateY(-1px);
+		}
+
+		.jump-nav a[data-track='ic'][data-active='true'] {
+			border-color: color-mix(in oklab, var(--color-blue-400) 60%, transparent);
+			background-color: color-mix(in oklab, var(--color-blue-500) 16%, transparent);
+			color: var(--color-blue-200);
+		}
+
+		.jump-nav a[data-track='manager'][data-active='true'] {
+			border-color: color-mix(in oklab, var(--color-violet-400) 60%, transparent);
+			background-color: color-mix(in oklab, var(--color-violet-500) 16%, transparent);
+			color: var(--color-violet-200);
+		}
+
+		@media (prefers-reduced-motion: no-preference) {
+			.hero-glow {
+				animation: glow-drift 11s ease-in-out infinite alternate;
+			}
+
+			.fade-up {
+				animation: fade-up 0.5s ease-out both;
+				animation-delay: var(--fade-delay, 0ms);
+			}
+
+			@keyframes glow-drift {
+				from {
+					transform: translate3d(-1.5%, 0, 0) scale(1);
+					opacity: 0.75;
+				}
+				to {
+					transform: translate3d(1.5%, 0, 0) scale(1.04);
+					opacity: 1;
+				}
+			}
+
+			@keyframes fade-up {
+				from {
+					opacity: 0;
+					transform: translateY(10px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+		}
+	</style>
+
+	<script is:inline>
+		const levelLinks = Array.from(document.querySelectorAll('[data-level-link]'));
+		const levelSections = Array.from(document.querySelectorAll('details[id]'));
+		const backToTopButton = document.getElementById('back-to-top');
+		const heroGlow = document.querySelector('[data-hero-glow]');
+
+		if (levelLinks.length && levelSections.length && 'IntersectionObserver' in window) {
+			const byId = new Map(levelLinks.map((el) => [el.getAttribute('data-level-id'), el]));
+
+			const setActive = (id) => {
+				for (const link of levelLinks) {
+					link.setAttribute('data-active', String(link.getAttribute('data-level-id') === id));
+				}
+			};
+
+			const observer = new IntersectionObserver(
+				(entries) => {
+					const visible = entries
+						.filter((entry) => entry.isIntersecting)
+						.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+					if (visible[0]) {
+						setActive(visible[0].target.id);
+					}
+				},
+				{
+					rootMargin: '-20% 0px -65% 0px',
+					threshold: [0.1, 0.25, 0.5],
+				},
+			);
+
+			for (const section of levelSections) {
+				observer.observe(section);
+			}
+
+			const firstId = levelSections[0]?.id;
+			if (firstId && byId.has(firstId)) {
+				setActive(firstId);
+			}
+		}
+
+		if (backToTopButton) {
+			const updateBackToTop = () => {
+				const show = window.scrollY > 700;
+				backToTopButton.classList.toggle('opacity-0', !show);
+				backToTopButton.classList.toggle('translate-y-2', !show);
+				backToTopButton.classList.toggle('pointer-events-none', !show);
+			};
+
+			window.addEventListener('scroll', updateBackToTop, { passive: true });
+			updateBackToTop();
+
+			backToTopButton.addEventListener('click', () => {
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+			});
+		}
+
+		if (heroGlow) {
+			const canParallax =
+				window.matchMedia('(prefers-reduced-motion: no-preference)').matches &&
+				window.matchMedia('(pointer: fine)').matches &&
+				window.innerWidth >= 1024;
+
+			if (canParallax) {
+				let targetX = 0;
+				let targetY = 0;
+				let currentX = 0;
+				let currentY = 0;
+
+				const tick = () => {
+					currentX += (targetX - currentX) * 0.08;
+					currentY += (targetY - currentY) * 0.08;
+					heroGlow.style.transform = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0)`;
+					requestAnimationFrame(tick);
+				};
+
+				window.addEventListener(
+					'mousemove',
+					(event) => {
+						const x = event.clientX / window.innerWidth - 0.5;
+						const y = event.clientY / window.innerHeight - 0.5;
+						targetX = x * 18;
+						targetY = y * 12;
+					},
+					{ passive: true },
+				);
+
+				window.addEventListener('mouseleave', () => {
+					targetX = 0;
+					targetY = 0;
+				});
+
+				requestAnimationFrame(tick);
+			}
+		}
+	</script>
+</Layout>

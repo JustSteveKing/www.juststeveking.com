@@ -1,0 +1,72 @@
+---
+import { Card } from '@/components';
+import type { Level } from '@/data/career-framework';
+import { clsx } from 'clsx';
+
+interface Props {
+  level: Level;
+  index?: number;
+  defaultOpen?: boolean;
+}
+
+const { level, index = 0, defaultOpen = false } = Astro.props as Props;
+const isAltDensity = index % 2 !== 0;
+const trackColor = level.track === 'ic' ? 'text-blue-400' : 'text-violet-400';
+const dotColor = level.track === 'ic' ? 'bg-blue-500' : 'bg-violet-500';
+const shellGlow = level.track === 'ic' ? 'shadow-[0_22px_52px_-42px_rgba(59,130,246,0.55)]' : 'shadow-[0_22px_52px_-42px_rgba(167,139,250,0.55)]';
+const headerTint = level.track === 'ic' ? 'from-blue-500/10 to-cyan-400/5' : 'from-violet-500/10 to-fuchsia-400/5';
+const bodyTint = isAltDensity ? 'bg-stone-900/20' : 'bg-stone-900/40';
+const impactHeading = level.track === 'ic' ? 'text-blue-300' : 'text-violet-300';
+const impactDot = level.track === 'ic' ? 'bg-blue-400' : 'bg-violet-400';
+const activityHeading = level.track === 'ic' ? 'text-cyan-300' : 'text-fuchsia-300';
+const activityDash = level.track === 'ic' ? 'bg-cyan-400' : 'bg-fuchsia-400';
+---
+
+<details id={level.id} class={clsx('group scroll-mt-8 rounded-2xl', shellGlow)} open={defaultOpen}>
+  <summary class="list-none cursor-pointer rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-950">
+    <Card class={clsx('rounded-2xl border-stone-700/80 bg-linear-to-b px-5 py-4 transition-all duration-200 group-open:border-stone-500/70 group-open:bg-stone-900/70', headerTint)}>
+      <div class="flex items-center justify-between gap-4">
+        <div class="min-w-0">
+          <p class="font-mono text-xs uppercase tracking-[0.08em] text-stone-500">
+            <span class={clsx('inline-block h-2 w-2 rounded-full mr-2 align-middle', dotColor)}></span>
+            <span class={trackColor}>{level.shortTitle}</span>
+          </p>
+          <h3 class="mt-1 text-base font-semibold text-stone-100/95">{level.title}</h3>
+          {level.timeToNext && <p class="mt-1 text-sm text-stone-400/90">{level.timeToNext}</p>}
+        </div>
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-stone-600/80 bg-stone-900/60 text-stone-300/90 shadow-inner transition-transform duration-200 group-open:rotate-45 group-open:border-stone-500 group-open:text-stone-100">+</span>
+      </div>
+    </Card>
+  </summary>
+
+  <Card class={clsx('mt-2 rounded-2xl border-stone-700/70 px-5 py-5', bodyTint)}>
+    <p class="text-sm leading-relaxed text-stone-300/95">{level.summary}</p>
+    {level.note && <p class="mt-2 text-xs leading-relaxed text-stone-500/90">{level.note}</p>}
+
+    <div class="mt-5 grid gap-6 md:grid-cols-2">
+      <div>
+        <h4 class={clsx('text-sm font-semibold', impactHeading)}>Impact expectations</h4>
+        <ul class="mt-2 space-y-2.5 text-sm text-stone-400/95">
+          {level.impact.map((item) => (
+            <li class="flex items-start gap-2">
+              <span class={clsx('mt-2 inline-block h-1.5 w-1.5 rounded-full shadow-[0_0_0_3px_rgba(255,255,255,0.02)]', impactDot)}></span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h4 class={clsx('text-sm font-semibold', activityHeading)}>Common activities</h4>
+        <ul class="mt-2 space-y-2.5 text-sm text-stone-400/95">
+          {level.activities.map((item) => (
+            <li class="flex items-start gap-2">
+              <span class={clsx('mt-[0.72rem] inline-block h-0.5 w-3 rounded-full opacity-85', activityDash)}></span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </Card>
+</details>
