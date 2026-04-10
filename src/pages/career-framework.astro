@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import { Container, Section, Heading, Card } from '@/components';
+import { Container, Section, Heading, Card, Prose } from '@/components';
 import { careerFramework } from '@/config/pages';
 import { levels, icLevels, managerLevels } from '@/data/career-framework';
 import LevelCard from '@/components/career/LevelCard.astro';
@@ -60,13 +60,15 @@ import PathwayDiagram from '@/components/career/PathwayDiagram.astro';
 			<div class="fade-up max-w-4xl" style="--fade-delay: 60ms;">
 				<p class="mb-3 inline-flex rounded-full border border-stone-700 bg-stone-900/60 px-3 py-1 font-mono text-[0.7rem] uppercase tracking-[0.08em] text-stone-400">Framework shape</p>
 				<Heading level={2} class="mb-3 text-2xl">Two Paths</Heading>
-				<p class="max-w-3xl text-stone-400 leading-relaxed">
-					There are two distinct career paths in engineering, and it is worth being explicit about that upfront.
-					The Individual Contributor path measures impact at the individual level through technical contributions,
-					code, design and influence that flows from deep expertise. The People Manager path measures impact as a
-					multiplier: how many people you are making more effective, and how that compounds. Neither is more senior
-					than the other.
-				</p>
+				<Prose class="text-stone-400">
+					<p>
+						There are two distinct career paths in engineering, and it is worth being explicit about that upfront.
+						The Individual Contributor path measures impact at the individual level through technical contributions,
+						code, design and influence that flows from deep expertise. The People Manager path measures impact as a
+						multiplier: how many people you are making more effective, and how that compounds. Neither is more senior
+						than the other.
+					</p>
+				</Prose>
 
 				<div class="mt-6">
 					<PathwayDiagram />
@@ -80,11 +82,13 @@ import PathwayDiagram from '@/components/career/PathwayDiagram.astro';
 			<div class="fade-up max-w-4xl" style="--fade-delay: 120ms;">
 				<p class="mb-3 inline-flex rounded-full border border-blue-500/40 bg-blue-500/10 px-3 py-1 font-mono text-[0.7rem] uppercase tracking-[0.08em] text-blue-300">Individual contributor</p>
 				<Heading level={2} class="mb-3 text-2xl">Individual Contributor Track</Heading>
-				<p class="max-w-3xl text-stone-400 leading-relaxed">
-					Six levels from early career through to company-wide engineering leadership. SE3 is explicitly valid as a
-					long-term destination. Progression beyond it is optional and depends on what you want, not on the
-					organisation needing everyone to keep climbing.
-				</p>
+				<Prose class="text-stone-400">
+					<p>
+						Six levels from early career through to company-wide engineering leadership. SE3 is explicitly valid as a
+						long-term destination. Progression beyond it is optional and depends on what you want, not on the
+						organisation needing everyone to keep climbing.
+					</p>
+				</Prose>
 
 				<div class="mt-8 rounded-2xl border border-stone-700/75 bg-linear-to-b from-stone-900/42 to-stone-900/24 p-5 shadow-[0_26px_55px_-44px_rgba(56,189,248,0.55)]">
 					<div class="mb-4 flex items-center gap-2 border-b border-stone-700/70 pb-3.5">
@@ -106,11 +110,13 @@ import PathwayDiagram from '@/components/career/PathwayDiagram.astro';
 			<div class="fade-up max-w-4xl" style="--fade-delay: 180ms;">
 				<p class="mb-3 inline-flex rounded-full border border-violet-500/40 bg-violet-500/10 px-3 py-1 font-mono text-[0.7rem] uppercase tracking-[0.08em] text-violet-300">People manager</p>
 				<Heading level={2} class="mb-3 text-2xl">People Manager Track</Heading>
-				<p class="max-w-3xl text-stone-400 leading-relaxed">
-					Two levels covering team-level and multi-team leadership. Choosing this path means committing to the
-					multiplier model: your primary measure of success becomes the output, growth and culture of your people,
-					not your individual technical contribution.
-				</p>
+				<Prose class="text-stone-400">
+					<p>
+						Two levels covering team-level and multi-team leadership. Choosing this path means committing to the
+						multiplier model: your primary measure of success becomes the output, growth and culture of your people,
+						not your individual technical contribution.
+					</p>
+				</Prose>
 
 				<div class="mt-8 rounded-2xl border border-stone-700/75 bg-linear-to-b from-stone-900/42 to-stone-900/24 p-5 shadow-[0_26px_55px_-44px_rgba(167,139,250,0.55)]">
 					<div class="mb-4 flex items-center gap-2 border-b border-stone-700/70 pb-3.5">
@@ -132,10 +138,12 @@ import PathwayDiagram from '@/components/career/PathwayDiagram.astro';
 			<div class="fade-up max-w-4xl" style="--fade-delay: 240ms;">
 				<p class="mb-3 inline-flex rounded-full border border-stone-700 bg-stone-900/60 px-3 py-1 font-mono text-[0.7rem] uppercase tracking-[0.08em] text-stone-400">Operating principles</p>
 				<Heading level={2} class="mb-3 text-2xl">What Makes This Work</Heading>
-				<p class="max-w-3xl text-stone-400 leading-relaxed">
-					A career framework only works if it is actually used, not just published and forgotten. These are the
-					principles that make the difference between a useful tool and a document nobody reads.
-				</p>
+				<Prose class="text-stone-400">
+					<p>
+						A career framework only works if it is actually used, not just published and forgotten. These are the
+						principles that make the difference between a useful tool and a document nobody reads.
+					</p>
+				</Prose>
 
 				<div class="mt-8 grid gap-4.5 sm:grid-cols-2">
 					<Card class="group relative overflow-hidden rounded-2xl border-stone-700/75 bg-linear-to-b from-stone-900/46 to-stone-900/24 p-5 shadow-[0_24px_48px_-44px_rgba(56,189,248,0.6)] transition-all duration-200 hover:-translate-y-0.5 hover:border-stone-600/70">
