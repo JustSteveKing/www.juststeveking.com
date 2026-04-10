@@ -29,7 +29,7 @@ const meta = {
 ---
 
 <Layout meta={meta}>
-  <Hero title={series.data.title} description={series.data.description} />
+  <Hero title={series.data.title} description={series.data.description || meta.description} />
 
   <Section class="py-12">
     <Container>
