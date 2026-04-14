@@ -69,7 +69,5 @@ export const footerNav: NavGroup[] = [
   },
 ];
 
-/**
- * Breadcrumb root — used as the first crumb on every page.
- */
+/** Breadcrumb root — used as the first crumb on every page. */
 export const homeCrumb: NavItem = { label: 'Home', href: '/' };
