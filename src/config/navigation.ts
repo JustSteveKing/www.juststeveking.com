@@ -1,9 +1,5 @@
 import type { NavGroup, NavItem } from '@/types';
 
-/**
- * Primary navigation — rendered in the site header.
- * Keep this short; anything secondary belongs in footerNav.
- */
 export const mainNav: NavItem[] = [
   { label: 'Start Here', href: '/start-here', variant: 'highlight' },
   {
