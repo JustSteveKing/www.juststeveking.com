@@ -4,138 +4,162 @@ import { getCollection } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import { siteConfig } from '@/config';
 import {
-  Avatar,
   Badge,
   Button,
   Card,
   Container,
+  ConversionPanel,
   Heading,
   Link,
   Section,
   Testimonial,
 } from '@/components';
 import { home } from '@/config/pages';
-import { tracks } from '@/config/tracks';
 
 const allArticles: CollectionEntry<'articles'>[] = await getCollection('articles');
-const allTalks: CollectionEntry<'talks'>[] = await getCollection('talks');
-const allPackages: CollectionEntry<'packages'>[] = await getCollection('packages');
 const allTestimonials: CollectionEntry<'testimonials'>[] = await getCollection('testimonials');
 
 const publishedArticles = allArticles
   .filter((article) => !article.data.draft)
   .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
 
-const recentArticles = publishedArticles.slice(0, 3);
+const featuredTestimonials = allTestimonials.slice(0, 4);
 
-const editorPicks = publishedArticles
-  .filter((article) => {
-    const haystack = [
-      article.data.category,
-      article.data.title,
-      article.data.description,
-      ...(article.data.tags ?? []),
-    ]
-      .join(' ')
-      .toLowerCase();
-
-    return (
-      article.data.featured ||
-      ['api', 'laravel', 'php', 'architecture'].some((term) => haystack.includes(term))
-    );
-  })
-  .slice(0, 3);
-
-const curatedArticles = editorPicks.length > 0 ? editorPicks : recentArticles;
-
-const featuredTalk = [...allTalks].sort(
-  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
-)[0];
-
-const featuredPackage = [...allPackages].sort((a, b) => {
-  const starDelta = (b.data.stars ?? 0) - (a.data.stars ?? 0);
-
-  if (starDelta !== 0) {
-    return starDelta;
-  }
-
-  return (b.data.monthlyDownloads ?? b.data.downloads ?? 0) - (a.data.monthlyDownloads ?? a.data.downloads ?? 0);
-})[0];
-
-const featuredTestimonials = allTestimonials.slice(0, 6);
-
-const stats = [
+const proofStats = [
+  {
+    value: '15+',
+    label: 'years solving messy software problems',
+    detail: 'From frontline systems thinking to leading engineering teams under real delivery pressure.',
+  },
   {
     value: '50K+',
-    label: 'developers read this site each month',
-    detail: 'Practical writing for teams building with PHP, Laravel, and APIs.',
+    label: 'developers reached through articles and technical education',
+    detail: 'Authority built on practical writing, talks, and hands-on delivery work.',
   },
   {
     value: '30+',
-    label: 'talks delivered across meetups and conferences',
-    detail: 'From API design workshops to architectural deep dives.',
-  },
-  {
-    value: '15+',
-    label: 'years building and leading software teams',
-    detail: 'Hands-on experience spanning product delivery, enablement, and mentoring.',
+    label: 'talks and workshops delivered internationally',
+    detail: 'Helping teams make better API, architecture, and enablement decisions.',
   },
 ];
 
-const audiencePaths = [
+const painPoints = [
   {
-    eyebrow: 'Here to learn?',
-    title: 'Start with curated tracks instead of guessing what to read first.',
+    title: 'You are firefighting instead of building',
     description:
-      'I have guided paths for backend engineers, platform leads, and CTOs working on API design, Laravel architecture, and team enablement.',
-    href: '/start-here',
-    cta: 'Explore the learning tracks',
+      'Latency spikes, brittle integrations, and unclear ownership keep dragging engineers back into incident mode.',
   },
   {
-    eyebrow: 'Here to hire?',
-    title: 'See how I help engineering teams sharpen delivery and architecture.',
+    title: 'Your team does not trust the system',
     description:
-      'I run workshops, coaching sessions, and enablement projects for teams that want cleaner APIs, stronger technical habits, and better engineering decisions.',
-    href: '/work-with-me',
-    cta: 'See how I work with teams',
+      'Every release feels risky because API behaviour is inconsistent, debugging is slow, and the root causes stay murky.',
+  },
+  {
+    title: 'The rewrite feels bigger than the fix',
+    description:
+      'You know the platform needs attention, but replacing everything would slow delivery even more.',
   },
 ];
 
-const pillars = [
+const framework = [
   {
-    title: 'Writing',
+    step: '01',
+    title: 'Diagnose',
     description:
-      'Clear, practical articles on PHP, Laravel, API design, and software architecture for developers who want to level up without the fluff.',
-    proof: curatedArticles[0]
-      ? `Editor’s pick: ${curatedArticles[0].data.title}`
-      : 'Fresh essays and walkthroughs every month.',
+      'Map the hotspots, instrumentation gaps, and reliability failures that are actually costing you time.',
+  },
+  {
+    step: '02',
+    title: 'Stabilise',
+    description:
+      'Fix the riskiest endpoints, contracts, and operational bottlenecks first so the team can breathe again.',
+  },
+  {
+    step: '03',
+    title: 'Scale',
+    description:
+      'Leave behind patterns, guardrails, and decision-making habits the team can keep using without me in the room.',
+  },
+];
+
+const services = [
+  {
+    title: 'API Audit',
+    description:
+      'A focused investigation into the performance, reliability, and design issues slowing your team down.',
+    outcome: 'You leave with a clear action plan, prioritised fixes, and a faster route to stability.',
+    audience: 'Best for teams who know something is wrong but need a precise diagnosis before committing effort.',
+    href: '/services#api-audit',
+  },
+  {
+    title: 'Performance & Reliability Fixes',
+    description:
+      'Hands-on work to remove bottlenecks, reduce avoidable incidents, and make delivery feel calmer.',
+    outcome: 'You get meaningful improvements without a costly full rewrite or months of vague discovery.',
+    audience: 'Best for SaaS teams that need execution, not another slide deck.',
+    href: '/services#fix-and-optimisation',
+  },
+  {
+    title: 'Ongoing Advisory',
+    description:
+      'Strategic technical support for leaders and senior engineers making difficult API and architecture decisions.',
+    outcome: 'You get sharper technical calls, stronger standards, and a trusted external perspective.',
+    audience: 'Best for teams navigating growth, ownership changes, or persistent delivery friction.',
+    href: '/services#ongoing-advisory',
+  },
+];
+
+function contentBucket(article: CollectionEntry<'articles'>) {
+  const haystack = [
+    article.data.title,
+    article.data.description,
+    article.data.category,
+    ...(article.data.tags ?? []),
+  ]
+    .join(' ')
+    .toLowerCase();
+
+  if (['framework', 'fix', 'stability', 'performance', 'debug', 'diagnos', 'audit', 'reliability'].some((term) => haystack.includes(term))) {
+    return 'solution';
+  }
+
+  if (['opinion', 'broken', 'leadership', 'culture', 'expectations', 'why', 'lessons', 'ai'].some((term) => haystack.includes(term))) {
+    return 'opinion';
+  }
+
+  return 'problem';
+}
+
+function pickBucket(bucket: 'problem' | 'opinion' | 'solution') {
+  return publishedArticles.find((article) => contentBucket(article) === bucket) ?? publishedArticles[0];
+}
+
+const contentTracks = [
+  {
+    title: 'Problem-led',
+    description: 'Discovery content that helps teams name the bottleneck before they start searching for a fix.',
+    proof: 'Built for SEO, discovery, and problem awareness.',
     href: '/articles',
-    cta: 'Browse articles',
+    article: pickBucket('problem'),
   },
   {
-    title: 'Speaking',
-    description:
-      'Conference talks and workshops for teams that want actionable ideas on APIs, developer tooling, and modern Laravel architecture.',
-    proof: featuredTalk
-      ? `Recent session: ${featuredTalk.data.title}`
-      : '30+ talks delivered internationally.',
-    href: '/talks',
-    cta: 'View talks',
+    title: 'Opinion-led',
+    description: 'Clear points of view on delivery, architecture, and engineering habits that build trust fast.',
+    proof: 'Built for authority, differentiation, and trust.',
+    href: '/articles',
+    article: pickBucket('opinion'),
   },
   {
-    title: 'Open Source',
-    description:
-      'Libraries, experiments, and standards work shaped by real-world PHP teams and a strong bias toward maintainable systems.',
-    proof: featuredPackage
-      ? `Most-starred package: ${featuredPackage.data.name}${featuredPackage.data.stars ? ` • ${featuredPackage.data.stars.toLocaleString()} stars` : ''}`
-      : 'Packages used across the PHP ecosystem.',
-    href: '/packages',
-    cta: 'Explore packages',
+    title: 'Solution-led',
+    description: 'Practical breakdowns of how I diagnose, stabilise, and improve API systems without drama.',
+    proof: 'Built for conversion and commercial intent.',
+    href: '/articles',
+    article: pickBucket('solution'),
   },
 ];
 
 function formatDate(date: Date) {
-  return new Date(date).toLocaleDateString('en-US', {
+  return new Date(date).toLocaleDateString('en-GB', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
@@ -144,58 +168,133 @@ function formatDate(date: Date) {
 ---
 
 <Layout meta={home}>
-
-  <Section class="border-b border-stone-800/60">
+  <Section variant="hero" class="border-b border-white/10">
     <Container>
-      <div class="max-w-4xl">
-        <div class="mb-8 flex items-start gap-5">
-          {siteConfig.author.avatar && (
-            <Avatar
-              src={siteConfig.author.avatar}
-              alt={siteConfig.author.name}
-              size="2xl"
-            />
-          )}
-          <div class="pt-1">
-            <div class="mb-2 flex flex-wrap items-center gap-2">
-              <Badge variant="primary" size="sm">PHP-FIG Core Committee</Badge>
-              <Badge variant="secondary" size="sm">Technical Director</Badge>
-            </div>
-            <p class="text-sm text-stone-500">Steve McDougall · Wales, UK</p>
+      <div class="grid gap-10 xl:grid-cols-[1.1fr_0.9fr] xl:items-center">
+        <div class="max-w-3xl">
+          <div class="mb-5 flex flex-wrap items-center gap-3">
+            <Badge variant="primary" size="sm">For SaaS engineering teams</Badge>
+            <Badge variant="secondary" size="sm">API stability and delivery confidence</Badge>
+          </div>
+
+          <p class="eyebrow mb-5">API stability for SaaS teams</p>
+          <Heading level={1} class="mb-5 max-w-4xl text-balance">
+            I help SaaS teams fix slow, unreliable APIs without rewriting everything.
+          </Heading>
+          <p class="mb-6 lede text-pretty">
+            Improve performance, reduce incidents, and ship faster with a practical approach to API diagnosis, stabilisation, and technical decision-making.
+          </p>
+          <p class="mb-8 max-w-3xl text-base leading-8 text-stone-400">
+            This site used to lead with what I know. It now leads with the expensive problems I help teams solve: unstable APIs, risky releases, slow debugging, and delivery systems that create more noise than momentum.
+          </p>
+
+          <div class="mb-8 flex flex-wrap gap-3">
+            <Button href="/services" variant="primary" size="lg">Fix your API</Button>
+            <Button href="/contact" variant="outline" size="lg">Book a call</Button>
+            <Button href="/resources" variant="ghost" size="lg">Get the checklist</Button>
+          </div>
+
+          <div class="flex flex-wrap gap-3 text-sm text-stone-400">
+            <span class="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">API audits</span>
+            <span class="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">Reliability fixes</span>
+            <span class="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">Advisory for senior teams</span>
           </div>
         </div>
 
-        <Heading level={1} class="mb-4 max-w-3xl">
-          Build APIs your team can trust.
+        <div class="surface-feature glow-ring p-6 md:p-8">
+          <div class="mb-6 flex items-center gap-4">
+            {siteConfig.author.avatar && (
+              <img
+                src={siteConfig.author.avatar}
+                alt={siteConfig.author.name}
+                class="h-16 w-16 rounded-2xl border border-white/10 object-cover"
+              />
+            )}
+            <div>
+              <p class="text-lg font-semibold text-stone-100">{siteConfig.author.name}</p>
+              <p class="text-sm text-stone-400">Technical director, educator, and API problem-solver</p>
+            </div>
+          </div>
+
+          <div class="space-y-5">
+            <div>
+              <p class="kicker mb-2">What I help fix</p>
+              <ul class="space-y-3 text-sm leading-7 text-stone-300">
+                <li class="flex gap-3"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-300"></span><span>Slow endpoints and unclear performance bottlenecks</span></li>
+                <li class="flex gap-3"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-300"></span><span>Brittle integrations and unreliable API behaviour</span></li>
+                <li class="flex gap-3"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-300"></span><span>Teams stuck between firefighting, rewrites, and guesswork</span></li>
+              </ul>
+            </div>
+
+            <div class="surface-muted rounded-[calc(var(--radius-xl)-0.35rem)] p-5">
+              <p class="kicker mb-2">Why teams trust me</p>
+              <p class="text-sm leading-7 text-stone-300">
+                15+ years in software, 50K+ developers reached through teaching, and practical experience helping engineering organisations improve systems, standards, and delivery habits.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="band" class="border-b border-white/10 py-10">
+    <Container>
+      <dl class="grid gap-5 lg:grid-cols-3">
+        {proofStats.map(({ value, label, detail }) => (
+          <div class="surface-card p-6">
+            <dd class="mb-2 text-4xl font-semibold tracking-[-0.04em] text-stone-50">{value}</dd>
+            <dt class="mb-2 text-sm font-medium text-stone-200">{label}</dt>
+            <p class="text-sm leading-7 text-stone-400">{detail}</p>
+          </div>
+        ))}
+      </dl>
+    </Container>
+  </Section>
+
+  <Section class="border-b border-white/10">
+    <Container>
+      <div class="mb-10 max-w-3xl">
+        <p class="eyebrow mb-4">Problem awareness</p>
+        <Heading level={2} class="mb-4 text-balance">
+          Your API is probably slowing the team down in more ways than one.
         </Heading>
-
-        <p class="mb-6 max-w-3xl text-xl font-medium text-stone-300">
-          I help engineering teams design better APIs, improve Laravel architecture, and grow developers who ship with confidence.
+        <p class="lede text-stone-400">
+          When the platform is unreliable, the damage is not just technical. Engineers lose confidence, product work slows down, and delivery becomes dominated by caution and context switching.
         </p>
+      </div>
 
-        <p class="mb-8 max-w-3xl text-lg leading-relaxed text-stone-400">
-          Through in-depth writing, conference talks, open source, and hands-on team engagements, I turn hard-won lessons into practical guidance you can actually use.
-        </p>
+      <div class="grid gap-5 lg:grid-cols-3">
+        {painPoints.map((item) => (
+          <Card variant="muted" class="h-full">
+            <Heading level={3} class="mb-3 text-stone-100">{item.title}</Heading>
+            <p class="text-sm leading-7 text-stone-400">{item.description}</p>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
 
-        <div class="mb-10 flex flex-wrap gap-3">
-          <Button href="/start-here" variant="primary" size="lg">Start Here</Button>
-          <Button href="/work-with-me" variant="outline" size="lg">Work With Me</Button>
-          <Button href="/newsletter" variant="ghost" size="lg">Join Code &amp; Chill</Button>
+  <Section variant="band" class="border-b border-white/10">
+    <Container>
+      <div class="grid gap-10 xl:grid-cols-[0.8fr_1.2fr] xl:items-start">
+        <div class="max-w-xl">
+          <p class="eyebrow mb-4">The framework</p>
+          <Heading level={2} class="mb-4 text-balance">
+            I use an API Stability Framework built around diagnose, stabilise, and scale.
+          </Heading>
+          <p class="mb-6 text-base leading-8 text-stone-400">
+            The goal is not consulting theatre. It is to get clear on what is actually broken, fix the highest-leverage issues first, and leave the team with better habits than it had before.
+          </p>
+          <Button href="/services" variant="outline">See how the work is structured</Button>
         </div>
 
-        <div class="grid gap-4 lg:grid-cols-2">
-          {audiencePaths.map((path) => (
-            <Card class="flex h-full flex-col border-stone-800 bg-stone-900/30">
-              <p class="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-blue-300">
-                {path.eyebrow}
-              </p>
-              <Heading level={3} class="mb-3 text-xl">{path.title}</Heading>
-              <p class="mb-6 flex-1 text-sm leading-relaxed text-stone-400">
-                {path.description}
-              </p>
-              <Link href={path.href} underline={false} class="text-sm font-medium text-stone-200">
-                {path.cta} &rarr;
-              </Link>
+        <div class="grid gap-5 md:grid-cols-3">
+          {framework.map((item) => (
+            <Card variant={item.step === '02' ? 'feature' : 'default'} class="h-full">
+              <p class="mb-4 text-sm font-semibold text-blue-200">Step {item.step}</p>
+              <Heading level={4} class="mb-3 text-stone-100">{item.title}</Heading>
+              <p class="text-sm leading-7 text-stone-400">{item.description}</p>
             </Card>
           ))}
         </div>
@@ -203,226 +302,151 @@ function formatDate(date: Date) {
     </Container>
   </Section>
 
-  <Section class="border-b border-stone-800/60 py-10">
+  <Section class="border-b border-white/10">
     <Container>
-      <dl class="grid gap-5 lg:grid-cols-3">
-        {stats.map(({ value, label, detail }) => (
-          <div class="rounded-2xl border border-stone-800 bg-stone-900/20 p-6">
-            <dd class="mb-2 text-3xl font-bold tracking-tight text-stone-100">{value}</dd>
-            <dt class="mb-3 text-sm font-medium text-stone-300">{label}</dt>
-            <p class="text-sm leading-relaxed text-stone-500">{detail}</p>
-          </div>
-        ))}
-      </dl>
-    </Container>
-  </Section>
-
-  <Section aria-label="Start Here" class="border-b border-stone-800/60">
-    <Container>
-      <div class="mb-10 max-w-2xl">
-        <Heading level={2} class="mb-3">Start in the right place.</Heading>
-        <p class="leading-relaxed text-stone-400">
-          If you are new here, use a path that matches the job you are trying to do instead of digging through the archive at random.
+      <div class="mb-10 max-w-3xl">
+        <p class="eyebrow mb-4">Trust and proof</p>
+        <Heading level={2} class="mb-4 text-balance">
+          The trust layer is already here. It just needed to point at outcomes.
+        </Heading>
+        <p class="text-base leading-8 text-stone-400">
+          The writing, talks, and open-source work matter because they are downstream of real delivery work, real systems, and the decisions that teams struggle to make under pressure.
         </p>
       </div>
 
-      <div class="grid gap-5 xl:grid-cols-12">
-        <Card class="group flex h-full flex-col overflow-hidden border-blue-500/20 bg-gradient-to-br from-blue-500/10 via-stone-900/40 to-stone-950 xl:col-span-7 xl:row-span-2">
-          <Badge variant="primary" size="sm" class="mb-4 w-fit">Start Here</Badge>
-          <Heading level={3} class="mb-4 max-w-xl text-2xl">
-            Pick the path that matches your role, then go deeper without the guesswork.
-          </Heading>
-          <p class="mb-8 max-w-2xl flex-1 text-base leading-relaxed text-stone-300">
-            I have already grouped the best material for backend engineers, platform leads, and CTOs who care about APIs, Laravel architecture, and team enablement.
-          </p>
-          <div class="grid gap-4 md:grid-cols-3">
-            {tracks.map((track) => (
-              <div class="rounded-xl border border-stone-800/80 bg-stone-950/40 p-4">
-                <p class="mb-2 text-sm font-semibold text-stone-100">{track.title}</p>
-                <p class="text-sm leading-relaxed text-stone-400">{track.description}</p>
-              </div>
-            ))}
-          </div>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <Button href="/start-here" variant="primary">Explore all tracks</Button>
-            <Button href="/newsletter" variant="outline">Join Code &amp; Chill</Button>
-          </div>
-        </Card>
+      <div class="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+        <div class="space-y-5">
+          <Card variant="feature">
+            <p class="kicker mb-3">Proof without fluff</p>
+            <Heading level={3} class="mb-3 text-stone-50">Evidence from the work behind the writing</Heading>
+            <ul class="space-y-3 text-sm leading-7 text-stone-300">
+              <li class="flex gap-3"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-300"></span><span>Led engineering organisations and education initiatives reaching 50,000+ developers.</span></li>
+              <li class="flex gap-3"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-300"></span><span>Delivered talks and workshops across 30+ events on APIs, architecture, and developer enablement.</span></li>
+              <li class="flex gap-3"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-300"></span><span>Supported teams that needed clearer standards, calmer delivery, and stronger technical direction.</span></li>
+            </ul>
+          </Card>
+          <ConversionPanel
+            compact
+            eyebrow="Decision-ready teams"
+            title="If the problem is already expensive, we should make the next decision easier."
+            description="Start with a focused conversation about what is breaking, what it is costing, and whether an audit or hands-on fix is the right move."
+            primaryHref="/contact"
+            primaryLabel="Book a discovery call"
+            secondaryHref="/about"
+            secondaryLabel="Why clients hire me"
+          />
+        </div>
 
-        {tracks.map((track) => (
-          <Card href="/start-here" class="group flex h-full flex-col xl:col-span-5">
-            <p class="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-blue-300">
-              Track
-            </p>
-            <Heading level={4} class="mb-3">{track.title}</Heading>
-            <p class="mb-5 text-sm leading-relaxed text-stone-400">
-              {track.description}
-            </p>
-            <div class="mb-6 space-y-2 text-sm text-stone-500">
-              {track.items.slice(0, 2).map((item) => (
-                <p>{item.label}</p>
+        {featuredTestimonials.length > 0 && (
+          <div class="min-w-0 overflow-hidden">
+            <div class="flex gap-5 overflow-x-auto overscroll-x-contain px-1 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {featuredTestimonials.map((testimonial) => (
+                <Testimonial
+                  quote={testimonial.data.quote}
+                  name={testimonial.data.author.name}
+                  role={testimonial.data.author.role}
+                  company={testimonial.data.author.company}
+                  avatar={testimonial.data.author.avatar?.src}
+                />
               ))}
             </div>
-            <span class="mt-auto text-sm text-stone-300 transition-colors group-hover:text-white">
-              Explore this path &rarr;
-            </span>
+          </div>
+        )}
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="band" class="border-b border-white/10">
+    <Container>
+      <div class="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div class="max-w-3xl">
+          <p class="eyebrow mb-4">Services</p>
+          <Heading level={2} class="mb-4 text-balance">
+            Three ways to work together, without bloated consulting packages.
+          </Heading>
+          <p class="text-base leading-8 text-stone-400">
+            The offers are intentionally simple: diagnose the problem, fix the right things, or stay involved as a trusted technical advisor.
+          </p>
+        </div>
+        <Button href="/services" variant="outline">View all services</Button>
+      </div>
+
+      <div class="grid gap-5 xl:grid-cols-3">
+        {services.map((service, index) => (
+          <Card variant={index === 1 ? 'feature' : 'default'} href={service.href} class="flex h-full flex-col">
+            <Heading level={3} class="mb-3 text-stone-100">{service.title}</Heading>
+            <p class="mb-5 text-sm leading-7 text-stone-300">{service.description}</p>
+            <p class="mb-5 text-sm leading-7 text-stone-400">{service.outcome}</p>
+            <p class="mt-auto text-xs font-medium uppercase tracking-[0.18em] text-stone-500">{service.audience}</p>
+            <span class="mt-6 text-sm text-blue-200">See details &rarr;</span>
           </Card>
         ))}
-
-        <div class="rounded-2xl border border-stone-800 bg-stone-900/30 p-6 xl:col-span-7">
-          <div class="mb-6 flex items-baseline justify-between gap-4">
-            <Heading level={3}>Editor&rsquo;s Picks</Heading>
-            <Link href="/articles" underline={false} class="text-sm">
-              All articles &rarr;
-            </Link>
-          </div>
-
-          <div class="divide-y divide-stone-800">
-            {curatedArticles.map((article) => (
-              <a
-                href={`/articles/${article.id}`}
-                class="group block py-5 first:pt-0 last:pb-0"
-              >
-                <div class="mb-2 flex flex-wrap items-center gap-2">
-                  <Badge variant="primary" size="xs">{article.data.category}</Badge>
-                  {(article.data.readingTime ?? article.data.minRead) && (
-                    <span class="text-xs text-stone-500">
-                      {article.data.readingTime ?? article.data.minRead} min read
-                    </span>
-                  )}
-                </div>
-                <Heading level={4} class="mb-2 text-base group-hover:text-white">
-                  {article.data.title}
-                </Heading>
-                <p class="mb-3 text-sm leading-relaxed text-stone-400">
-                  {article.data.description}
-                </p>
-                <p class="text-xs text-stone-500">{formatDate(article.data.pubDate)}</p>
-              </a>
-            ))}
-          </div>
-        </div>
-
-        <div class="rounded-2xl border border-stone-800 bg-stone-900/20 p-6 xl:col-span-5">
-          <Badge variant="secondary" size="sm" class="mb-4">Newsletter</Badge>
-          <Heading level={3} class="mb-3">Prefer a slower pace?</Heading>
-          <p class="mb-6 text-sm leading-relaxed text-stone-400">
-            Join 5,000+ developers reading Code &amp; Chill for weekly notes on APIs, architecture, and better technical decisions.
-          </p>
-          <div class="flex flex-wrap gap-3">
-            <Button href="/newsletter" variant="primary">Join the newsletter</Button>
-            <Button href="/articles" variant="ghost">Read the archive</Button>
-          </div>
-        </div>
       </div>
     </Container>
   </Section>
 
-  <Section aria-label="Recent Writing" class="border-b border-stone-800/60">
+  <Section class="border-b border-white/10">
     <Container>
-      <div class="mb-10 flex items-baseline justify-between">
-        <Heading level={2}>Latest Writing</Heading>
-        <Link href="/articles" underline={false} class="text-sm">
-          All articles &rarr;
-        </Link>
+      <div class="mb-10 max-w-3xl">
+        <p class="eyebrow mb-4">Content as a growth engine</p>
+        <Heading level={2} class="mb-4 text-balance">
+          The writing now has jobs to do: attract the right traffic, build trust, and show how I solve the problem.
+        </Heading>
+        <p class="text-base leading-8 text-stone-400">
+          Not every article should just be a thought. Some should help people discover the problem, some should sharpen authority, and some should bridge directly into the solution.
+        </p>
       </div>
 
-      <div class="divide-y divide-stone-800">
-        {recentArticles.map((article) => (
-          <a
-            href={`/articles/${article.id}`}
-            class="group flex flex-col gap-3 py-6 first:pt-0 last:pb-0 transition-opacity hover:opacity-90 sm:flex-row sm:items-start sm:gap-8"
-          >
-            <time
-              datetime={new Date(article.data.pubDate).toISOString()}
-              class="shrink-0 text-xs text-stone-500 sm:w-28 sm:pt-1.5"
-            >
-              {formatDate(article.data.pubDate)}
-            </time>
-            <div class="min-w-0 flex-1">
-              <div class="mb-2 flex flex-wrap items-center gap-2">
-                <Badge variant="primary" size="xs">{article.data.category}</Badge>
-                {(article.data.readingTime ?? article.data.minRead) && (
-                  <span class="text-xs text-stone-500">
-                    {article.data.readingTime ?? article.data.minRead} min read
-                  </span>
-                )}
-              </div>
-              <Heading level={4} class="mb-1.5 text-base group-hover:text-white">
-                {article.data.title}
-              </Heading>
-              <p class="line-clamp-1 text-sm leading-relaxed text-stone-400">
-                {article.data.description}
-              </p>
-            </div>
-          </a>
-        ))}
-      </div>
-    </Container>
-  </Section>
-
-  <Section aria-label="What I Create" class="border-b border-stone-800/60">
-    <Container>
-      <Heading level={2} class="mb-10">What I Create</Heading>
       <div class="grid gap-5 lg:grid-cols-3">
-        {pillars.map(({ title, description, proof, href, cta }) => (
-          <Card href={href} class="group flex flex-col">
-            <Heading level={4} class="mb-2">{title}</Heading>
-            <p class="mb-5 flex-1 text-sm leading-relaxed text-stone-400">
-              {description}
-            </p>
-            <p class="mb-5 text-xs uppercase tracking-[0.2em] text-stone-500">{proof}</p>
-            <span class="text-sm text-stone-300 transition-colors group-hover:text-white">
-              {cta} &rarr;
-            </span>
+        {contentTracks.map((track) => (
+          <Card variant="muted" class="flex h-full flex-col">
+            <p class="kicker mb-3">{track.title}</p>
+            <Heading level={3} class="mb-3 text-stone-100">{track.description}</Heading>
+            <p class="mb-5 text-sm leading-7 text-stone-400">{track.proof}</p>
+            {track.article && (
+              <div class="rounded-[1.25rem] border border-white/10 bg-black/10 p-5">
+                <p class="mb-2 text-xs uppercase tracking-[0.18em] text-stone-500">Example article</p>
+                <a href={`/articles/${track.article.id}`} class="block text-sm font-medium leading-7 text-stone-200 transition-colors hover:text-white">
+                  {track.article.data.title}
+                </a>
+                <p class="mt-2 text-xs text-stone-500">{formatDate(track.article.data.pubDate)}</p>
+              </div>
+            )}
+            <Link href={track.href} underline={false} class="mt-6 text-sm text-blue-200">
+              Explore the content layer &rarr;
+            </Link>
           </Card>
         ))}
       </div>
     </Container>
   </Section>
 
-  {featuredTestimonials.length > 0 && (
-    <Section aria-label="What People Say" class="border-b border-stone-800/60">
-      <Container>
-        <div class="mb-10 max-w-2xl">
-          <Heading level={2} class="mb-3">Trusted by developers and engineering leaders</Heading>
-          <p class="leading-relaxed text-stone-400">
-            The writing is useful because it comes from real delivery work, real teams, and real technical trade-offs.
-          </p>
-        </div>
-        <div class="-mx-4 sm:-mx-6 lg:-mx-8">
-          <div class="flex gap-5 overflow-x-auto px-4 pb-4 sm:px-6 lg:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {featuredTestimonials.map((t) => (
-              <Testimonial
-                quote={t.data.quote}
-                name={t.data.author.name}
-                role={t.data.author.role}
-                company={t.data.author.company}
-                avatar={t.data.author.avatar?.src}
-              />
-            ))}
-          </div>
-        </div>
-      </Container>
-    </Section>
-  )}
-
-  <Section aria-label="Newsletter">
+  <Section>
     <Container>
-      <div class="rounded-2xl border border-stone-800 bg-stone-900/30 p-8 md:p-10">
-        <div class="max-w-2xl">
-          <Badge variant="primary" class="mb-4">Newsletter</Badge>
-          <Heading level={2} class="mb-3">Join 5,000+ developers reading Code &amp; Chill</Heading>
-          <p class="mb-6 leading-relaxed text-stone-400">
-            A weekly deep dive on APIs, Laravel architecture, and the decisions that make software easier to ship and maintain.
-          </p>
-          <div class="flex flex-wrap gap-3">
-            <Button href="/newsletter" variant="primary">Join Code &amp; Chill</Button>
-            <Button href="/rss.xml" variant="outline">Follow via RSS</Button>
+      <div class="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <ConversionPanel
+          eyebrow="Lead capture"
+          title="Get the API Reliability Checklist and turn scattered debugging into a repeatable review."
+          description="Use the resources hub to spot common failure points, tighten API contracts, and give your team a more structured starting point before problems spiral."
+          primaryHref="/resources"
+          primaryLabel="Get the checklist"
+          secondaryHref="/newsletter"
+          secondaryLabel="Join Code & Chill"
+        />
+        <Card variant="muted" class="flex h-full flex-col justify-between">
+          <div>
+            <p class="kicker mb-3">Final CTA</p>
+            <Heading level={3} class="mb-3 text-stone-100">Ready to stop losing time to API instability?</Heading>
+            <p class="text-sm leading-7 text-stone-400">
+              Send a little context on the team, the symptoms, and what good looks like. I will tell you whether an audit, a fix sprint, or ongoing advisory is the right next step.
+            </p>
           </div>
-        </div>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <Button href="/contact" variant="primary">Book a call</Button>
+            <Button href="/services" variant="outline">See the offers</Button>
+          </div>
+        </Card>
       </div>
     </Container>
   </Section>
-
 </Layout>

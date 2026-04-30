@@ -1,23 +1,34 @@
 ---
 import { clsx } from 'clsx';
+import type { HTMLAttributes } from 'astro/types';
 
-interface Props {
+interface Props extends HTMLAttributes<'section'> {
   'aria-label'?: string;
   'aria-labelledby'?: string;
+  variant?: 'default' | 'band' | 'hero';
   class?: string;
 }
 
 const {
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledby,
+  variant = 'default',
   class: className,
+  ...rest
 } = Astro.props as Props;
+
+const variantClasses = {
+  default: 'py-16 sm:py-24',
+  band: 'section-band py-16 sm:py-24',
+  hero: 'section-hero py-20 sm:py-28',
+};
 ---
 
 <section
   aria-label={ariaLabel}
   aria-labelledby={ariaLabelledby}
-  class={clsx('py-16 sm:py-24', className)}
+  class={clsx(variantClasses[variant], className)}
+  {...rest}
 >
   <slot />
 </section>

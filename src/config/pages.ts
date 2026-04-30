@@ -2,13 +2,13 @@ import type { PageMeta } from '@/types';
 
 export const home: PageMeta = {
   title: 'Home',
-  description: 'Practical guidance on APIs, Laravel architecture, and developer growth for engineering teams that want to ship with confidence.',
+  description: 'I help SaaS teams fix slow, unreliable APIs without rewriting everything.',
   ogImage: '/og/pages/home.webp',
 };
 
 export const articles: PageMeta = {
   title: 'Articles',
-  description: 'Long-form writing on PHP, Laravel, API design, and software engineering.',
+  description: 'Problem-led, opinion-led, and solution-led writing on API performance, reliability, and engineering delivery.',
   ogImage: '/og/pages/articles.webp',
 };
 
@@ -50,7 +50,7 @@ export const packages: PageMeta = {
 
 export const projects: PageMeta = {
   title: 'Projects',
-  description: 'A curated list of projects, applications, and tools I have built and led.',
+  description: 'Selected projects that show how I think through systems, APIs, and product delivery.',
   ogImage: '/og/pages/projects.webp',
 };
 
@@ -62,20 +62,38 @@ export const apiGuides: PageMeta = {
 
 export const about: PageMeta = {
   title: 'About',
-  description: 'A little about who I am, what I do, and how I got here.',
+  description: 'Why SaaS teams trust me to diagnose API issues, improve reliability, and sharpen engineering decisions.',
   ogImage: '/og/pages/about.webp',
 };
 
 export const startHere: PageMeta = {
   title: 'Start Here',
-  description: 'A practical entry point for new visitors to discover learning paths and latest updates.',
+  description: 'Start with the best resources for fixing API reliability, Laravel architecture, and engineering delivery bottlenecks.',
   ogImage: '/og/pages/starthere.webp',
 };
 
 export const workWithMe: PageMeta = {
   title: 'Work With Me',
-  description: 'Workshops, coaching, and enablement for engineering teams improving API design, Laravel architecture, and developer growth.',
+  description: 'Compatibility route for services focused on API audits, reliability fixes, and ongoing advisory work.',
   ogImage: '/og/pages/workwithme.webp',
+};
+
+export const services: PageMeta = {
+  title: 'Services',
+  description: 'API audits, performance and reliability fixes, and ongoing advisory for SaaS teams.',
+  ogImage: '/og/pages/workwithme.webp',
+};
+
+export const resources: PageMeta = {
+  title: 'Resources',
+  description: 'Practical checklists, guides, and learning paths for teams improving API stability.',
+  ogImage: '/og/pages/starthere.webp',
+};
+
+export const contact: PageMeta = {
+  title: 'Contact',
+  description: 'Book a discovery call or send context about the API or delivery problem you need help fixing.',
+  ogImage: '/og/pages/about.webp',
 };
 
 export const uses: PageMeta = {

@@ -1,0 +1,129 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import {
+  Badge,
+  Button,
+  Card,
+  Container,
+  ConversionPanel,
+  Heading,
+  Section,
+} from '@/components';
+import { resources as resourcesMeta } from '@/config/pages';
+
+const checklist = [
+  'Map the slowest endpoints before changing code.',
+  'Check retries, timeouts, and third-party dependencies before blaming the application layer.',
+  'Review payload shape, pagination, and caching assumptions.',
+  'Look for unclear API contracts that create avoidable client breakage.',
+  'Triage observability gaps before you try to fix the symptom in production.',
+  'Decide what must be stabilised now versus what can be reworked later.',
+];
+
+const resources = [
+  {
+    title: 'API Reliability Checklist',
+    description:
+      'A practical starting point for teams investigating reliability drift, delivery risk, and repeated integration surprises.',
+    href: '#api-reliability-checklist',
+    cta: 'Read the checklist',
+  },
+  {
+    title: 'Start Here Path',
+    description:
+      'A guided reading path for engineers and leaders who want better API, Laravel, and team habits without trawling the archive.',
+    href: '/start-here',
+    cta: 'Explore the path',
+  },
+  {
+    title: 'Code & Chill',
+    description:
+      'Weekly notes on architecture, API design, and the decisions that make software easier to ship and maintain.',
+    href: '/newsletter',
+    cta: 'Join the newsletter',
+  },
+];
+---
+
+<Layout meta={resourcesMeta}>
+  <Section variant="hero" class="border-b border-white/10">
+    <Container>
+      <div class="max-w-3xl">
+        <div class="mb-5 flex flex-wrap items-center gap-3">
+          <Badge variant="primary">Resources</Badge>
+          <Badge variant="secondary">Lead magnets and practical tools</Badge>
+        </div>
+        <p class="eyebrow mb-4">Owned attention starts here</p>
+        <Heading level={1} class="mb-5 text-balance">
+          Helpful resources for teams fixing API performance and reliability issues.
+        </Heading>
+        <p class="lede">
+          Use the checklist to audit where the drag is coming from, then go deeper with the newsletter, guides, and curated learning paths.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <span class="metric-chip"><strong>Checklist</strong> a practical first pass</span>
+          <span class="metric-chip"><strong>Newsletter</strong> ongoing architecture insight</span>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="border-b border-white/10">
+    <Container>
+      <div class="grid gap-5 lg:grid-cols-3">
+        {resources.map((resource, index) => (
+          <Card variant={index === 0 ? 'feature' : 'default'} href={resource.href} class="flex h-full flex-col">
+            <p class="kicker mb-3">{index === 0 ? 'Lead magnet' : index === 1 ? 'Guided path' : 'Slow-burn trust'}</p>
+            <Heading level={3} class="mb-3 text-stone-100">{resource.title}</Heading>
+            <p class="mb-6 flex-1 text-sm leading-7 text-stone-400">{resource.description}</p>
+            <span class="text-sm text-blue-200">{resource.cta} &rarr;</span>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="api-reliability-checklist" variant="band" class="scroll-mt-24 border-b border-white/10">
+    <Container>
+      <div class="grid gap-10 xl:grid-cols-[0.9fr_1.1fr] xl:items-start">
+        <div class="section-intro">
+          <p class="eyebrow mb-4">Checklist</p>
+          <Heading level={2} class="mb-4 text-balance">
+            API Reliability Checklist
+          </Heading>
+          <p class="text-base leading-8 text-stone-400">
+            A lightweight review for teams that need to slow the firefighting down and figure out what deserves attention first.
+          </p>
+        </div>
+
+        <Card variant="feature" class="surface-grid">
+          <ul class="grid gap-3 md:grid-cols-2 text-sm leading-7 text-stone-200">
+            {checklist.map((item) => (
+              <li class="list-check">
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <Button href="/newsletter" variant="primary">Get more like this</Button>
+            <Button href="/services" variant="outline">Need help applying it?</Button>
+          </div>
+        </Card>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <ConversionPanel
+        eyebrow="Next step"
+        title="Want practical resources and a direct path to help if the checklist confirms the problem?"
+        description="Use the checklist, join Code & Chill for ongoing insights, and book a call if you want help diagnosing or fixing the issue with your team."
+        primaryHref="/newsletter"
+        primaryLabel="Join Code & Chill"
+        secondaryHref="/contact"
+        secondaryLabel="Book a call"
+      />
+    </Container>
+  </Section>
+</Layout>

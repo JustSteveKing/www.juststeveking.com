@@ -20,6 +20,12 @@ const description = meta?.description ?? siteConfig.description;
 const canonical = meta?.canonical ?? new URL(Astro.url.pathname, siteConfig.url).toString();
 const ogImage = meta?.ogImage ?? siteConfig.defaultOgImage;
 const ogImageUrl = ogImage ? new URL(ogImage, siteConfig.url).toString() : undefined;
+const publishedTime = meta?.publishedTime
+  ? new Date(meta.publishedTime).toISOString()
+  : undefined;
+const modifiedTime = meta?.modifiedTime
+  ? new Date(meta.modifiedTime).toISOString()
+  : undefined;
 
 const robotsTokens = [
   meta?.noIndex && 'noindex',
@@ -46,8 +52,8 @@ const robotsTokens = [
   ogImageUrl={ogImageUrl}
   type={meta?.type}
   siteName={siteConfig.title}
-  publishedTime={meta?.publishedTime}
-  modifiedTime={meta?.modifiedTime}
+  publishedTime={publishedTime}
+  modifiedTime={modifiedTime}
 />
 
 <Twitter

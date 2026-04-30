@@ -5,6 +5,7 @@ import Container from './Container.astro';
 interface Props {
   title: string;
   description: string;
+  eyebrow?: string;
   align?: 'left' | 'center';
   class?: string;
 }
@@ -12,6 +13,7 @@ interface Props {
 const {
   title,
   description,
+  eyebrow,
   align = 'left',
   class: className,
 } = Astro.props as Props;
@@ -19,13 +21,18 @@ const {
 const hasCta = Astro.slots.has('cta');
 ---
 
-<section class={clsx('py-16 sm:py-24', className)}>
+<section class={clsx('section-hero border-b border-white/10 py-20 sm:py-28', className)}>
   <Container>
     <div class={clsx('max-w-2xl', align === 'center' && 'mx-auto text-center')}>
-      <h1 class="text-4xl font-bold tracking-tight text-stone-100 sm:text-5xl">
+      {eyebrow && (
+        <p class={clsx('eyebrow mb-5', align === 'center' && 'justify-center before:hidden')}>
+          {eyebrow}
+        </p>
+      )}
+      <h1 class="font-serif text-4xl font-semibold tracking-[-0.03em] text-stone-100 sm:text-5xl">
         {title}
       </h1>
-      <p class="mt-4 text-lg leading-relaxed text-stone-400">
+      <p class="mt-5 lede text-pretty text-stone-300">
         {description}
       </p>
       {hasCta && (

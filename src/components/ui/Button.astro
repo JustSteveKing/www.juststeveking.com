@@ -25,12 +25,12 @@ const {
 } = Astro.props as Props;
 
 const variantClasses: Record<Variant, string> = {
-  default:     'bg-stone-800 text-stone-100 hover:bg-stone-700 border border-stone-700',
-  primary:     'bg-blue-600 text-white hover:bg-blue-500 border border-blue-500',
-  secondary:   'bg-stone-900 text-stone-300 hover:bg-stone-800 border border-stone-700',
-  ghost:       'text-stone-300 hover:bg-stone-800/50 hover:text-stone-100 border border-transparent',
-  outline:     'bg-transparent text-stone-300 hover:bg-stone-800 hover:text-stone-100 border border-stone-600',
-  destructive: 'bg-red-600 text-white hover:bg-red-500 border border-red-500',
+  default:     'border border-white/10 bg-white/[0.05] text-stone-100 hover:bg-white/[0.09]',
+  primary:     'border border-blue-300/35 bg-[linear-gradient(135deg,rgba(59,130,246,0.95),rgba(37,99,235,0.95))] text-white shadow-[0_18px_45px_-22px_rgba(59,130,246,0.95)] hover:border-blue-200/50 hover:brightness-110',
+  secondary:   'border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,39,0.92),rgba(10,14,23,0.96))] text-stone-100 hover:bg-[linear-gradient(180deg,rgba(31,41,55,0.95),rgba(12,18,29,0.98))]',
+  ghost:       'border border-transparent bg-transparent text-stone-300 hover:bg-white/[0.06] hover:text-stone-100',
+  outline:     'border border-white/14 bg-white/[0.02] text-stone-100 hover:border-white/22 hover:bg-white/[0.07]',
+  destructive: 'border border-red-400/30 bg-red-500/90 text-white hover:bg-red-500',
 };
 
 const sizeClasses: Record<Size, string> = {
@@ -43,7 +43,8 @@ const sizeClasses: Record<Size, string> = {
 };
 
 const base = clsx(
-  'inline-flex items-center justify-center rounded-md font-medium transition-colors',
+  'inline-flex items-center justify-center rounded-full font-medium tracking-[0.01em] transition-all duration-200 ease-out',
+  'hover:-translate-y-0.5',
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-950',
   'disabled:pointer-events-none disabled:opacity-50',
   variantClasses[variant],
@@ -52,7 +53,7 @@ const base = clsx(
 );
 
 const externalAttrs = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
-const disabledLinkAttrs = disabled ? { 'aria-disabled': 'true', tabindex: '-1' } : {};
+const disabledLinkAttrs = disabled ? { 'aria-disabled': true, tabindex: -1 } : {};
 ---
 
 {href ? (

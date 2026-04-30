@@ -17,6 +17,11 @@ interface GitHubEntry {
   sha: string;
 }
 
+interface GitHubFileResponse {
+  content?: string;
+  encoding?: string;
+}
+
 const WORDS_PER_MINUTE = 200;
 const RATE_LIMIT_WARN_THRESHOLD = 10;
 
@@ -69,10 +74,8 @@ export async function fetchGitHubContent({
 
   return Promise.all(
     markdownFiles.map(async (file) => {
-      const fileResponse = await fetch(file.download_url!);
-      if (!fileResponse.ok) return null;
-
-      const raw = await fileResponse.text();
+      const raw = await fetchFileContents({ owner, repo, path: file.path, branch, headers });
+      if (!raw) return null;
       const { data: frontmatter, content: body } = matter(raw);
 
       if (frontmatter.readingTime === undefined) {
@@ -89,8 +92,39 @@ export async function fetchGitHubContent({
   ).then(results => results.filter((r): r is NonNullable<typeof r> => r !== null));
 }
 
+async function fetchFileContents({
+  owner,
+  repo,
+  path,
+  branch,
+  headers,
+}: {
+  owner: string;
+  repo: string;
+  path: string;
+  branch: string;
+  headers: Record<string, string>;
+}): Promise<string | null> {
+  const fileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
+  const fileResponse = await fetch(fileUrl, { headers });
+
+  if (!fileResponse.ok) {
+    return null;
+  }
+
+  const payload = (await fileResponse.json()) as GitHubFileResponse;
+  if (!payload.content) {
+    return null;
+  }
+
+  const normalized = payload.content.replace(/\n/g, '');
+  const encoding = payload.encoding === 'base64' ? 'base64' : 'utf8';
+  return Buffer.from(normalized, encoding).toString('utf8');
+}
+
 export function githubLoader(options: GitHubLoaderOptions): Loader {
   const { owner, repo, path, token } = options;
+  const branch = options.branch || 'main';
   return {
     name: 'github-loader',
     async load({ store, logger, parseData, generateDigest, renderMarkdown, meta }: LoaderContext) {
@@ -105,7 +139,7 @@ export function githubLoader(options: GitHubLoaderOptions): Loader {
       if (token) headers.Authorization = `Bearer ${token}`;
       if (storedEtag) headers['If-None-Match'] = storedEtag;
 
-      const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${options.branch || 'main'}`;
+      const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
       let listResponse = await fetch(url, { headers });
 
       checkRateLimit(listResponse, logger);
@@ -132,9 +166,7 @@ export function githubLoader(options: GitHubLoaderOptions): Loader {
       if (newEtag) meta.set(etagKey, newEtag);
 
       const entries = (await listResponse.json()) as GitHubEntry[];
-      const markdownFiles = entries.filter(
-        (e) => e.type === 'file' && /\.mdx?$/.test(e.name) && e.download_url !== null,
-      );
+      const markdownFiles = entries.filter((e) => e.type === 'file' && /\.mdx?$/.test(e.name));
 
       const currentIds = new Set(markdownFiles.map((f) => f.name.replace(/\.mdx?$/, '')));
       for (const id of store.keys()) {
@@ -157,13 +189,11 @@ export function githubLoader(options: GitHubLoaderOptions): Loader {
             return;
           }
 
-          const fileResponse = await fetch(file.download_url!);
-          if (!fileResponse.ok) {
-            logger.warn(`Skipping ${file.path}: ${fileResponse.status}`);
+          const raw = await fetchFileContents({ owner, repo, path: file.path, branch, headers });
+          if (!raw) {
+            logger.warn(`Skipping ${file.path}: unable to fetch contents`);
             return;
           }
-
-          const raw = await fileResponse.text();
           const { data: frontmatter, content: body } = matter(raw);
 
           if (frontmatter.readingTime === undefined) {
@@ -190,4 +220,3 @@ export function githubLoader(options: GitHubLoaderOptions): Loader {
     },
   };
 }
-

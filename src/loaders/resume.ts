@@ -8,9 +8,10 @@ interface ResumeLoaderOptions {
   token?: string;
 }
 
-interface GitHubFileEntry {
+interface GitHubContentsResponse {
   sha: string;
-  download_url: string | null;
+  content?: string;
+  encoding?: string;
 }
 
 function checkRateLimit(response: Response, logger: LoaderContext['logger']): void {
@@ -56,7 +57,7 @@ export function resumeLoader({
         return;
       }
 
-      const entry = (await metaResponse.json()) as GitHubFileEntry;
+      const entry = (await metaResponse.json()) as GitHubContentsResponse;
 
       const shaKey = 'sha:resume';
       if (meta.get(shaKey) === entry.sha && store.has('resume')) {
@@ -64,18 +65,11 @@ export function resumeLoader({
         return;
       }
 
-      if (!entry.download_url) {
-        logger.error('GitHub did not return a download_url for the resume file');
+      if (!entry.content) {
+        logger.error('GitHub did not return file contents for the resume file');
         return;
       }
-
-      const contentResponse = await fetch(entry.download_url);
-      if (!contentResponse.ok) {
-        logger.error(`Failed to download resume: ${contentResponse.status} ${contentResponse.statusText}`);
-        return;
-      }
-
-      const raw = await contentResponse.text();
+      const raw = Buffer.from(entry.content.replace(/\n/g, ''), entry.encoding === 'base64' ? 'base64' : 'utf8').toString('utf8');
 
       let parsed: unknown;
       try {
@@ -86,7 +80,7 @@ export function resumeLoader({
       }
 
       const digest = generateDigest(raw);
-      const data = await parseData({ id: 'resume', data: parsed });
+      const data = await parseData({ id: 'resume', data: parsed as Record<string, unknown> });
 
       store.set({ id: 'resume', data, digest });
       meta.set(shaKey, entry.sha);

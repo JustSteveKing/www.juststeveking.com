@@ -1,62 +1,70 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import { Container, Section, Heading, Button, Badge } from '@/components';
+import { Container, Section, Heading, Button, Badge, Card, ConversionPanel } from '@/components';
 import { newsletter } from '@/config/pages';
-import { PUBLIC_NEWSLETTER_ACTION } from 'astro:env/client';
 
+const expectations = [
+  {
+    title: 'Deep dives',
+    description: 'Practical essays on APIs, architecture, and the habits that make software easier to ship.',
+  },
+  {
+    title: 'Case studies',
+    description: 'Breakdowns of real technical decisions, fixes, and lessons from delivery work.',
+  },
+  {
+    title: 'Useful opinion',
+    description: 'A point of view on engineering leadership, delivery pressure, and developer experience.',
+  },
+];
 ---
 
 <Layout meta={newsletter}>
-  <Section class="border-b border-stone-800/60">
+  <Section variant="hero" class="border-b border-white/10">
     <Container>
       <div class="max-w-3xl">
-        <Badge variant="primary" class="mb-4">Newsletter</Badge>
-        <Heading level={1} class="mb-5">Code & Chill</Heading>
-        <p class="text-xl text-stone-400 leading-relaxed">
-          Join 5,000+ developers who receive a weekly deep dive into PHP, API design, and the art of software engineering.
+        <div class="mb-5 flex flex-wrap items-center gap-3">
+          <Badge variant="primary">Newsletter</Badge>
+          <Badge variant="secondary">5,000+ readers</Badge>
+        </div>
+        <p class="eyebrow mb-4">Owned attention with better taste</p>
+        <Heading level={1} class="mb-5 text-balance">Code & Chill</Heading>
+        <p class="lede">
+          Join 5,000+ developers who want thoughtful writing on APIs, architecture, and the decisions that make software easier to ship.
         </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <span class="metric-chip"><strong>Weekly</strong> not constant inbox noise</span>
+          <span class="metric-chip"><strong>Useful</strong> insight you can actually apply</span>
+        </div>
       </div>
     </Container>
   </Section>
 
-  <Section>
+  <Section class="border-b border-white/10">
     <Container>
       <div class="grid gap-12 lg:grid-cols-2">
-        <div>
-          <Heading level={2} class="mb-6">What to expect</Heading>
-          <ul class="space-y-6">
-            <li class="flex gap-4">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-stone-800 text-blue-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M8 7h6"/><path d="M8 11h8"/></svg>
-              </div>
-              <div>
-                <p class="font-semibold text-stone-100">Deep Dives</p>
-                <p class="text-sm text-stone-400">Technical explorations into complex topics like Event Sourcing, Domain-Driven Design, and API versioning.</p>
-              </div>
-            </li>
-            <li class="flex gap-4">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-stone-800 text-blue-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-              </div>
-              <div>
-                <p class="font-semibold text-stone-100">Case Studies</p>
-                <p class="text-sm text-stone-400">Real-world examples of how I solve architectural problems for clients and in my open-source projects.</p>
-              </div>
-            </li>
-            <li class="flex gap-4">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-stone-800 text-blue-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              </div>
-              <div>
-                <p class="font-semibold text-stone-100">AMA & Community</p>
-                <p class="text-sm text-stone-400">Answers to common questions from the community and curated resources from across the ecosystem.</p>
-              </div>
-            </li>
-          </ul>
+        <div class="section-intro">
+          <p class="eyebrow mb-4">What you get</p>
+          <Heading level={2} class="mb-4 text-balance">A quieter, more thoughtful channel than the average technical newsletter.</Heading>
+          <p class="mb-8">
+            This is where long-form thinking, delivery lessons, and useful frameworks land first. It is designed to build trust over time, not chase clicks.
+          </p>
+
+          <div class="grid gap-5">
+            {expectations.map((item, index) => (
+              <Card variant={index === 0 ? 'feature' : 'muted'} class="h-full">
+                <Heading level={3} class="mb-3 text-stone-100">{item.title}</Heading>
+                <p class="text-sm leading-7 text-stone-400">{item.description}</p>
+              </Card>
+            ))}
+          </div>
         </div>
 
-        <div class="rounded-2xl border border-stone-800 bg-stone-900/50 p-8 shadow-sm">
-          <Heading level={3} class="mb-6">Subscribe</Heading>
+        <div class="surface-feature surface-grid glow-ring rounded-[var(--radius-xl)] p-8 shadow-sm">
+          <Heading level={3} class="mb-3 text-stone-50">Subscribe</Heading>
+          <p class="mb-6 text-sm leading-7 text-stone-300">
+            Join once, read when it is useful, and unsubscribe whenever it stops earning the space.
+          </p>
           <form 
             id="newsletter-form" 
             action="https://buttondown.com/api/emails/embed-subscribe/juststeveking" 
@@ -71,18 +79,18 @@ import { PUBLIC_NEWSLETTER_ACTION } from 'astro:env/client';
                 type="email"
                 autocomplete="email"
                 required
-                class="w-full min-w-0 appearance-none rounded-md border border-stone-700 bg-stone-800 px-4 py-2 text-stone-100 placeholder-stone-500 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                class="field-shell"
                 placeholder="Enter your email"
               />
             </div>
             <Button variant="primary" type="submit" class="w-full">
-              Subscribe
+              Join Code & Chill
             </Button>
             <div class="text-center space-y-2">
-              <p class="text-xs text-stone-500">
-                No spam, just quality technical content. Unsubscribe at any time.
+              <p class="text-xs text-stone-400">
+                No spam, just thoughtful technical writing. Unsubscribe at any time.
               </p>
-              <p class="text-[10px] uppercase tracking-widest text-stone-600">
+              <p class="text-[10px] uppercase tracking-widest text-stone-500">
                 <a href="https://buttondown.com/refer/juststeveking" target="_blank" rel="noopener noreferrer" class="hover:text-stone-400 transition-colors">
                   Powered by Buttondown.
                 </a>
@@ -94,22 +102,17 @@ import { PUBLIC_NEWSLETTER_ACTION } from 'astro:env/client';
     </Container>
   </Section>
 
-  <Section class="bg-stone-900/30">
+  <Section>
     <Container>
-      <div class="text-center max-w-2xl mx-auto">
-        <Heading level={2} class="mb-4">Already a reader?</Heading>
-        <p class="text-stone-400 mb-8">
-          Check out the latest articles or follow me on social media for more frequent updates.
-        </p>
-        <div class="flex flex-wrap justify-center gap-4">
-          <a href="/articles" class="text-sm font-medium text-blue-400 hover:text-blue-300">
-            Read latest articles &rarr;
-          </a>
-          <a href="https://twitter.com/JustSteveKing" class="text-sm font-medium text-stone-400 hover:text-stone-300">
-            Follow on X
-          </a>
-        </div>
-      </div>
+      <ConversionPanel
+        eyebrow="Already reading?"
+        title="Use the newsletter as the slow-burn layer, then head to services when the problem becomes urgent."
+        description="If you are here to learn, keep reading. If you are already dealing with an expensive API or delivery problem, the services page is the faster path."
+        primaryHref="/articles"
+        primaryLabel="Read latest articles"
+        secondaryHref="/services"
+        secondaryLabel="See services"
+      />
     </Container>
   </Section>
 </Layout>

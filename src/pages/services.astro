@@ -1,0 +1,299 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { siteConfig } from '@/config';
+import {
+  Badge,
+  Button,
+  Card,
+  Container,
+  ConversionPanel,
+  Heading,
+  Section,
+  Testimonial,
+} from '@/components';
+import { services as servicesMeta } from '@/config/pages';
+
+const allTestimonials: CollectionEntry<'testimonials'>[] = await getCollection('testimonials');
+const featuredTestimonials = allTestimonials.slice(0, 3);
+
+function contactHref(subject: string) {
+  return `mailto:${siteConfig.author.email}?subject=${encodeURIComponent(subject)}`;
+}
+
+const offers = [
+  {
+    id: 'api-audit',
+    title: 'API Audit',
+    kicker: 'Deep dive and action plan',
+    description:
+      'A focused diagnostic engagement for teams dealing with slow endpoints, confusing API behaviour, or repeated delivery friction.',
+    includes: [
+      'A structured review of the API surface, instrumentation, reliability risks, and delivery bottlenecks.',
+      'A prioritised action plan explaining what to fix first, what can wait, and where the biggest leverage sits.',
+      'A leadership-ready summary you can use to align engineering effort with business urgency.',
+    ],
+    outcome:
+      'Clarity. You know what is broken, why it is expensive, and what the next 30 to 60 days should look like.',
+    bestFor:
+      'Teams that know the platform is creating drag but need a precise diagnosis before they commit to change.',
+    cta: 'Request an API audit',
+    subject: 'API audit enquiry',
+  },
+  {
+    id: 'fix-and-optimisation',
+    title: 'Fix & Optimisation',
+    kicker: 'Hands-on performance and reliability work',
+    description:
+      'Execution support to remove avoidable instability, improve response times, and make shipping feel less risky.',
+    includes: [
+      'Targeted work on the highest-impact API issues identified during discovery or already known by the team.',
+      'Practical collaboration with engineers to improve contracts, debugging, observability, and delivery confidence.',
+      'Clear documentation of what changed, why it mattered, and how the team can keep the gains.',
+    ],
+    outcome:
+      'Calmer delivery. Fewer recurring incidents, better technical clarity, and a faster path to dependable releases.',
+    bestFor:
+      'Teams that do not need more recommendations. They need the right fixes landed and explained.',
+    cta: 'Talk about a fix sprint',
+    subject: 'Fix sprint enquiry',
+  },
+  {
+    id: 'ongoing-advisory',
+    title: 'Ongoing Advisory',
+    kicker: 'Strategic support for senior teams',
+    description:
+      'A retained advisory relationship for engineering leaders and senior ICs making difficult API and architecture decisions.',
+    includes: [
+      'Regular technical reviews, decision support, and external perspective on platform direction.',
+      'Feedback on standards, team habits, reliability priorities, and the engineering trade-offs that keep resurfacing.',
+      'A steady partner who can help sharpen strategy without adding management theatre.',
+    ],
+    outcome:
+      'Better decisions with less drift. The team moves faster because the important technical calls get clearer.',
+    bestFor:
+      'Leads and principals navigating scale, changing team shapes, or recurring uncertainty around API direction.',
+    cta: 'Ask about advisory',
+    subject: 'Ongoing advisory enquiry',
+  },
+];
+
+const process = [
+  {
+    title: 'Week 1: Diagnose',
+    description:
+      'We get specific about the symptoms, constraints, and technical hotspots creating the most drag.',
+  },
+  {
+    title: 'Week 2: Prioritise',
+    description:
+      'I turn what we find into a clear order of operations so the team knows what matters most.',
+  },
+  {
+    title: 'Week 3+: Fix or support',
+    description:
+      'Depending on the engagement, I either help land the changes or stay involved as an advisor while the team executes.',
+  },
+];
+
+const proof = [
+  '15+ years in software, spanning delivery, leadership, and developer education.',
+  '50K+ developers reached through practical content, workshops, and community work.',
+  '30+ talks delivered on APIs, architecture, and engineering effectiveness.',
+];
+
+const pricing = [
+  {
+    title: 'API Audit',
+    range: 'From £2k',
+    note: 'For a focused diagnostic, findings, and action plan.',
+  },
+  {
+    title: 'Fix Sprint',
+    range: 'From £4k',
+    note: 'For hands-on optimisation and reliability work scoped to the highest-impact fixes.',
+  },
+  {
+    title: 'Advisory',
+    range: 'Monthly',
+    note: 'For ongoing strategic support, technical reviews, and decision-making help.',
+  },
+];
+---
+
+<Layout meta={servicesMeta}>
+  <Section variant="hero" class="border-b border-white/10">
+    <Container>
+      <div class="grid gap-10 xl:grid-cols-[1.05fr_0.95fr] xl:items-center">
+        <div class="max-w-3xl">
+          <div class="mb-5 flex flex-wrap items-center gap-3">
+            <Badge variant="primary">Services</Badge>
+            <Badge variant="secondary">API audits, fix sprints, advisory</Badge>
+          </div>
+          <p class="eyebrow mb-4">This is how the work is structured</p>
+          <Heading level={1} class="mb-5 text-balance">
+            Fix the API issues dragging your SaaS team down.
+          </Heading>
+          <p class="mb-6 lede">
+            Start with a diagnostic, move into the highest-leverage fixes, or keep me close as an advisor while the team stabilises delivery.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <Button href="/contact" variant="primary" size="lg">Book a call</Button>
+            <Button href={contactHref('Services enquiry')} variant="outline" size="lg">Email the problem</Button>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="metric-chip"><strong>Fast start</strong> short discovery, then a clear next step</span>
+            <span class="metric-chip"><strong>No rewrite pitch</strong> fix the highest-leverage issues first</span>
+          </div>
+        </div>
+
+        <Card variant="feature">
+          <p class="kicker mb-3">The API Stability Framework</p>
+          <Heading level={3} class="mb-3 text-stone-50">Diagnose. Stabilise. Scale.</Heading>
+          <p class="mb-5 text-sm leading-7 text-stone-300">
+            I do not sell vague consulting. I help teams understand what is actually failing, fix the highest-impact issues, and leave with patterns they can keep using.
+          </p>
+          <ul class="space-y-3 text-sm leading-7 text-stone-300">
+            {proof.map((item) => (
+              <li class="flex gap-3">
+                <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-300"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </Card>
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="border-b border-white/10">
+    <Container>
+      <div class="section-intro mb-10">
+        <p class="eyebrow mb-4">Clear offers</p>
+        <Heading level={2} class="mb-4 text-balance">
+          Three offers. No bloated menu. No guessing what happens next.
+        </Heading>
+        <p class="text-base leading-8 text-stone-400">
+          The right engagement depends on whether you need diagnosis, hands-on execution, or ongoing technical decision support.
+        </p>
+      </div>
+
+      <div class="grid gap-6">
+        {offers.map((offer, index) => (
+          <Card id={offer.id} variant={index === 1 ? 'feature' : 'default'} class="scroll-mt-24">
+            <div class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+              <div>
+                <p class="kicker mb-3">{offer.kicker}</p>
+                <Heading level={3} class="mb-3 text-stone-100">{offer.title}</Heading>
+                <p class="mb-5 text-sm leading-7 text-stone-300">{offer.description}</p>
+                <p class="text-sm leading-7 text-stone-400">{offer.bestFor}</p>
+              </div>
+
+              <div>
+                <p class="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-stone-500">What is included</p>
+                <ul class="space-y-3 text-sm leading-7 text-stone-300">
+                  {offer.includes.map((item) => (
+                    <li class="flex gap-3">
+                      <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-300"></span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div class="mt-6 rounded-[1.4rem] border border-white/10 bg-black/10 p-5">
+                  <p class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-stone-500">Outcome</p>
+                  <p class="text-sm leading-7 text-stone-300">{offer.outcome}</p>
+                </div>
+
+                <div class="mt-6 flex flex-wrap gap-3">
+                  <Button href={contactHref(offer.subject)} variant="primary">{offer.cta}</Button>
+                  <Button href="/contact" variant="outline">Book a call</Button>
+                </div>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="band" class="border-b border-white/10 py-12">
+    <Container>
+      <div class="grid gap-5 lg:grid-cols-3">
+        {pricing.map((item, index) => (
+          <Card variant={index === 1 ? 'feature' : 'muted'} class="h-full">
+            <p class="kicker mb-3">{item.title}</p>
+            <p class="mb-2 font-serif text-3xl font-semibold tracking-[-0.03em] text-stone-50">{item.range}</p>
+            <p class="text-sm leading-7 text-stone-400">{item.note}</p>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="band" class="border-b border-white/10">
+    <Container>
+      <div class="grid gap-10 xl:grid-cols-[0.95fr_1.05fr] xl:items-start">
+        <div class="section-intro">
+          <p class="eyebrow mb-4">Process</p>
+          <Heading level={2} class="mb-4 text-balance">
+            People buy certainty. The process is intentionally simple.
+          </Heading>
+          <p class="text-base leading-8 text-stone-400">
+            We start by getting specific about the problem, then reduce risk with a clearer plan, and finally either fix the right things or support the team while it does.
+          </p>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-3">
+          {process.map((item, index) => (
+            <Card variant={index === 1 ? 'muted' : 'default'} class="h-full">
+              <Heading level={4} class="mb-3 text-stone-100">{item.title}</Heading>
+              <p class="text-sm leading-7 text-stone-400">{item.description}</p>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  {featuredTestimonials.length > 0 && (
+    <Section class="border-b border-white/10">
+      <Container>
+        <div class="section-intro mb-10">
+          <p class="eyebrow mb-4">What people say</p>
+          <Heading level={2} class="mb-4 text-balance">
+            Trust matters more when the work touches architecture, delivery pressure, and team confidence.
+          </Heading>
+        </div>
+
+        <div class="grid gap-5 lg:grid-cols-3">
+          {featuredTestimonials.map((testimonial) => (
+            <Testimonial
+              quote={testimonial.data.quote}
+              name={testimonial.data.author.name}
+              role={testimonial.data.author.role}
+              company={testimonial.data.author.company}
+              avatar={testimonial.data.author.avatar?.src}
+              class="h-full w-full"
+            />
+          ))}
+        </div>
+      </Container>
+    </Section>
+  )}
+
+  <Section>
+    <Container>
+      <ConversionPanel
+        eyebrow="Action"
+        title="If your API is already slowing the team down, the next step should feel obvious."
+        description="Send a little context on the current symptoms, what has already been tried, and what good looks like. I will tell you whether an audit, a fix sprint, or ongoing advisory is the right fit."
+        primaryHref="/contact"
+        primaryLabel="Book a discovery call"
+        secondaryHref="/resources"
+        secondaryLabel="Get the checklist first"
+      />
+    </Container>
+  </Section>
+</Layout>

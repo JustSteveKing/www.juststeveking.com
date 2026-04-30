@@ -16,6 +16,11 @@ interface GitHubEntry {
   sha: string;
 }
 
+interface GitHubFileResponse {
+  content?: string;
+  encoding?: string;
+}
+
 function checkRateLimit(response: Response, logger: LoaderContext['logger']): void {
   const remaining = response.headers.get('X-RateLimit-Remaining');
   const reset = response.headers.get('X-RateLimit-Reset');
@@ -37,6 +42,24 @@ export function githubJsonLoader({
   branch = 'main',
   token,
 }: GitHubJsonLoaderOptions): Loader {
+  async function fetchFileContents(filePath: string, headers: Record<string, string>): Promise<string | null> {
+    const fileUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}`;
+    const fileResponse = await fetch(fileUrl, { headers });
+
+    if (!fileResponse.ok) {
+      return null;
+    }
+
+    const payload = (await fileResponse.json()) as GitHubFileResponse;
+    if (!payload.content) {
+      return null;
+    }
+
+    const normalized = payload.content.replace(/\n/g, '');
+    const encoding = payload.encoding === 'base64' ? 'base64' : 'utf8';
+    return Buffer.from(normalized, encoding).toString('utf8');
+  }
+
   return {
     name: 'github-json-loader',
     async load({ store, logger, parseData, generateDigest, meta }: LoaderContext) {
@@ -78,9 +101,7 @@ export function githubJsonLoader({
       if (newEtag) meta.set(etagKey, newEtag);
 
       const entries = (await listResponse.json()) as GitHubEntry[];
-      const jsonFiles = entries.filter(
-        (e) => e.type === 'file' && e.name.endsWith('.json') && e.download_url !== null,
-      );
+      const jsonFiles = entries.filter((e) => e.type === 'file' && e.name.endsWith('.json'));
 
       // Remove entries for files that no longer exist in the repo
       const currentIds = new Set(jsonFiles.map((f) => f.name.replace(/\.json$/, '')));
@@ -104,13 +125,11 @@ export function githubJsonLoader({
             return;
           }
 
-          const fileResponse = await fetch(file.download_url!);
-          if (!fileResponse.ok) {
-            logger.warn(`Skipping ${file.path}: ${fileResponse.status}`);
+          const raw = await fetchFileContents(file.path, headers);
+          if (!raw) {
+            logger.warn(`Skipping ${file.path}: unable to fetch contents`);
             return;
           }
-
-          const raw = await fileResponse.text();
 
           let parsed: unknown;
           try {
@@ -121,7 +140,7 @@ export function githubJsonLoader({
           }
 
           const digest = generateDigest(raw);
-          const data = await parseData({ id, data: parsed });
+          const data = await parseData({ id, data: parsed as Record<string, unknown> });
 
           store.set({ id, data, digest });
           meta.set(shaKey, file.sha);

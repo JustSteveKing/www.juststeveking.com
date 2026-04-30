@@ -1,4 +1,4 @@
-import type { NavItem } from './navigation';
+import type { NavItem } from '@/types';
 
 export interface Track {
   id: string;

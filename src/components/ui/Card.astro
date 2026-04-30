@@ -1,10 +1,12 @@
 ---
 import { clsx } from 'clsx';
+import type { HTMLAttributes } from 'astro/types';
 
-interface Props {
+interface Props extends HTMLAttributes<'a'>, HTMLAttributes<'div'> {
   href?: string;
   external?: boolean;
   'aria-label'?: string;
+  variant?: 'default' | 'feature' | 'muted';
   class?: string;
 }
 
@@ -12,12 +14,21 @@ const {
   href,
   external = false,
   'aria-label': ariaLabel,
+  variant = 'default',
   class: className,
+  ...rest
 } = Astro.props as Props;
 
+const variantClasses = {
+  default: 'surface-card',
+  feature: 'surface-feature',
+  muted: 'surface-muted',
+};
+
 const base = clsx(
-  'rounded-xl border border-stone-800 dark:border-stone-100 bg-stone-900/10 dark:bg-stone-100/10 p-6',
-  href && 'transition-colors duration-150 hover:border-stone-700 dark:hover:border-stone-300 hover:bg-stone-900/20 dark:hover:bg-stone-100/20',
+  'group relative rounded-[var(--radius-xl)] p-6 md:p-7',
+  variantClasses[variant],
+  href && 'lift-hover',
   className,
 );
 
@@ -27,12 +38,12 @@ const externalAttrs = external
 ---
 
 {href ? (
-  <a href={href} class={base} aria-label={ariaLabel} {...externalAttrs}>
+  <a href={href} class={base} aria-label={ariaLabel} {...externalAttrs} {...rest}>
     <slot />
     {external && <span class="sr-only">(opens in new tab)</span>}
   </a>
 ) : (
-  <div class={base} aria-label={ariaLabel}>
+  <div class={base} aria-label={ariaLabel} {...rest}>
     <slot />
   </div>
 )}

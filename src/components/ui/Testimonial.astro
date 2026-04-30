@@ -14,8 +14,9 @@ interface Props {
 const { quote, name, role, company, avatar, class: className } = Astro.props;
 ---
 
-<figure class={clsx('flex w-80 shrink-0 flex-col rounded-xl border border-stone-800 p-6', className)}>
-  <blockquote class="text-sm text-stone-300 leading-relaxed flex-1 mb-5">
+<figure class={clsx('surface-card flex w-80 shrink-0 flex-col p-6 md:p-7', className)}>
+  <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-blue-200/80">Trusted by teams</p>
+  <blockquote class="mb-6 flex-1 text-sm leading-7 text-stone-200">
     &ldquo;{quote}&rdquo;
   </blockquote>
   <figcaption class="flex items-center gap-3">

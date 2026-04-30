@@ -1,0 +1,118 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { siteConfig } from '@/config';
+import {
+  Badge,
+  Button,
+  Card,
+  Container,
+  Heading,
+  Section,
+} from '@/components';
+import { contact as contactMeta } from '@/config/pages';
+
+const prompts = [
+  'What symptoms are you seeing? Slow endpoints, unreliable behaviour, incidents, release anxiety, or something else?',
+  'What has already been tried so far?',
+  'What would a good outcome look like for the team over the next 30 to 90 days?',
+];
+
+const reassurance = [
+  {
+    title: 'You do not need a perfect brief',
+    description: 'A little context is enough. I can help shape the problem with you.',
+  },
+  {
+    title: 'I will tell you if I am not the right fit',
+    description: 'The goal is clarity, not forcing every conversation into a project.',
+  },
+  {
+    title: 'The next step stays lightweight',
+    description: 'Usually that means a short discovery call or a direct email exchange.',
+  },
+];
+
+function contactHref(subject: string) {
+  return `mailto:${siteConfig.author.email}?subject=${encodeURIComponent(subject)}`;
+}
+---
+
+<Layout meta={contactMeta}>
+  <Section variant="hero" class="border-b border-white/10">
+    <Container>
+      <div class="grid gap-10 xl:grid-cols-[0.95fr_1.05fr] xl:items-start">
+        <div class="max-w-3xl">
+          <div class="mb-5 flex flex-wrap items-center gap-3">
+            <Badge variant="primary">Contact</Badge>
+            <Badge variant="secondary">Direct conversion path</Badge>
+          </div>
+          <p class="eyebrow mb-4">Book a call or send context</p>
+          <Heading level={1} class="mb-5 text-balance">
+            Tell me what is slowing the team down.
+          </Heading>
+          <p class="mb-6 lede">
+            If your API, architecture, or delivery habits are creating avoidable drag, send a little context and I will tell you what the best next step looks like.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <Button href={contactHref('Discovery call')} variant="primary" size="lg">Email to book a call</Button>
+            <Button href="/services" variant="outline" size="lg">Review services first</Button>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="metric-chip"><strong>Low-friction</strong> short email, then a clear next step</span>
+            <span class="metric-chip"><strong>Direct</strong> no sales theatre, just technical context</span>
+          </div>
+        </div>
+
+        <Card variant="feature" class="surface-grid">
+          <p class="kicker mb-3">Helpful context to include</p>
+          <ul class="space-y-3 text-sm leading-7 text-stone-200">
+            {prompts.map((prompt) => (
+              <li class="list-check">
+                <span>{prompt}</span>
+              </li>
+            ))}
+          </ul>
+        </Card>
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="border-b border-white/10">
+    <Container>
+      <div class="grid gap-5 lg:grid-cols-3">
+        <Card variant="default" class="h-full">
+          <Heading level={3} class="mb-3 text-stone-100">Best for</Heading>
+          <p class="text-sm leading-7 text-stone-400">
+            Teams dealing with unreliable APIs, risky releases, delivery drag, or technical direction that feels harder than it should.
+          </p>
+        </Card>
+        <Card variant="muted" class="h-full">
+          <Heading level={3} class="mb-3 text-stone-100">What happens next</Heading>
+          <p class="text-sm leading-7 text-stone-400">
+            I will reply with whether an audit, a fix sprint, or advisory support makes the most sense for your situation.
+          </p>
+        </Card>
+        <Card variant="default" class="h-full">
+          <Heading level={3} class="mb-3 text-stone-100">Prefer email?</Heading>
+          <p class="mb-6 text-sm leading-7 text-stone-400">
+            That works well. Include the team size, the current pain, and any urgency or deadlines you are dealing with.
+          </p>
+          <Button href={contactHref('API support enquiry')} variant="outline">Email Steve</Button>
+        </Card>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="grid gap-5 lg:grid-cols-3">
+        {reassurance.map((item, index) => (
+          <Card variant={index === 1 ? 'muted' : 'default'} class="h-full">
+            <Heading level={4} class="mb-3 text-stone-100">{item.title}</Heading>
+            <p class="text-sm leading-7 text-stone-400">{item.description}</p>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+</Layout>

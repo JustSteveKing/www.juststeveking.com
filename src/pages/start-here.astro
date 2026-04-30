@@ -1,56 +1,68 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Layout from '@/layouts/Layout.astro';
-import { Container, Section, Heading, Card, Badge } from '@/components';
+import { Container, Section, Heading, Card, Badge, Button, ConversionPanel } from '@/components';
 import { startHere } from '@/config/pages';
 import { tracks } from '@/config/tracks';
-
 ---
 
 <Layout meta={startHere}>
-  <Section class="border-b border-stone-800/60 bg-stone-950">
+  <Section variant="hero" class="border-b border-white/10">
     <Container>
       <div class="max-w-3xl">
-        <Heading level={1} class="mb-5">Start Here</Heading>
-        <p class="text-xl text-stone-400 leading-relaxed">
-          Whether you're a backend engineer, a platform lead, or a CTO, I've organized my content into structured paths to help you solve specific problems.
+        <div class="mb-5 flex flex-wrap items-center gap-3">
+          <Badge variant="primary">Start Here</Badge>
+          <Badge variant="secondary">Curated learning paths</Badge>
+        </div>
+        <p class="eyebrow mb-4">Get to the right material faster</p>
+        <Heading level={1} class="mb-5 text-balance">Choose the path that matches the problem you are trying to solve.</Heading>
+        <p class="lede">
+          Whether you are improving API design, Laravel architecture, or engineering leadership habits, these tracks help you skip the archive spelunking and get straight to the good material.
         </p>
       </div>
     </Container>
   </Section>
 
-  <Section>
+  <Section class="border-b border-white/10">
     <Container>
-      <div class="grid gap-8 lg:grid-cols-3">
-        {tracks.map((track) => (
-          <Card class="flex flex-col h-full">
-            <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-stone-800 text-stone-100">
-               <Icon name={`lucide:${track.icon}`} class="h-6 w-6" />
-            </div>
-            
-            <Heading level={3} class="mb-3">{track.title}</Heading>
-            <p class="text-stone-400 mb-8 flex-1">
-              {track.description}
-            </p>
+      <div class="mb-10 max-w-3xl">
+        <p class="eyebrow mb-4">Guided routes</p>
+        <Heading level={2} class="mb-4 text-balance">
+          Think of these as guided entry points, not a pile of links.
+        </Heading>
+        <p class="text-base leading-8 text-stone-400">
+          Each path is shaped around a different role and a different job to be done, so new readers can move from awareness to useful next steps much faster.
+        </p>
+      </div>
 
-            <div class="space-y-4">
-              <p class="text-xs font-semibold uppercase tracking-wider text-stone-500">Included articles:</p>
+      <div class="grid gap-6 lg:grid-cols-3">
+        {tracks.map((track, index) => (
+          <Card variant={index === 0 ? 'feature' : 'default'} class="flex h-full flex-col">
+            <div class="mb-6 flex h-13 w-13 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] text-blue-200">
+              <Icon name={`lucide:${track.icon}`} class="h-6 w-6" />
+            </div>
+
+            <Heading level={3} class="mb-3 text-stone-100">{track.title}</Heading>
+            <p class="mb-6 text-sm leading-7 text-stone-300">{track.description}</p>
+
+            <div class="rounded-[1.25rem] border border-white/10 bg-black/10 p-5">
+              <p class="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-stone-500">Inside this path</p>
               <ul class="space-y-3">
                 {track.items.map((item) => (
                   <li>
-                    <a href={item.href} class="group flex items-center text-sm text-stone-300 hover:text-white transition-colors">
-                      <span class="mr-2 text-stone-600 group-hover:text-blue-500">&rarr;</span>
-                      {item.label}
+                    <a href={item.href} class="group flex items-start gap-3 text-sm leading-7 text-stone-300 transition-colors hover:text-white">
+                      <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-300/70"></span>
+                      <span>{item.label}</span>
                     </a>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div class="mt-8 pt-6 border-t border-stone-800">
-               <a href={track.href} class="text-sm font-medium text-blue-400 hover:text-blue-300">
-                 Explore the track &rarr;
-               </a>
+            <div class="mt-6 pt-2">
+              <a href={track.href} class="text-sm font-medium text-blue-200 transition-colors hover:text-white">
+                Explore the track &rarr;
+              </a>
             </div>
           </Card>
         ))}
@@ -58,24 +70,31 @@ import { tracks } from '@/config/tracks';
     </Container>
   </Section>
 
-  <Section class="bg-stone-900/30">
+  <Section variant="band" class="border-b border-white/10">
     <Container>
-      <div class="rounded-2xl border border-stone-800 bg-stone-900/50 p-8 md:p-12">
-        <div class="max-w-2xl">
-          <Badge variant="primary" class="mb-4">Newsletter</Badge>
-          <Heading level={2} class="mb-4">Prefer a slow-burn approach?</Heading>
-          <p class="text-lg text-stone-400 mb-8">
-            Join 5,000+ developers in "Code & Chill". Every week, I send out deep dives into architecture, API design patterns, and lessons learned from the field.
+      <div class="grid gap-6 lg:grid-cols-[1fr_0.95fr]">
+        <Card variant="feature" class="h-full">
+          <p class="kicker mb-3">Need a faster route?</p>
+          <Heading level={3} class="mb-3 text-stone-50">If the problem is already urgent, skip the reading queue.</Heading>
+          <p class="text-sm leading-7 text-stone-300">
+            The guides and tracks are useful if you want to learn. If you already know the API issues are expensive, head straight to the services page and we can talk about the right next step.
           </p>
-          <div class="flex flex-wrap gap-4">
-            <a href="/newsletter" class="inline-flex h-11 items-center justify-center rounded-md bg-blue-600 px-6 font-medium text-white hover:bg-blue-500 transition-colors">
-              Join Code & Chill
-            </a>
-            <a href="/articles" class="inline-flex h-11 items-center justify-center rounded-md border border-stone-700 bg-transparent px-6 font-medium text-stone-300 hover:bg-stone-800 hover:text-white transition-colors">
-              Browse All Articles
-            </a>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <Button href="/services" variant="primary">See services</Button>
+            <Button href="/contact" variant="outline">Book a call</Button>
           </div>
-        </div>
+        </Card>
+
+        <ConversionPanel
+          compact
+          eyebrow="Slow-burn trust"
+          title="Prefer to stay in learning mode for now?"
+          description="Join Code & Chill for weekly notes on architecture, API design, and the habits that make software easier to ship and maintain."
+          primaryHref="/newsletter"
+          primaryLabel="Join Code & Chill"
+          secondaryHref="/articles"
+          secondaryLabel="Browse articles"
+        />
       </div>
     </Container>
   </Section>

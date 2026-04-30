@@ -1,15 +1,27 @@
 ---
 import { siteConfig, footerNav } from '@/config';
 import Container from '@/components/ui/Container.astro';
-import Divider from '@/components/ui/Divider.astro';
 import Link from '@/components/ui/Link.astro';
 ---
 
-<footer class="border-t border-stone-800 bg-stone-950">
+<footer class="relative z-10 border-t border-white/10 bg-[rgba(8,9,13,0.9)]">
   <Container>
+    <div class="grid gap-10 border-b border-white/10 py-14 lg:grid-cols-[1.2fr_1.8fr] lg:items-start">
+      <div class="max-w-md">
+        <p class="eyebrow mb-4">Fix expensive API problems</p>
+        <p class="font-serif text-3xl font-semibold tracking-[-0.03em] text-stone-100">
+          Strategy, diagnosis, and calm execution for SaaS teams shipping under pressure.
+        </p>
+        <p class="mt-4 text-sm leading-7 text-stone-400">
+          I help teams stabilise APIs, improve delivery confidence, and turn technical friction into a clearer path forward.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-4 text-sm">
+          <Link href="/services" underline={false} class="text-blue-200">Explore services &rarr;</Link>
+          <Link href="/contact" underline={false}>Book a call &rarr;</Link>
+        </div>
+      </div>
 
-    <!-- Nav groups -->
-    <div class="grid grid-cols-2 gap-x-8 gap-y-12 py-16 sm:grid-cols-4">
+      <div class="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-4">
       {footerNav.map((group) => (
         <div>
           <p class="mb-4 text-xs font-semibold uppercase tracking-widest text-stone-400">
@@ -31,19 +43,14 @@ import Link from '@/components/ui/Link.astro';
           </ul>
         </div>
       ))}
+      </div>
     </div>
 
-    <Divider />
-
-    <!-- Bottom bar -->
     <div class="flex flex-col gap-6 py-8 sm:flex-row sm:items-center sm:justify-between">
-
-      <!-- Copyright -->
       <p class="text-sm text-stone-400">
         &copy; {new Date().getFullYear()} {siteConfig.author.name}. All rights reserved.
       </p>
 
-      <!-- Social links -->
       <nav aria-label="Social links" class="flex flex-wrap items-center gap-x-5 gap-y-2">
         {siteConfig.socials.map((social) => (
           <Link
@@ -56,7 +63,6 @@ import Link from '@/components/ui/Link.astro';
           </Link>
         ))}
       </nav>
-
     </div>
   </Container>
 </footer>

@@ -3,10 +3,11 @@ import type { NavGroup, NavItem } from '@/types';
 export const mainNav: NavItem[] = [
   { label: 'Start Here', href: '/start-here', variant: 'highlight' },
   {
-    label: 'Learn',
+    label: 'Insights',
     href: '/articles',
     items: [
       { label: 'Articles', href: '/articles' },
+      { label: 'Resources', href: '/resources' },
       { label: 'Career Framework', href: '/career-framework' },
       { label: 'API Guides', href: '/api-guides' },
       { label: 'Videos', href: '/videos' },
@@ -15,6 +16,7 @@ export const mainNav: NavItem[] = [
       { label: 'Newsletter', href: '/newsletter' },
     ],
   },
+  { label: 'Services', href: '/services' },
   {
     label: 'Projects',
     href: '/projects',
@@ -24,7 +26,7 @@ export const mainNav: NavItem[] = [
     ],
   },
   { label: 'About', href: '/about' },
-  { label: 'Work With Me', href: '/work-with-me', variant: 'cta' },
+  { label: 'Book a Call', href: '/contact', variant: 'cta' },
 ];
 
 /**
@@ -32,39 +34,40 @@ export const mainNav: NavItem[] = [
  */
 export const footerNav: NavGroup[] = [
   {
-    label: 'Content',
+    label: 'Conversion',
+    items: [
+      { label: 'Services', href: '/services' },
+      { label: 'Resources', href: '/resources' },
+      { label: 'Contact', href: '/contact' },
+      { label: 'Newsletter', href: '/newsletter' },
+    ],
+  },
+  {
+    label: 'Insights',
     items: [
       { label: 'Articles', href: '/articles' },
       { label: 'Reviews', href: '/reviews' },
       { label: 'Talks', href: '/talks' },
       { label: 'Videos', href: '/videos' },
-      { label: 'Podcasts', href: '/podcasts' },
       { label: 'Series', href: '/articles/series' },
     ],
   },
   {
-    label: 'Projects',
+    label: 'Proof',
     items: [
       { label: 'Projects', href: '/projects' },
       { label: 'Packages', href: '/packages' },
+      { label: 'About', href: '/about' },
+      { label: 'Start Here', href: '/start-here' },
     ],
   },
   {
-    label: 'Resources',
+    label: 'Library',
     items: [
       { label: 'Career Framework', href: '/career-framework' },
       { label: 'API Guides', href: '/api-guides' },
+      { label: 'Podcasts', href: '/podcasts' },
       { label: 'RSS Feed', href: '/rss.xml' },
-    ],
-  },
-  {
-    label: 'Site',
-    items: [
-      { label: 'About', href: '/about' },
-      { label: 'Now', href: '/now' },
-      { label: 'Uses', href: '/uses' },
-      { label: 'Newsletter', href: '/newsletter' },
-      { label: 'Colophon', href: '/colophon' },
     ],
   },
 ];

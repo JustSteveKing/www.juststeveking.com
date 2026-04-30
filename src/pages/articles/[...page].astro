@@ -3,15 +3,17 @@ import type { GetStaticPaths, Page } from 'astro';
 import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
-import { Hero, Button, Section, Badge, Container } from '@/components';
+import { Hero, Button, Section, Badge, Container, Card, Heading, ConversionPanel } from '@/components';
 import { articles } from '@/config/pages';
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const allArticles = await getCollection('articles');
 
-  const sorted = allArticles.sort(
-    (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
-  );
+  const sorted = allArticles
+    .filter((article) => !article.data.draft)
+    .sort(
+      (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
+    );
 
   return paginate(sorted, { pageSize: 12 });
 };
@@ -21,19 +23,52 @@ interface Props {
 }
 
 const { page } = Astro.props as unknown as Props;
+
+const lanes = [
+  {
+    title: 'Problem-led',
+    description: 'Articles that help engineers and leaders recognise what is going wrong before they start shopping for solutions.',
+  },
+  {
+    title: 'Opinion-led',
+    description: 'Points of view and field notes that build trust and help people understand how I think.',
+  },
+  {
+    title: 'Solution-led',
+    description: 'Practical breakdowns of fixes, frameworks, and diagnostic approaches that move readers closer to action.',
+  },
+];
 ---
 
 <Layout meta={articles}>
-  <Hero title={articles.title} description={articles.description}>
+  <Hero
+    eyebrow="Content system"
+    title="Writing that helps teams find the problem, trust the thinking, and move toward a fix."
+    description="The archive is no longer just a stream of thoughts. It is organised as a growth engine: discovery, authority, and solution-led content for teams improving APIs and engineering delivery."
+  >
     <Fragment slot="cta">
-      <Button href="/rss.xml" variant="outline">RSS Feed</Button>
-      <Button href="/newsletter" variant="ghost">Newsletter</Button>
+      <Button href="/resources" variant="primary">Get the checklist</Button>
+      <Button href="/services" variant="outline">See services</Button>
     </Fragment>
   </Hero>
 
+  <Section class="border-b border-white/10 py-12">
+    <Container>
+      <div class="grid gap-5 lg:grid-cols-3">
+        {lanes.map((lane, index) => (
+          <Card variant={index === 2 ? 'feature' : 'muted'} class="h-full">
+            <p class="kicker mb-3">{lane.title}</p>
+            <Heading level={3} class="mb-3 text-stone-100">{lane.title} content</Heading>
+            <p class="text-sm leading-7 text-stone-400">{lane.description}</p>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
   <Section class="py-12">
     <Container>
-      <div class="divide-y divide-stone-800">
+      <div class="divide-y divide-white/10">
         {page.data.map((article) => (
           <a
             href={`/articles/${article.id}`}
@@ -43,11 +78,11 @@ const { page } = Astro.props as unknown as Props;
               datetime={new Date(article.data.pubDate).toISOString()}
               class="shrink-0 text-xs text-stone-500 sm:w-28 sm:pt-1.5"
             >
-              {new Date(article.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+              {new Date(article.data.pubDate).toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' })}
             </time>
 
-            <div class="flex-1 min-w-0">
-              <div class="flex flex-wrap items-center gap-2 mb-2">
+            <div class="min-w-0 flex-1">
+              <div class="mb-2 flex flex-wrap items-center gap-2">
                 <Badge variant="primary">{article.data.category}</Badge>
                 {(article.data.readingTime ?? article.data.minRead) && (
                   <span class="text-xs text-stone-500">
@@ -55,10 +90,10 @@ const { page } = Astro.props as unknown as Props;
                   </span>
                 )}
               </div>
-              <h2 class="text-lg font-semibold text-stone-100 group-hover:text-white mb-2 leading-snug">
+              <h2 class="text-lg font-semibold leading-snug text-stone-100 group-hover:text-white mb-2">
                 {article.data.title}
               </h2>
-              <p class="text-sm text-stone-400 leading-relaxed line-clamp-2">
+              <p class="text-sm leading-7 text-stone-400 line-clamp-2">
                 {article.data.description}
               </p>
             </div>
@@ -69,7 +104,7 @@ const { page } = Astro.props as unknown as Props;
       {(page.url.prev || page.url.next) && (
         <nav
           aria-label="Pagination"
-          class="mt-16 flex items-center justify-between border-t border-stone-800 pt-8"
+          class="mt-16 flex items-center justify-between border-t border-white/10 pt-8"
         >
           <div>
             {page.url.prev && (
@@ -92,6 +127,20 @@ const { page } = Astro.props as unknown as Props;
           </div>
         </nav>
       )}
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <ConversionPanel
+        eyebrow="Turn readers into leads"
+        title="If you have read enough and the problem is already expensive, the next step should be a conversation."
+        description="Use the resources hub if you want to self-serve first, or head straight to services if your team needs help diagnosing or fixing the issue."
+        primaryHref="/contact"
+        primaryLabel="Book a call"
+        secondaryHref="/resources"
+        secondaryLabel="Get the checklist"
+      />
     </Container>
   </Section>
 </Layout>

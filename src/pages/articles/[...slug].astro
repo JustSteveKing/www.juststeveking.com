@@ -3,7 +3,17 @@ import type { GetStaticPaths } from 'astro';
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, render, getEntry } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
-import { Badge, Container, Divider, Prose } from '@/components';
+import { siteConfig } from '@/config';
+import {
+  Badge,
+  Button,
+  Card,
+  Container,
+  ConversionPanel,
+  Divider,
+  Heading,
+  Prose,
+} from '@/components';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const articles = await getCollection('articles');
@@ -31,23 +41,65 @@ const meta = {
   modifiedTime: entry.data.updatedDate,
   tags: entry.data.tags,
 };
+
+function contactHref(subject: string) {
+  return `mailto:${siteConfig.author.email}?subject=${encodeURIComponent(subject)}`;
+}
+
+function articleIntent(article: CollectionEntry<'articles'>) {
+  const haystack = [
+    article.data.title,
+    article.data.description,
+    article.data.category,
+    ...(article.data.tags ?? []),
+  ]
+    .join(' ')
+    .toLowerCase();
+
+  if (['framework', 'fix', 'stability', 'performance', 'diagnos', 'audit', 'debug', 'reliability'].some((term) => haystack.includes(term))) {
+    return {
+      eyebrow: 'Solution-led article',
+      title: 'Want help applying this to your API stack?',
+      description:
+        'I help SaaS teams diagnose bottlenecks, stabilise risky APIs, and turn technical friction into a clearer delivery path.',
+    };
+  }
+
+  if (['opinion', 'broken', 'lessons', 'ai', 'culture', 'leadership'].some((term) => haystack.includes(term))) {
+    return {
+      eyebrow: 'Authority to action',
+      title: 'If this point of view matches the problem your team is feeling, there is a practical next step.',
+      description:
+        'Use the services page to see how I turn the same ideas into audits, fix sprints, and ongoing technical support.',
+    };
+  }
+
+  return {
+    eyebrow: 'Problem to solution',
+    title: 'Seeing the symptoms but not sure where to start?',
+    description:
+      'Use the API Reliability Checklist to structure the investigation, then get in touch if you want help turning it into a fix plan.',
+  };
+}
+
+const cta = articleIntent(entry);
 ---
 
 <Layout {meta}>
   <article>
-    <header class="border-b border-stone-800 py-16 sm:py-24">
+    <header class="section-hero border-b border-white/10 py-20 sm:py-28">
       <Container>
-        <div class="max-w-3xl">
+        <div class="max-w-4xl">
           <div class="mb-4 flex flex-wrap items-center gap-2">
             <Badge variant="primary">{entry.data.category}</Badge>
             {entry.data.tags.map((tag) => (
               <Badge variant="outline" size="xs">{tag}</Badge>
             ))}
           </div>
-          <h1 class="text-4xl font-bold tracking-tight text-stone-100 sm:text-5xl">
+          <h1 class="font-serif text-4xl font-semibold tracking-[-0.03em] text-stone-100 sm:text-5xl">
             {entry.data.title}
           </h1>
-          <p class="mt-4 text-lg text-stone-400">{entry.data.description}</p>
+          <p class="mt-5 lede text-stone-300">{entry.data.description}</p>
           <div class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-stone-500">
             <time datetime={new Date(entry.data.pubDate).toISOString()}>
               {new Date(entry.data.pubDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
@@ -65,50 +117,102 @@ const meta = {
       </Container>
     </header>
 
+    <section class="border-b border-white/10 py-8">
+      <Container>
+        <ConversionPanel
+          compact
+          eyebrow={cta.eyebrow}
+          title={cta.title}
+          description={cta.description}
+          primaryHref="/services"
+          primaryLabel="See services"
+          secondaryHref="/resources"
+          secondaryLabel="Get the checklist"
+        />
+      </Container>
+    </section>
+
     <Container>
-      <div class="max-w-3xl py-12">
-        {series && (
-          <aside class="mb-8 rounded-lg border border-stone-700 bg-stone-900/50 p-5 text-sm text-stone-400">
-            This article is part of the{' '}
-            <a href={`/articles/series/${series.id}`} class="text-stone-300 font-medium underline underline-offset-4 hover:text-white transition-colors">
-              {series.data.title}
-            </a>{' '}
-            series.
-          </aside>
-        )}
+      <div class="grid gap-12 py-12 xl:grid-cols-[minmax(0,1fr)_20rem]">
+        <div class="min-w-0 max-w-3xl">
+          {series && (
+            <aside class="surface-muted mb-8 p-5 text-sm text-stone-400">
+              This article is part of the{' '}
+              <a href={`/articles/series/${series.id}`} class="font-medium text-stone-200 underline underline-offset-4 hover:text-white transition-colors">
+                {series.data.title}
+              </a>{' '}
+              series.
+            </aside>
+          )}
 
-        {entry.data.sponsor && (
-          <aside class="mb-8 rounded-lg border border-stone-700 bg-stone-900/50 p-5 text-sm text-stone-400">
-            This article is sponsored by{' '}
-            <a href={entry.data.sponsor.url} class="text-stone-300 underline underline-offset-4" target="_blank" rel="noopener noreferrer">
-              {entry.data.sponsor.name}
-            </a>.
-          </aside>
-        )}
+          {entry.data.sponsor && (
+            <aside class="surface-muted mb-8 p-5 text-sm text-stone-400">
+              This article is sponsored by{' '}
+              <a href={entry.data.sponsor.url} class="font-medium text-stone-200 underline underline-offset-4" target="_blank" rel="noopener noreferrer">
+                {entry.data.sponsor.name}
+              </a>.
+            </aside>
+          )}
 
-        {entry.data.crossPost && (
-          <aside class="mb-8 rounded-lg border border-stone-700 bg-stone-900/50 p-5 text-sm text-stone-400">
-            This article was originally published on{' '}
-            <a href={entry.data.crossPost.originalUrl} class="text-stone-300 underline underline-offset-4" target="_blank" rel="noopener noreferrer">
-              {entry.data.crossPost.originalSite}
-            </a>.
-          </aside>
-        )}
+          {entry.data.crossPost && (
+            <aside class="surface-muted mb-8 p-5 text-sm text-stone-400">
+              This article was originally published on{' '}
+              <a href={entry.data.crossPost.originalUrl} class="font-medium text-stone-200 underline underline-offset-4" target="_blank" rel="noopener noreferrer">
+                {entry.data.crossPost.originalSite}
+              </a>.
+            </aside>
+          )}
 
-        <Prose>
-          <Content />
-        </Prose>
+          <Prose>
+            <Content />
+          </Prose>
 
-        {entry.data.tags.length > 0 && (
-          <>
-            <Divider class="my-10" />
-            <div class="flex flex-wrap gap-2">
-              {entry.data.tags.map((tag) => (
-                <Badge variant="outline" size="sm">{tag}</Badge>
-              ))}
+          {entry.data.tags.length > 0 && (
+            <>
+              <Divider class="my-10 border-white/10" />
+              <div class="flex flex-wrap gap-2">
+                {entry.data.tags.map((tag) => (
+                  <Badge variant="outline" size="sm">{tag}</Badge>
+                ))}
+              </div>
+            </>
+          )}
+
+          <div class="mt-10">
+            <ConversionPanel
+              eyebrow="End-of-article CTA"
+              title="If this article matches a problem your team is actively feeling, let’s make the next step practical."
+              description="Send context on what is breaking, what it is costing, and what you want to improve. I will tell you whether an audit, a fix sprint, or advisory support is the best fit."
+              primaryHref="/contact"
+              primaryLabel="Book a call"
+              secondaryHref={contactHref(`Question about: ${entry.data.title}`)}
+              secondaryLabel="Email about this article"
+            />
+          </div>
+        </div>
+
+        <aside class="space-y-5 xl:sticky xl:top-28 xl:self-start">
+          <Card class="hidden xl:block surface-muted p-6">
+            <p class="kicker mb-3">Mid-content CTA</p>
+            <Heading level={4} class="mb-3 text-stone-100">Need help beyond the article?</Heading>
+            <p class="mb-5 text-sm leading-7 text-stone-400">
+              I work with SaaS teams on API audits, reliability fixes, and technical advisory when the problem is already slowing delivery down.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <Button href="/services" variant="primary">See services</Button>
+              <Button href="/contact" variant="outline">Book a call</Button>
             </div>
-          </>
-        )}
+          </Card>
+
+          <Card variant="muted" class="p-6">
+            <p class="kicker mb-3">Lead magnet</p>
+            <Heading level={4} class="mb-3 text-stone-100">Get the API Reliability Checklist</Heading>
+            <p class="mb-5 text-sm leading-7 text-stone-400">
+              A simple review you can use to spot hotspots, missing guardrails, and the next issue to investigate.
+            </p>
+            <Button href="/resources" variant="outline" class="w-full">Open resources</Button>
+          </Card>
+        </aside>
       </div>
     </Container>
   </article>

@@ -22,43 +22,47 @@ function navItemClasses(item: (typeof mainNav)[number]) {
 
   if (item.variant === 'cta') {
     return clsx(
-      'rounded-md border px-3 py-1.5 text-sm font-medium transition-colors',
-      'border-blue-500 bg-blue-600 text-white hover:bg-blue-500',
-      active && 'bg-blue-500 text-white',
+      'rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200',
+      'border-blue-300/35 bg-[linear-gradient(135deg,rgba(59,130,246,0.95),rgba(37,99,235,0.95))] text-white shadow-[0_18px_45px_-22px_rgba(59,130,246,0.95)] hover:-translate-y-0.5 hover:border-blue-200/50 hover:brightness-110',
+      active && 'brightness-110',
     );
   }
 
   if (item.variant === 'highlight') {
     return clsx(
-      'rounded-md border px-3 py-1.5 text-sm font-medium transition-colors',
+      'rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200',
       active
-        ? 'border-blue-500/60 bg-blue-500/15 text-blue-100'
-        : 'border-transparent text-blue-200 hover:border-blue-500/40 hover:bg-blue-500/10 hover:text-blue-100',
+        ? 'border-blue-300/25 bg-blue-400/12 text-blue-100'
+        : 'border-transparent text-blue-200/90 hover:border-blue-300/16 hover:bg-blue-400/10 hover:text-blue-100',
     );
   }
 
   return clsx(
-    'rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
+    'rounded-full px-4 py-2 text-sm font-medium transition-all duration-200',
     active
-      ? 'bg-stone-800 text-stone-100'
-      : 'text-stone-400 hover:bg-stone-800/50 hover:text-stone-200',
+      ? 'bg-white/[0.08] text-stone-100'
+      : 'text-stone-400 hover:bg-white/[0.05] hover:text-stone-100',
   );
 }
 ---
 
-<header class="sticky top-0 z-50 border-b border-stone-800/60 bg-stone-950/90 backdrop-blur-sm">
+<header class="sticky top-0 z-50 border-b border-white/10 bg-[rgba(8,9,13,0.72)] shadow-[0_20px_60px_-40px_rgba(2,6,23,0.95)] backdrop-blur-xl">
   <Container>
-    <nav class="flex h-16 items-center justify-between gap-8">
+    <nav class="flex h-[4.5rem] items-center justify-between gap-8 py-3">
 
-      <!-- Logo -->
       <a
         href="/"
-        class="shrink-0 font-semibold text-stone-100 transition-colors hover:text-white"
+        class="flex shrink-0 items-center gap-3 text-stone-100 transition-colors hover:text-white"
       >
-        {siteConfig.title}
+        <span class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-sm font-semibold text-blue-200 shadow-[0_12px_30px_-20px_rgba(59,130,246,0.8)]">
+          JSK
+        </span>
+        <span class="flex flex-col leading-none">
+          <span class="text-sm font-semibold tracking-[0.16em] text-stone-200">JustSteveKing</span>
+          <span class="text-[11px] uppercase tracking-[0.22em] text-stone-500">API Stability</span>
+        </span>
       </a>
 
-      <!-- Primary links — hidden on mobile -->
       <div class="hidden items-center gap-1 md:flex">
         {mainNav.map((item) => (
           hasChildren(item) ? (
@@ -87,15 +91,15 @@ function navItemClasses(item: (typeof mainNav)[number]) {
               </a>
 
               <div class="invisible absolute left-0 top-full z-20 pt-3 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                <div class="min-w-56 rounded-xl border border-stone-800 bg-stone-950/95 p-2 shadow-2xl backdrop-blur">
+                <div class="surface-panel min-w-60 p-2 shadow-2xl">
                   {item.items?.map((child) => (
                     <a
                       href={child.href}
                       class={clsx(
-                        'block rounded-lg px-3 py-2 text-sm transition-colors',
+                        'block rounded-2xl px-4 py-3 text-sm transition-colors',
                         isActive(child.href)
-                          ? 'bg-stone-800 text-stone-100'
-                          : 'text-stone-400 hover:bg-stone-800/70 hover:text-stone-100',
+                          ? 'bg-white/[0.08] text-stone-100'
+                          : 'text-stone-400 hover:bg-white/[0.06] hover:text-stone-100',
                       )}
                       aria-current={isActive(child.href) ? 'page' : undefined}
                     >
@@ -121,28 +125,27 @@ function navItemClasses(item: (typeof mainNav)[number]) {
           )
         ))}
 
-        <div class="ml-4 h-4 w-px bg-stone-800"></div>
+        <div class="ml-4 h-6 w-px bg-white/10"></div>
 
         <button
           id="search-trigger"
           type="button"
-          class="ml-2 flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium text-stone-400 transition-colors hover:bg-stone-800/50 hover:text-stone-200"
+          class="ml-2 flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-medium text-stone-400 transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/[0.06] hover:text-stone-100"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
           <span>Search</span>
-          <kbd class="ml-2 hidden font-sans text-[10px] font-semibold text-stone-600 lg:inline-block">
+          <kbd class="ml-2 hidden font-sans text-[10px] font-semibold text-stone-500 lg:inline-block">
             <span class="text-xs">⌘</span>K
           </kbd>
         </button>
       </div>
 
-      <!-- Mobile menu button -->
       <button
         id="mobile-menu-toggle"
         type="button"
         aria-controls="mobile-menu"
         aria-expanded="false"
-        class="flex items-center justify-center rounded-md p-2 text-stone-400 transition-colors hover:bg-stone-800/50 hover:text-stone-200 md:hidden"
+        class="flex items-center justify-center rounded-full border border-white/10 bg-white/[0.03] p-3 text-stone-400 transition-colors hover:bg-white/[0.08] hover:text-stone-100 md:hidden"
       >
         <span class="sr-only">Open menu</span>
         <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -160,26 +163,25 @@ function navItemClasses(item: (typeof mainNav)[number]) {
   </Container>
 </header>
 
-<!-- Full-screen mobile menu overlay -->
 <div
   id="mobile-menu"
   aria-label="Mobile navigation"
-  class="fixed inset-0 z-50 flex flex-col bg-stone-950 md:hidden"
+  class="fixed inset-0 z-50 flex flex-col bg-[rgba(8,9,13,0.98)] backdrop-blur-xl md:hidden"
   style="display: none;"
 >
-  <!-- Top bar matching the header height -->
-  <div class="flex h-16 shrink-0 items-center justify-between border-b border-stone-800/60 px-4">
+  <div class="flex h-[4.5rem] shrink-0 items-center justify-between border-b border-white/10 px-4 py-3">
     <a
       href="/"
-      class="font-semibold text-stone-100"
+      class="flex items-center gap-3 text-stone-100"
       id="mobile-menu-logo"
     >
-      {siteConfig.title}
+      <span class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-sm font-semibold text-blue-200">JSK</span>
+      <span class="text-sm font-semibold tracking-[0.16em]">JustSteveKing</span>
     </a>
     <button
       id="mobile-menu-close"
       type="button"
-      class="flex items-center justify-center rounded-md p-2 text-stone-400 transition-colors hover:bg-stone-800/50 hover:text-stone-200"
+      class="flex items-center justify-center rounded-full border border-white/10 bg-white/[0.03] p-3 text-stone-400 transition-colors hover:bg-white/[0.08] hover:text-stone-100"
     >
       <span class="sr-only">Close menu</span>
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -189,21 +191,20 @@ function navItemClasses(item: (typeof mainNav)[number]) {
     </button>
   </div>
 
-  <!-- Nav links -->
   <nav class="flex-1 overflow-y-auto px-6">
     <ul class="space-y-3 py-6">
       {mainNav.map((item) => (
-        <li class={clsx(hasChildren(item) && 'rounded-2xl border border-stone-800/80 bg-stone-900/20')}>
+        <li class={clsx(hasChildren(item) && 'surface-muted rounded-[var(--radius-xl)]')}>
           {hasChildren(item) ? (
             <>
               <div class="flex items-center gap-2 p-2">
                 <a
                   href={item.href}
                   class={clsx(
-                    'flex min-w-0 flex-1 items-center rounded-xl px-4 py-3 text-xl font-semibold transition-colors',
+                    'flex min-w-0 flex-1 items-center rounded-2xl px-4 py-3 text-xl font-semibold transition-colors',
                     isItemActive(item)
                       ? 'text-stone-100'
-                      : 'text-stone-300 hover:bg-stone-900/70 hover:text-white',
+                      : 'text-stone-300 hover:bg-white/[0.06] hover:text-white',
                   )}
                   aria-current={isItemActive(item) ? 'page' : undefined}
                 >
@@ -211,7 +212,7 @@ function navItemClasses(item: (typeof mainNav)[number]) {
                 </a>
                 <button
                   type="button"
-                  class="mobile-submenu-toggle flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-stone-400 transition-colors hover:bg-stone-800/70 hover:text-stone-100"
+                  class="mobile-submenu-toggle flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-stone-400 transition-colors hover:bg-white/[0.06] hover:text-stone-100"
                   data-mobile-submenu-toggle
                   data-target={`mobile-submenu-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
                   aria-expanded={isItemActive(item) ? 'true' : 'false'}
@@ -243,17 +244,17 @@ function navItemClasses(item: (typeof mainNav)[number]) {
               <div
                 id={`mobile-submenu-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
                 class={clsx(
-                  'space-y-1 border-t border-stone-800/80 px-2 pb-2 pt-2',
+                  'space-y-1 border-t border-white/10 px-2 pb-2 pt-2',
                   !isItemActive(item) && 'hidden',
                 )}
               >
                 <a
                   href={item.href}
                   class={clsx(
-                    'block rounded-xl px-4 py-3 text-sm transition-colors',
+                    'block rounded-2xl px-4 py-3 text-sm transition-colors',
                     isActive(item.href)
-                      ? 'bg-stone-800 text-stone-100'
-                      : 'text-stone-400 hover:bg-stone-800/70 hover:text-stone-100',
+                      ? 'bg-white/[0.08] text-stone-100'
+                      : 'text-stone-400 hover:bg-white/[0.06] hover:text-stone-100',
                   )}
                   aria-current={isActive(item.href) ? 'page' : undefined}
                 >
@@ -264,10 +265,10 @@ function navItemClasses(item: (typeof mainNav)[number]) {
                   <a
                     href={child.href}
                     class={clsx(
-                      'block rounded-xl px-4 py-3 text-sm transition-colors',
+                      'block rounded-2xl px-4 py-3 text-sm transition-colors',
                       isActive(child.href)
-                        ? 'bg-stone-800 text-stone-100'
-                        : 'text-stone-400 hover:bg-stone-800/70 hover:text-stone-100',
+                        ? 'bg-white/[0.08] text-stone-100'
+                        : 'text-stone-400 hover:bg-white/[0.06] hover:text-stone-100',
                     )}
                     aria-current={isActive(child.href) ? 'page' : undefined}
                   >
@@ -280,11 +281,11 @@ function navItemClasses(item: (typeof mainNav)[number]) {
             <a
               href={item.href}
               class={clsx(
-                'flex items-center rounded-2xl px-4 py-4 text-xl font-semibold transition-colors',
-                item.variant === 'cta' && 'bg-blue-600 text-white hover:bg-blue-500',
+                'flex items-center rounded-[var(--radius-xl)] px-4 py-4 text-xl font-semibold transition-colors',
+                item.variant === 'cta' && 'bg-[linear-gradient(135deg,rgba(59,130,246,0.95),rgba(37,99,235,0.95))] text-white',
                 item.variant === 'highlight' && !isItemActive(item) && 'text-blue-200 hover:bg-blue-500/10 hover:text-blue-100',
-                item.variant !== 'cta' && item.variant !== 'highlight' && !isItemActive(item) && 'text-stone-300 hover:bg-stone-900/70 hover:text-white',
-                isItemActive(item) && item.variant !== 'cta' && 'bg-stone-900/80 text-stone-100',
+                item.variant !== 'cta' && item.variant !== 'highlight' && !isItemActive(item) && 'text-stone-300 hover:bg-white/[0.06] hover:text-white',
+                isItemActive(item) && item.variant !== 'cta' && 'bg-white/[0.08] text-stone-100',
               )}
               aria-current={isItemActive(item) ? 'page' : undefined}
             >
@@ -301,9 +302,8 @@ function navItemClasses(item: (typeof mainNav)[number]) {
     </ul>
   </nav>
 
-  <!-- Footer area -->
-  <div class="shrink-0 border-t border-stone-800/60 px-6 py-6">
-    <p class="text-sm text-stone-600">&copy; {new Date().getFullYear()} {siteConfig.author.name}</p>
+  <div class="shrink-0 border-t border-white/10 px-6 py-6">
+    <p class="text-sm text-stone-500">&copy; {new Date().getFullYear()} {siteConfig.author.name}</p>
   </div>
 </div>
 
